@@ -1,2 +1,4 @@
-vendor/*
 .DS_Store
+vendor/*
+libs/.DS_Store
+assets/libs/angular2/*
