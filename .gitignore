@@ -1,4 +1,8 @@
 .DS_Store
-vendor/*
+!.gitkeep
+tmp
+.idea
 libs/.DS_Store
+logs/*
+vendor/*
 assets/libs/angular2/*
