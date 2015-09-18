@@ -5,4 +5,3 @@ tmp
 libs/.DS_Store
 logs/*
 vendor/*
-assets/libs/angular2/*
