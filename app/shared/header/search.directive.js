@@ -3,13 +3,13 @@
 
     angular
         .module('app.header')
-        .directive('arHeader', function() {
+        .directive('arSearch', function() {
             return {
                 restrict: 'E',
-                templateUrl: 'app/shared/header/header.html',
-                controllerAs: 'headerCtrl',
+                templateUrl: 'app/shared/header/search.html',
+                controllerAs: 'searchCtrl',
                 controller: function() {
-                    
+
                 }
             };
         });

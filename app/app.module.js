@@ -6,7 +6,8 @@
         'app.services',
         'app.header',
         'app.footer',
-        'app.home'
+        'app.home',
+        'app.review'
     ]);
 
 })();
