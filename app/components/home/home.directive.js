@@ -9,7 +9,7 @@
                 templateUrl: 'app/components/home/home.html',
                 controllerAs: 'homeCtrl',
                 controller: function() {
-
+                  
                 }
             };
         });

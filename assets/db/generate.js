@@ -2,7 +2,7 @@ module.exports = function(){
     var faker = require("faker");
     var _ = require("lodash");
     return {
-        review: _.times(100, function (n) {
+        review: _.times(10, function (n) {
             return {
                 id: n,
                 user: {
@@ -10,6 +10,9 @@ module.exports = function(){
                   name: faker.name.findName(),
                   avatar: faker.internet.url(),
                   email: faker.internet.email()
+                },
+                api: {
+                  name: faker.commerce.productName()
                 },
                 review: faker.lorem.paragraphs(),
                 created_at: faker.date.past(),
