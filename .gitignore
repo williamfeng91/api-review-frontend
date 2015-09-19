@@ -1,5 +1,7 @@
 .DS_Store
 !.gitkeep
+node_modules/
+bower_components/
 tmp
 .idea
 libs/.DS_Store

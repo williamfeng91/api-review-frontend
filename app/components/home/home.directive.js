@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('app.header')
-        .directive('arHeader', function() {
+        .module('app.home')
+        .directive('arHome', function() {
             return {
                 restrict: 'E',
-                templateUrl: 'app/shared/header/header.html',
-                controllerAs: 'headerCtrl',
+                templateUrl: 'app/components/home/home.html',
+                controllerAs: 'homeCtrl',
                 controller: function() {
 
                 }
