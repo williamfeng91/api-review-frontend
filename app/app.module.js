@@ -3,9 +3,10 @@
 
 	angular.module('app', [
 		'ngRoute',
-
+		'app.services',
 		'app.header',
-		'app.footer'
+		'app.footer',
+		'app.home'
 	]);
 
 })();
