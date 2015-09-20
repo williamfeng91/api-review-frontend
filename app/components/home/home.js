@@ -1,6 +1,6 @@
 angular
-    .module('app.home', [])
-    .controller('HomeController',HomeController);
+    .module('app.home')
+    .controller('HomeController', HomeController);
 
 function HomeController() {
 }
