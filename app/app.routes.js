@@ -5,7 +5,9 @@
       'ngNewRouter',
       'app.header',
       'app.footer',
-      'app.home'])
+      'app.home',
+      'app.review'
+    ])
     .config(componentLoaderConfig)
     .controller('AppController', ['$router', AppController]);
 
@@ -36,7 +38,14 @@
           footer: 'footer'
         }
       },
-      { path: '/review/:id', component: 'review' }
+      {
+        path: '/review/:id',
+        component: {
+          header: 'header',
+          footer: 'footer',
+          main: 'review'
+        }
+      }
     ];
     function AppController ($router) {}
 })();

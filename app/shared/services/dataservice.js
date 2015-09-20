@@ -16,7 +16,8 @@
 
         function getReview(reviewId) {
             return $http({
-                url: 'http://jsonstub.com/reviews/' + reviewId,
+                // url: 'http://jsonstub.com/reviews/' + reviewId,
+                url: 'http://localhost:3000/review/' + reviewId,
                 method: 'GET',
                 dataType: 'json',
                 data: '',

@@ -1,6 +1,6 @@
 angular
-    .module('app.home', ['app.services'])
-    .controller('HomeController',['dataservice',HomeController]);
+    .module('app.home', [])
+    .controller('HomeController',HomeController);
 
-function HomeController(dataservice) {
+function HomeController() {
 }

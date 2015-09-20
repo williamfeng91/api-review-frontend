@@ -22,3 +22,13 @@
         };
     }
 })();
+
+angular
+    .module('app.review', ['app.services'])
+    .controller('ReviewController',['$routeParams','dataservice',ReviewController]);
+
+function ReviewController($routeParams,dataservice) {
+  dataservice.getReview($routeParams.id).then(function(data) {
+      console.log(data);
+  });
+}
