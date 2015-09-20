@@ -39,6 +39,14 @@
                 main: 'review',
                 footer: 'footer'
             }
+        },
+        {
+            path: '/reviews',
+            component: {
+                header: 'header',
+                main: 'reviewList',
+                footer: 'footer'
+            }
         }
     ];
 

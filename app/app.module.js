@@ -7,6 +7,7 @@
         'app.header',
         'app.footer',
         'app.home',
-        'app.review'
+        'app.review',
+        'app.reviewList'
     ]);
 })();
