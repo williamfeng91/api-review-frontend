@@ -41,6 +41,22 @@
             }
         },
         {
+            path: '/reviews/:id/edit',
+            component: {
+                header: 'header',
+                main: 'reviewEditor',
+                footer: 'footer'
+            }
+        },
+        {
+            path: '/reviews/new',
+            component: {
+                header: 'header',
+                main: 'reviewEditor',
+                footer: 'footer'
+            }
+        },
+        {
             path: '/reviews',
             component: {
                 header: 'header',

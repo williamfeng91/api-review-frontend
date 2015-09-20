@@ -8,6 +8,7 @@
         'app.footer',
         'app.home',
         'app.review',
+        'app.reviewEditor',
         'app.reviewList'
     ]);
 })();
