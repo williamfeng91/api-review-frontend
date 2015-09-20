@@ -17,8 +17,8 @@
 
         function getReview(reviewId) {
             return $http({
-                // url: 'http://jsonstub.com/reviews/' + reviewId,
-                url: 'http://localhost:3000/review/' + reviewId,
+                url: 'http://jsonstub.com/reviews/' + reviewId,
+                // url: 'http://localhost:3000/review/' + reviewId,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -38,8 +38,8 @@
             return $http({
                 url: 'http://jsonstub.com/reviews?p=' + page + "&n=" + numsPerPage,
                 method: 'GET',
-                dataType: 'json', 
-                data: '',         
+                dataType: 'json',
+                data: '',
                 headers: {
                     'Content-Type': 'application/json',
                     'JsonStub-User-Key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
