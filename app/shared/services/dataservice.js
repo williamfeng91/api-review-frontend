@@ -31,7 +31,10 @@
 
             function getReviewComplete(data, status, headers, config) {
                 var result = data.data;
-                logger.success('Successfully retrieved review ' + result._id + ' successfully: ' + JSON.stringify(result));
+                logger.success(
+                    'Successfully retrieved review ' + result._id,
+                    result,
+                    'dataservice.getReview');
                 return result;
             }
         }
@@ -51,7 +54,10 @@
 
             function getReviewsComplete(data, status, headers, config) {
                 var result = data.data;
-                logger.success('Successfully retrieved ' + result.reviews.length + ' reviews');
+                logger.success(
+                    'Successfully retrieved ' + result.reviews.length + ' reviews',
+                    result,
+                    'dataservice.getReviews');
                 return result;
             }
         }
