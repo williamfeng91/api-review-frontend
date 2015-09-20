@@ -2,12 +2,11 @@
     'use strict';
 
     angular.module('app', [
-        'ngRoute',
+        'ngNewRouter',
         'app.services',
         'app.header',
         'app.footer',
         'app.home',
         'app.review'
     ]);
-
 })();
