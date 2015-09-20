@@ -21,11 +21,11 @@
 </head>
 
 <body>
-    <ar-header></ar-header>
-
-    <ar-review></ar-review>
-
-    <ar-footer></ar-footer>
+    <ar-content ng-controller="AppController as app">
+      <div ng-viewport=header></div>
+      <div ng-viewport=main></div>
+      <div ng-viewport=footer></div>
+    </ar-content>
 
     <!-- jQuery -->
     <script src="assets/libs/jquery.js"></script>
@@ -36,25 +36,27 @@
     <!-- AngularJS -->
     <script src="assets/libs/angular/angular.js"></script>
     <script src="assets/libs/angular-route/angular-route.js"></script>
+    <script src="assets/libs/angular-new-router/dist/router.es5.js"></script>
     <script src="app/app.module.js"></script>
+    <script src="app/app.routes.js"></script>
 
     <!-- services -->
     <script src="app/shared/services/services.module.js"></script>
     <script src="app/shared/services/dataservice.js"></script>
     <script src="app/shared/services/logger.js"></script>
     <!-- header -->
-    <script src="app/shared/header/header.module.js"></script>
-    <script src="app/shared/header/header.directive.js"></script>
-    <script src="app/shared/header/search.directive.js"></script>
+    <script src="app/components/header/header.module.js"></script>
+    <script src="app/components/header/header.js"></script>
+    <script src="app/components/header/search.js"></script>
     <!-- footer -->
-    <script src="app/shared/footer/footer.module.js"></script>
-    <script src="app/shared/footer/footer.directive.js"></script>
+    <script src="app/components/footer/footer.module.js"></script>
+    <script src="app/components/footer/footer.js"></script>
     <!-- home -->
     <script src="app/components/home/home.module.js"></script>
-    <script src="app/components/home/home.directive.js"></script>
+    <script src="app/components/home/home.js"></script>
     <!-- review -->
     <script src="app/components/review/review.module.js"></script>
-    <script src="app/components/review/review.directive.js"></script>
+    <script src="app/components/review/review.js"></script>
 
     <!-- Custom JS -->
     <script src="assets/js/review.js"></script>
