@@ -23,46 +23,37 @@
         $componentLoaderProvider.setTemplateMapping(changeNameTmpl);
     }
 
+    function getCompObj(main, header, footer) {
+      main = typeof main !== 'undefined' ? main : 'main';
+      header = typeof header !== 'undefined' ? header : 'header';
+      footer = typeof footer !== 'undefined' ? footer : 'footer';
+      return {
+        main: main,
+        header: header,
+        footer: footer
+      };
+    }
+
     AppController.$routeConfig = [
         {
             path: '/',
-            component: {
-                header: 'header',
-                main: 'home',
-                footer: 'footer'
-            }
+            component: getCompObj('home')
         },
         {
             path: '/reviews/:id',
-            component: {
-                header: 'header',
-                main: 'review',
-                footer: 'footer'
-            }
+            component: getCompObj('review')
         },
         {
             path: '/reviews/:id/edit',
-            component: {
-                header: 'header',
-                main: 'reviewEditor',
-                footer: 'footer'
-            }
+            component: getCompObj('reviewEditor')
         },
         {
             path: '/reviews/new',
-            component: {
-                header: 'header',
-                main: 'reviewEditor',
-                footer: 'footer'
-            }
+            component: getCompObj('reviewEditor')
         },
         {
             path: '/reviews',
-            component: {
-                header: 'header',
-                main: 'reviewList',
-                footer: 'footer'
-            }
+            component: getCompObj('reviewList')
         }
     ];
 
