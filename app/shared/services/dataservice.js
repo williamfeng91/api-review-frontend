@@ -3,10 +3,16 @@
 
     angular
         .module('app.services')
+        .constant('JSONSTUB', {
+          url: 'http://jsonstub.com/reviews',
+          'content-type': 'application/json',
+          'user-key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
+          'project-key': 'deeec676-1dad-4086-a1f0-ead970151994'
+        })
         .factory('dataservice', dataservice);
 
     /** @ngInject */
-    function dataservice($http, logger) {
+    function dataservice($http, logger, JSONSTUB) {
         var service = {
             getReview: getReview,
             getReviews: getReviews
@@ -17,15 +23,15 @@
 
         function getReview(reviewId) {
             return $http({
-                url: 'http://jsonstub.com/reviews/' + reviewId,
+                url: JSONSTUB['url'] + '/' + reviewId,
                 // url: 'http://localhost:3000/review/' + reviewId,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'JsonStub-User-Key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
-                    'JsonStub-Project-Key': 'deeec676-1dad-4086-a1f0-ead970151994'
+                    'Content-Type': JSONSTUB['content-type'],
+                    'JsonStub-User-Key': JSONSTUB['user-key'],
+                    'JsonStub-Project-Key': JSONSTUB['project-key']
                 }
             }).then(getReviewComplete);
 
@@ -41,14 +47,14 @@
 
         function getReviews(page, numsPerPage) {
             return $http({
-                url: 'http://jsonstub.com/reviews?p=' + page + "&n=" + numsPerPage,
+                url: JSONSTUB['url'] + '?p=' + page + "&n=" + numsPerPage,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'JsonStub-User-Key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
-                    'JsonStub-Project-Key': 'deeec676-1dad-4086-a1f0-ead970151994'
+                    'Content-Type': JSONSTUB['content-type'],
+                    'JsonStub-User-Key': JSONSTUB['user-key'],
+                    'JsonStub-Project-Key': JSONSTUB['project-key']
                 }
             }).then(getReviewsComplete);
 

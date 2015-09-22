@@ -2,7 +2,10 @@
     'use strict';
 
     angular.module('app')
-    .config(componentLoaderConfig)
+    .config([
+      '$locationProvider',
+      '$componentLoaderProvider',
+      componentLoaderConfig])
     .controller('AppController', ['$router', AppController]);
 
     function dashCase(str) {
@@ -11,7 +14,7 @@
         });
     }
 
-    function componentLoaderConfig($componentLoaderProvider) {
+    function componentLoaderConfig($locationProvider,$componentLoaderProvider) {
         function changeNameTmpl(name) {
             return changeName(name, '.html');
         }
@@ -21,6 +24,7 @@
             return './app/components/' + dashName + '/' + dashName + ext;
         }
         $componentLoaderProvider.setTemplateMapping(changeNameTmpl);
+        $locationProvider.html5mode = {enabled:true};
     }
 
     function getCompObj(main, header, footer) {
