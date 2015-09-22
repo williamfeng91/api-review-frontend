@@ -24,20 +24,24 @@
     }
 
     function getCompObj(main, header, footer) {
-      main = typeof main !== 'undefined' ? main : 'main';
-      header = typeof header !== 'undefined' ? header : 'header';
-      footer = typeof footer !== 'undefined' ? footer : 'footer';
-      return {
-        main: main,
-        header: header,
-        footer: footer
-      };
+        main = typeof main !== 'undefined' ? main : 'main';
+        header = typeof header !== 'undefined' ? header : 'header';
+        footer = typeof footer !== 'undefined' ? footer : 'footer';
+        return {
+            main: main,
+            header: header,
+            footer: footer
+        };
     }
 
     AppController.$routeConfig = [
         {
             path: '/',
             component: getCompObj('home')
+        },
+        {
+            path: '/login',
+            component: getCompObj('login')
         },
         {
             path: '/reviews/:id',
