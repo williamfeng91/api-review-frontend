@@ -6,7 +6,7 @@
         .factory('authservice', authservice);
 
     /** @ngInject */
-    function authservice($http, session, logger) {
+    function authservice($http, session, logger, APISERVICE) {
         var service = {
             login: login,
             logout: logout,
@@ -19,15 +19,11 @@
 
         function login(credentials, callback) {
             return $http({
-                url: 'http://jsonstub.com/login',
+                url: APISERVICE.url + '/login',
                 method: 'POST',
                 dataType: 'json',
                 data: '',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'JsonStub-User-Key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
-                    'JsonStub-Project-Key': 'deeec676-1dad-4086-a1f0-ead970151994'
-                }
+                headers: APISERVICE.headers
             }).then(loginComplete);
 
             function loginComplete(response) {
@@ -38,14 +34,19 @@
             }
         }
 
-        function logout() {
-            return $http
-                .post('/logout', {})
-                .then(logoutComplete);
+        function logout(callback) {
+            return $http({
+                url: APISERVICE.url + '/logout',
+                method: 'POST',
+                dataType: 'json',
+                data: '',
+                headers: APISERVICE.headers
+            }).then(logoutComplete);
 
             function logoutComplete(response) {
                 session.destroy();
-                logger.success('User ' + user.username + ' successfully logged out');
+                logger.success('Successfully logged out', response);
+                callback(response);
             }
         }
 
