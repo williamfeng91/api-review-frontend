@@ -6,7 +6,8 @@
         .module('app.services')
         .constant('toastr', toastr)
         .constant('APISERVICE', {
-          url: 'http://jsonstub.com/reviews',
+          url: 'http://jsonstub.com',
+          reviewUrl: 'http://jsonstub.com/reviews',
           headers: {
             'Content-Type': 'application/json',
             'JsonStub-User-Key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',

@@ -49,6 +49,10 @@
             component: getCompObj('login')
         },
         {
+            path: '/register',
+            component: getCompObj('register')
+        },
+        {
             path: '/reviews/:id',
             component: getCompObj('review')
         },

@@ -8,7 +8,7 @@
         <div>Test: Any username and password will work. You will be logged in as testUser</div>
         <form name="form" ng-submit="login.login()" role="form">
             <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-                <label for="username">Username</label>
+                <label for="username">Username/Email</label>
                 <input type="text" name="username" id="username" class="form-control" ng-model="login.username" required />
                 <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
             </div>

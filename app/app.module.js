@@ -9,6 +9,7 @@
             'app.header',
             'app.footer',
             'app.login',
+            'app.register',
             'app.home',
             'app.review',
             'app.reviewEditor',

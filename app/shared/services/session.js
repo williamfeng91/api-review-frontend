@@ -11,14 +11,14 @@
             this.currentUser = user;
             $http.defaults.headers.common['Authorization'] = 'Basic ' + user.auth_data; // jshint ignore:line
             $cookieStore.put('currentUser', user);
-            logger.success('Session created for user ' + user.username);
+            logger.info('Session created for user ' + user.username, this.currentUser, 'session.create');
         }
 
         this.destroy = function () {
             this.currentUser = null;
             $http.defaults.headers.common.Authorization = 'Basic ';
             $cookieStore.remove('currentUser');
-            logger.success('Session destroyed');
+            logger.info('Session destroyed', this.currentUser, 'session.destroy');
         }
 
         this.getCurrentUser = function () {

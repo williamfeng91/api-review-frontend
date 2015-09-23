@@ -29,7 +29,10 @@
             function loginComplete(response) {
                 var user = response.data;
                 session.create(user);
-                logger.success('User ' + user.username + ' successfully logged in', response);
+                logger.success(
+                    'User ' + user.username + ' successfully logged in',
+                    response,
+                    'authservice.loginComplete');
                 callback(response);
             }
         }
@@ -45,7 +48,10 @@
 
             function logoutComplete(response) {
                 session.destroy();
-                logger.success('Successfully logged out', response);
+                logger.success(
+                    'authservice: Successfully logged out',
+                    response,
+                    'authservice.logoutComplete');
                 callback(response);
             }
         }
