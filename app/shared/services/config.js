@@ -9,7 +9,7 @@
     function toastrConfig(toastr) {
         toastr.options.closeButton = true;
         toastr.options.timeOut = 0;
-        toastr.options.extendedTimeOut = 3000;
+        toastr.options.extendedTimeOut = 1000;
         toastr.options.positionClass = 'toast-bottom-right';
     }
 

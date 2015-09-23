@@ -19,10 +19,18 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Content <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li ng-repeat="opt in header.options"><a ng-link="{{opt.link}}">{{opt.title}}</a></li>
+                        <li ng-repeat="opt in header.contentMenu"><a ng-link="{{opt.link}}">{{opt.title}}</a></li>
                     </ul>
                 </li>
-                <li><a>Link</a></li>
+                <li ng-hide="header.authservice.isAuthenticated()"><a ng-link="main:login()">Login</a></li>
+                <li ng-show="header.authservice.isAuthenticated()" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{header.session.getCurrentUser().username}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="opt in header.userMenu"><a ng-link="{{opt.link}}">{{opt.title}}</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href ng-click="header.logout()">Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

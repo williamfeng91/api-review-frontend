@@ -29,19 +29,30 @@
             function loginComplete(response) {
                 var user = response.data;
                 session.create(user);
-                logger.success('User ' + user.username + ' successfully logged in', response);
+                logger.success(
+                    'User ' + user.username + ' successfully logged in',
+                    response,
+                    'authservice.loginComplete');
                 callback(response);
             }
         }
 
-        function logout() {
-            return $http
-                .post('/logout', {})
-                .then(logoutComplete);
+        function logout(callback) {
+            return $http({
+                url: APISERVICE.url + '/logout',
+                method: 'POST',
+                dataType: 'json',
+                data: '',
+                headers: APISERVICE.headers
+            }).then(logoutComplete);
 
             function logoutComplete(response) {
                 session.destroy();
-                logger.success('User ' + user.username + ' successfully logged out');
+                logger.success(
+                    'authservice: Successfully logged out',
+                    response,
+                    'authservice.logoutComplete');
+                callback(response);
             }
         }
 

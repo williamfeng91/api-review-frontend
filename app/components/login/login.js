@@ -5,8 +5,7 @@
         .module('app.login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', 'authservice', 'session'];
-    function LoginController($location, authservice, session) {
+    function LoginController($location, authservice, session, logger) {
         var vm = this;
 
         vm.login = login;
@@ -24,7 +23,7 @@
             };
             authservice.login(credentials, function (response) {
                 if (response.status == 200) {
-                    console.log("Login successful");
+                    logger.success('Login successful', response, 'LoginController');
                     $location.path('/');
                 } else {
                     // FlashService.Error(response.message);

@@ -23,7 +23,7 @@
 
         function getReview(reviewId) {
             return $http({
-                url: APISERVICE.url + '/' + reviewId,
+                url: APISERVICE.reviewUrl + '/' + reviewId,
                 // url: 'http://localhost:3000/review/' + reviewId,
                 method: 'GET',
                 dataType: 'json',
@@ -43,11 +43,11 @@
 
         function getReviews(page, numsPerPage) {
             return $http({
-                url: APISERVICE.url + '?p=' + page + "&n=" + numsPerPage,
+                url: APISERVICE.reviewUrl + '?p=' + page + "&n=" + numsPerPage,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
-                headers: APISERVICE.url
+                headers: APISERVICE.headers
             }).then(getReviewsComplete);
 
             function getReviewsComplete(data, status, headers, config) {
