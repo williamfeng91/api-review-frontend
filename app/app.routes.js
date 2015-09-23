@@ -24,7 +24,8 @@
             return './app/components/' + dashName + '/' + dashName + ext;
         }
         $componentLoaderProvider.setTemplateMapping(changeNameTmpl);
-        $locationProvider.html5mode = {enabled:true};
+        // $locationProvider.html5mode = {enabled:true};
+        // console.log($locationProvider.html5mode);
     }
 
     function getCompObj(main, header, footer) {
