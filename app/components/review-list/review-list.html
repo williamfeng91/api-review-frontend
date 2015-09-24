@@ -1,0 +1,79 @@
+<div id="main">
+	<div id="soutab">
+	  <form method="get" class="search" action="#" >
+	    <input class="text" type="text" name="s" placeholder="">
+	    <input class="button" value="search" type="submit">
+	  </form>
+	</div>
+<div id="container" ng-controller="ReviewListController">
+    <div class="clear"></div>
+    <section class="list"  ng-repeat="review in reviews"> 
+		<span class="titleimg"><a href="#">
+            <img src="app/components/review-list/reviews-logo.jpg" />
+            </a> </span>
+       <a href="#vote" class="up">10</a> 
+	   <div class="mecc">
+        <h2 class="mecctitle"> <a href="/review?id={{review._id}}">
+         {{review.title}}
+          </a> </h2>
+        <address class="meccaddress">
+			<div class="mectags-body">
+			<font ng-repeat="tag in review.tags">{{tag}}</font>
+		    </div>
+        <time>PublishTime - {{review.publishTime}}</time>
+		<span class= "meccname">
+	 	   Reviewer | <a href="/reviewer?id={{review.reviewer.id}}">{{review.reviewer.username}}</a>
+		</span>
+   </address><p>
+   	
+	API {{review.api.name}}
+	{{review.api.id}}
+   </p>
+      </div>
+      <div class="clear"></div>
+    </section>
+	  <div class="clear"></div>
+    <!--list-->
+        <div class="pagenavi">
+      <span class="page-numbers">1 / 20 </span> <a class='page-numbers' href='' title='previous page'>previous page</a> <a class='page-numbers' href='' title='第 1 页'>1</a> <span class='page-numbers current'>2</span> <a class='page-numbers' href='' title='3'>3</a> <a class='page-numbers' href='' title='4'>4</a> <span class="page-numbers">...</span><a class='page-numbers' href='' title='Last Page'>20</a> <a class='page-numbers' href='' title='next page'>next page</a>     </div>
+        <!--Page End-->
+    	<nav class="navigation">
+	  	  <div class="nav-previous"><a href="#" >previous page</a></div>
+			
+						<div class="nav-next"><a href="_blank" >next page</a></div>
+				</nav><!-- .navigation -->
+	    <!--phonepage--> 
+  </div>
+  <!--Container-->
+  <div class="clear"></div>
+</div>
+  <!--bottom--> 
+	<div class="scrollTopButton" id="scrollTopButton" style="display:none">
+		TOP
+	</div>
+	<div class="scrollBotButton" id="scrollBotButton" style="display:none">
+		Bottom
+	</div>
+</div>
+	<script type="text/javascript">
+	$(function(){
+		showScroll();
+		function showScroll(){
+			$(window).scroll( function() { 
+				var scrollTopValue=$(window).scrollTop();
+				var scrollBotValue=$('#container').height()-scrollTopValue;
+				console.log = scrollBotValue;
+				
+				scrollTopValue > 10 ? $('#scrollTopButton').fadeIn():$('#scrollTopButton').fadeOut();
+				scrollBotValue > 450 ? $('#scrollBotButton').fadeIn():$('#scrollBotButton').fadeOut();
+			} );	
+			$('#scrollTopButton').click(function(){
+				$("html,body").animate({scrollTop:0},200);	
+			});	
+			
+			$('#scrollBotButton').click(function(){
+				$("html,body").animate({scrollTop:$('#container').height()-350},200);	
+			});			
+		}
+	})
+	</script>
