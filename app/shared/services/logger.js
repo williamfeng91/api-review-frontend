@@ -5,8 +5,6 @@
         .module('app.services')
         .factory('logger', logger);
 
-    logger.$inject = ['$log', 'toastr'];
-
     function logger($log, toastr) {
         var service = {
             error   : error,

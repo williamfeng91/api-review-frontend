@@ -34,7 +34,7 @@
                 logger.success(
                     'User ' + user.username + ' successfully logged in',
                     response,
-                    'authservice.loginComplete');
+                    'authservice.login');
                 return $q.resolve(response);
             }
 
@@ -42,8 +42,8 @@
                 logger.error(
                     'Failed to login',
                     response,
-                    'authservice.loginFailed');
-                return $q.reject();
+                    'authservice.login');
+                return $q.reject(response);
             }
         }
 
@@ -54,7 +54,7 @@
                 dataType: 'json',
                 data: '',
                 headers: APISERVICE.headers
-            }).then(logoutComplete);
+            }).then(logoutComplete, logoutFailed);
 
             function logoutComplete(response) {
                 session.destroy();
@@ -62,8 +62,16 @@
                 logger.success(
                     'authservice: Successfully logged out',
                     response,
-                    'authservice.logoutComplete');
+                    'authservice.logout');
                 return $q.resolve(response);
+            }
+
+            function logoutFailed(response) {
+                logger.error(
+                    'Failed to logout',
+                    response,
+                    'authservice.logout');
+                return $q.reject(response);
             }
         }
 
