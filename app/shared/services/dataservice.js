@@ -47,7 +47,7 @@
             function getReviewsComplete(data, status, headers, config) {
                 var result = data.data;
                 logger.success(
-                    'Successfully retrieved ' + result.reviews.length + ' reviews',
+                    'Successfully retrieved ' + result.items.length + ' reviews',
                     result,
                     'dataservice.getReviews');
                 return result;
