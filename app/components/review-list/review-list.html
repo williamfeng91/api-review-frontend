@@ -1,7 +1,7 @@
 <div id="main">
 <div id="container" ng-controller="ReviewListController">
     <div class="clear"></div>
-    <section class="list"  ng-repeat="review in reviews"> 
+    <section class="list"  ng-repeat="review in reviewList.reviews"> 
 		<span class="titleimg"><a href="#">
             <img src="app/components/review-list/reviews-logo.jpg" />
             </a> </span>
@@ -22,9 +22,10 @@
 	</p>
 		
    </address><p>
-   	
-	API {{review.api.name}}
-	{{review.api.id}}
+	   API-
+   	<a href="/#">
+	 {{review.api.name}}
+</a>
    </p>
 </div>
       <div class="clear"></div>
