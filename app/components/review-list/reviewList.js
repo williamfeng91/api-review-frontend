@@ -3,14 +3,12 @@
 
     angular
         .module('app.reviewList')
-        .controller('ReviewListController', ['$routeParams', 'dataservice','$scope',ReviewListController]);
+        .controller('ReviewListController', ReviewListController);
 
-    function ReviewListController($routeParams, dataservice,$scope) {
+    function ReviewListController($routeParams, dataservice) {
         var vm = this;
         dataservice.getReviews(0, 20).then(function(data) {
-            vm.reviewList = data.items;
-			console.log(data.items)
-			$scope.reviews = data.items;
+            vm.reviews = data.items;
         });
     }
 })();
