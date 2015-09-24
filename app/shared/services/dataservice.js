@@ -33,7 +33,7 @@
                     'Successfully retrieved review ' + result._id,
                     result,
                     'dataservice.getReview');
-                return result;
+                return $q.resolve(result);
             }
 
             function getReviewFailed(response) {

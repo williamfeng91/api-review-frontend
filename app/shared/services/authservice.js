@@ -17,6 +17,10 @@
         return service;
         /////////////////////
 
+        /**
+         * Logs the user in
+         * @param credentials object required by the API for login
+         */
         function login(credentials) {
             return $http({
                 url: APISERVICE.url + '/login',
@@ -47,6 +51,9 @@
             }
         }
 
+        /**
+         * Logs the user out
+         */
         function logout() {
             return $http({
                 url: APISERVICE.url + '/logout',
