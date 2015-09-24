@@ -17,11 +17,14 @@ function HeaderController($location, authservice, session, logger) {
     vm.logout = logout;
 
     function logout() {
-        authservice.logout(function(response) {
-            if (response.status == 200) {
-                logger.success('Logout successful', response, 'HeaderController');
-                $location.path('/');
-            }
-        });
+        authservice.logout()
+            .then(logoutSuccessful, logoutFailed);
+
+        function logoutSuccessful(response) {
+            $location.path('/');
+        }
+
+        function logoutFailed(response) {
+        }
     }
 }

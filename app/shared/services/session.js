@@ -6,17 +6,15 @@
         .service('session', session);
 
     /** @ngInject */
-    function session($http, $cookieStore, logger) {
+    function session($cookieStore, logger) {
         this.create = function (user) {
             this.currentUser = user;
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + user.auth_data; // jshint ignore:line
             $cookieStore.put('currentUser', user);
             logger.info('Session created for user ' + user.username, this.currentUser, 'session.create');
         }
 
         this.destroy = function () {
             this.currentUser = null;
-            $http.defaults.headers.common.Authorization = 'Basic ';
             $cookieStore.remove('currentUser');
             logger.info('Session destroyed', this.currentUser, 'session.destroy');
         }
@@ -25,6 +23,7 @@
             return this.currentUser;
         }
 
+        // for OAuth
         this.getAuthData = function () {
             return this.currentUser ? this.currentUser.auth_data : {};
         }
