@@ -11,7 +11,6 @@
         toastr.options.timeOut = 0;
         toastr.options.extendedTimeOut = 500;
         toastr.options.positionClass = 'toast-bottom-right';
-        toastr.options.preventDuplicates = true;
     }
 
     var config = {

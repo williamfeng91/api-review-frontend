@@ -3,10 +3,10 @@
 
     angular
         .module('app.reviewEditor')
-        .controller('ReviewEditorController', ['$routeParams', 'dataservice', ReviewEditorController]);
+        .controller('ReviewEditorController', ReviewEditorController);
 
-    function ReviewEditorController($routeParams, dataservice) {
+    function ReviewEditorController($routeParams, dataservice, logger) {
         var vm = this;
-
+        logger.log("test");
     }
 })();

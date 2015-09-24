@@ -12,7 +12,7 @@
             </p>
             <hr>
             <div class="row">
-                <div class="col-lg-10">
+                <div class="col-lg-9">
                     <p><i class="fa fa-calendar"></i> Posted on {{review.review.publishTime}}</p>
                     <p>
                         <i class="fa fa-tags"></i> Tags:
@@ -21,13 +21,18 @@
                         </a>
                     </p>
                 </div>
-                <div class="col-lg-2">
-                    <a title="Edit my review" href="">
-                        <span class="fa-stack fa-lg"><i class="fa fa-pencil fa-stack-1x"></i></span>
-                    </a>
-                    <a title="Add to favourite" href="">
-                        <span class="fa-stack fa-lg"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                    </a>
+                <div class="col-lg-3">
+                    <div class="btn-group review-actions">
+                        <a title="Edit my review" class="btn btn-default" ng-link="reviewEditor()">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a title="Delete my review" class="btn btn-default" ng-link="main:login()">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                        <a title="Add to favourite" class="btn btn-default" href="">
+                            <i class="fa fa-star-o"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 

@@ -1,0 +1,45 @@
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-8">
+
+            <h1><a href="">{{review.review.title}}</a></h1>
+            <h2><small>Review of <a href="/apis/{{review.review.api.id}}">{{review.review.api.name}}</a></small></h2>
+            <p class="lead">
+                <i class="fa fa-user"></i> by
+                <a href="/users/{{review.review.reviewer.id}}">{{review.review.reviewer.username}}</a>
+            </p>
+            <hr>
+            <div class="row">
+                <div class="col-lg-9">
+                    <p><i class="fa fa-calendar"></i> Posted on {{review.review.publishTime}}</p>
+                    <p>
+                        <i class="fa fa-tags"></i> Tags:
+                        <a title="{{tag}}" href="" ng-repeat="tag in review.review.tags">
+                            <span class="badge badge-info">{{tag}}</span>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <div class="btn-group review-actions">
+                        <a title="Edit my review" class="btn btn-default" ng-link="reviewEditor()">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a title="Delete my review" class="btn btn-default" href="">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                        <a title="Add to favourite" class="btn btn-default" href="">
+                            <i class="fa fa-star-o"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <img src="http://placehold.it/900x300" class="img-responsive">
+            <hr>
+            <p class="lead">{{review.review.content}}</p>
+            <br/>
+    </div>
+</div>
