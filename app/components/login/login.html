@@ -5,22 +5,29 @@
         <h2>Login</h2>
         <div ng-show="login.error" class="alert alert-danger">{{login.error}}</div>
         <!-- temporary -->
-        <div>Test: Any username and password will work. You will be logged in as testUser</div>
         <form name="form" ng-submit="login.login()" role="form">
-            <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-                <label for="username">Username/Email</label>
-                <input type="text" name="username" id="username" class="form-control" ng-model="login.username" required />
-                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+            <div class="form-group" ng-class="{ 'has-error': form.username.$touched && form.username.$invalid }">
+                <label for="username">Email</label>
+                <div class="input-group margin-bottom-sm">
+                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                    <input type="email" name="username" id="username" class="form-control" ng-model="login.credentials.username"  placeholder="Email address" required />
+                </div>
+                <span ng-show="form.username.$touched && form.username.$error.required" class="help-block">Email is required</span>
+                <span ng-show="form.username.$touched && form.username.$error.email" class="help-block">Invalid email address</span>
             </div>
-            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <div class="form-group" ng-class="{ 'has-error': form.password.$touched && form.password.$invalid }">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" ng-model="login.password" required />
-                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                    <input type="password" name="password" id="password" class="form-control" ng-model="login.credentials.password"  placeholder="Password" required />
+                </div>
+                <span ng-show="form.password.$touched && form.password.$error.required" class="help-block">Password is required</span>
             </div>
+            <div>Test: Any username and password will work. You will be logged in as testUser</div>
             <div class="form-actions">
                 <button type="submit" ng-disabled="form.$invalid || login.dataLoading" class="btn btn-primary">Login</button>
                 <img ng-if="login.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                <a href="#/register" class="btn btn-link">Register</a>
+                <a ng-link="register()" class="btn btn-link">Register</a>
             </div>
         </form>
     </div>

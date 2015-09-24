@@ -5,7 +5,7 @@
         .module('app.login')
         .controller('LoginController', LoginController);
 
-    function LoginController($location, authservice, session, logger) {
+    function LoginController($location, authservice, session, toastr, logger) {
         var vm = this;
 
         vm.login = login;
@@ -17,19 +17,18 @@
 
         function login() {
             vm.dataLoading = true;
-            var credentials = {
-                'username': vm.username,
-                'password': vm.password
-            };
-            authservice.login(credentials, function (response) {
-                if (response.status == 200) {
-                    logger.success('Login successful', response, 'LoginController');
-                    $location.path('/');
-                } else {
-                    // FlashService.Error(response.message);
-                    vm.dataLoading = false;
-                }
-            });
+            authservice.login(vm.credentials)
+                .then(loginSuccessful, loginFailed);
+
+            function loginSuccessful(response) {
+                $location.path('/');
+                toastr.success('Successfully logged in!', 'Welcome ' + session.getCurrentUser().username);
+            }
+
+            function loginFailed(response) {
+                // FlashService.Error(response.message);
+                vm.dataLoading = false;
+            }
         };
     }
 

@@ -3,12 +3,6 @@
 
     angular
         .module('app.services')
-        // .constant('JSONSTUB', {
-        //   url: 'http://jsonstub.com/reviews',
-        //   'content-type': 'application/json',
-        //   'user-key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
-        //   'project-key': 'deeec676-1dad-4086-a1f0-ead970151994'
-        // })
         .factory('dataservice', dataservice);
 
     /** @ngInject */
@@ -41,9 +35,9 @@
             }
         }
 
-        function getReviews(page, numsPerPage) {
+        function getReviews(offset, limit) {
             return $http({
-                url: APISERVICE.reviewUrl + '?p=' + page + "&n=" + numsPerPage,
+                url: APISERVICE.reviewUrl + '?offset=' + offset + "&limit=" + limit,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
