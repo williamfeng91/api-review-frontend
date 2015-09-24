@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">API Review</a>
+            <a class="navbar-brand" ng-link="main:home()">API Review</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -17,14 +17,20 @@
             <ar-search></ar-search>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Content <span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Content <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Reviews</a></li>
-                        <li><a href="#">APIs</a></li>
-                        <li><a href="#">Reviewers</a></li>
+                        <li ng-repeat="opt in header.contentMenu"><a ng-link="{{opt.link}}">{{opt.title}}</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Link</a></li>
+                <li ng-hide="header.authservice.isAuthenticated()"><a ng-link="main:login()">Login</a></li>
+                <li ng-show="header.authservice.isAuthenticated()" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{header.session.getCurrentUser().username}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="opt in header.userMenu"><a ng-link="{{opt.link}}">{{opt.title}}</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href ng-click="header.logout()">Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

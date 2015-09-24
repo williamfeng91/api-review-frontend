@@ -2,7 +2,10 @@
     'use strict';
 
     angular.module('app')
-    .config(componentLoaderConfig)
+    .config([
+      '$locationProvider',
+      '$componentLoaderProvider',
+      componentLoaderConfig])
     .controller('AppController', ['$router', AppController]);
 
     function dashCase(str) {
@@ -11,7 +14,7 @@
         });
     }
 
-    function componentLoaderConfig($componentLoaderProvider) {
+    function componentLoaderConfig($locationProvider,$componentLoaderProvider) {
         function changeNameTmpl(name) {
             return changeName(name, '.html');
         }
@@ -21,48 +24,49 @@
             return './app/components/' + dashName + '/' + dashName + ext;
         }
         $componentLoaderProvider.setTemplateMapping(changeNameTmpl);
+        // $locationProvider.html5mode = {enabled:true};
+        // console.log($locationProvider.html5mode);
+    }
+
+    function getCompObj(main, header, footer) {
+        main = typeof main !== 'undefined' ? main : 'main';
+        header = typeof header !== 'undefined' ? header : 'header';
+        footer = typeof footer !== 'undefined' ? footer : 'footer';
+        return {
+            main: main,
+            header: header,
+            footer: footer
+        };
     }
 
     AppController.$routeConfig = [
         {
             path: '/',
-            component: {
-                header: 'header',
-                main: 'home',
-                footer: 'footer'
-            }
+            component: getCompObj('home')
+        },
+        {
+            path: '/login',
+            component: getCompObj('login')
+        },
+        {
+            path: '/register',
+            component: getCompObj('register')
         },
         {
             path: '/reviews/:id',
-            component: {
-                header: 'header',
-                main: 'review',
-                footer: 'footer'
-            }
+            component: getCompObj('review')
         },
         {
             path: '/reviews/:id/edit',
-            component: {
-                header: 'header',
-                main: 'reviewEditor',
-                footer: 'footer'
-            }
+            component: getCompObj('reviewEditor')
         },
         {
             path: '/reviews/new',
-            component: {
-                header: 'header',
-                main: 'reviewEditor',
-                footer: 'footer'
-            }
+            component: getCompObj('reviewEditor')
         },
         {
             path: '/reviews',
-            component: {
-                header: 'header',
-                main: 'reviewList',
-                footer: 'footer'
-            }
+            component: getCompObj('reviewList')
         }
     ];
 

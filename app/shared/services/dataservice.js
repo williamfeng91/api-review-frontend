@@ -6,7 +6,7 @@
         .factory('dataservice', dataservice);
 
     /** @ngInject */
-    function dataservice($http, logger) {
+    function dataservice($http, logger, APISERVICE) {
         var service = {
             getReview: getReview,
             getReviews: getReviews
@@ -17,16 +17,12 @@
 
         function getReview(reviewId) {
             return $http({
-                url: 'http://jsonstub.com/reviews/' + reviewId,
+                url: APISERVICE.reviewUrl + '/' + reviewId,
                 // url: 'http://localhost:3000/review/' + reviewId,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'JsonStub-User-Key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
-                    'JsonStub-Project-Key': 'deeec676-1dad-4086-a1f0-ead970151994'
-                }
+                headers: APISERVICE.headers
             }).then(getReviewComplete);
 
             function getReviewComplete(data, status, headers, config) {
@@ -39,17 +35,13 @@
             }
         }
 
-        function getReviews(page, numsPerPage) {
+        function getReviews(offset, limit) {
             return $http({
-                url: 'http://jsonstub.com/reviews?p=' + page + "&n=" + numsPerPage,
+                url: APISERVICE.reviewUrl + '?offset=' + offset + "&limit=" + limit,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'JsonStub-User-Key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
-                    'JsonStub-Project-Key': 'deeec676-1dad-4086-a1f0-ead970151994'
-                }
+                headers: APISERVICE.headers
             }).then(getReviewsComplete);
 
             function getReviewsComplete(data, status, headers, config) {
