@@ -9,10 +9,12 @@
     function userservice($http, $q, session, logger, APISERVICE) {
         var service = {
             create: createUser,
+            register: register,
             getById: getById,
             getAll: getAll,
             update: updateUser,
-            delete: deleteUser
+            delete: deleteUser,
+            activate: activate
         };
 
         return service;
@@ -25,6 +27,20 @@
         function createUser(user) {
             return $http({
                 url: APISERVICE.userUrl,
+                method: 'POST',
+                dataType: 'json',
+                data: user,
+                headers: APISERVICE.headers
+            }).then(handleSuccess, handleError);
+        }
+
+        /**
+         * Creates a new user
+         * @param user a user object that captures all details the API needs
+         */
+        function register(user) {
+            return $http({
+                url: APISERVICE.userUrl + '/register',
                 method: 'POST',
                 dataType: 'json',
                 data: user,
@@ -57,7 +73,7 @@
             limit = typeof limit !== 'undefined' ? limit : 20;
             var url = APISERVICE.userUrl + '?offset=' + offset + '&limit=' + limit;
             if (typeof userType !== 'undefined') {
-                url += '&userType=' + encodeURIComponent(userType),
+                url += '&userType=' + encodeURIComponent(userType);
             }
             return $http({
                 url: url,
@@ -75,7 +91,7 @@
         function getAll(userType) {
             var url = APISERVICE.userUrl;
             if (typeof userType !== 'undefined') {
-                url += '?userType=' + encodeURIComponent(userType),
+                url += '?userType=' + encodeURIComponent(userType);
             }
             return $http({
                 url: url,
@@ -114,12 +130,28 @@
             }).then(handleSuccess, handleError);
         }
 
+        /**
+         * Activates a user
+         * @param token the activation token
+         */
+        function activate(token) {
+            return $http({
+                url: APISERVICE.userUrl + '/activate',
+                method: 'POST',
+                dataType: 'json',
+                data: token,
+                headers: APISERVICE.headers
+            }).then(handleSuccess, handleError);
+        }
+
         // private functions
         function handleSuccess(response) {
-            return response.data;
+            logger.success('API call successful', response, 'userservice');
+            return $q.resolve(response.data);
         }
 
         function handleError(response) {
+            logger.error('API call unsuccessful', response, 'userservice');
             return $q.reject(response);
         }
     }

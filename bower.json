@@ -18,6 +18,7 @@
     "angular-route": "~1.4.0",
     "angular-loader": "~1.4.0",
     "angular-mocks": "~1.4.0",
+    "angular-dialog-service": "~5.2.8",
     "html5-boilerplate": "~5.2.0",
     "toastr": "~2.0.1"
   }

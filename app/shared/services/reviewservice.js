@@ -6,7 +6,7 @@
         .factory('reviewservice', reviewservice);
 
     /** @ngInject */
-    function reviewservice($http, $q, APISERVICE) {
+    function reviewservice($http, $q, APISERVICE, logger) {
         var service = {
             create: createReview,
             getById: getById,
@@ -33,7 +33,7 @@
                 dataType: 'json',
                 data: review,
                 headers: APISERVICE.headers
-            }).then(handleSuccess, handleFailure);
+            }).then(handleSuccess, handleError);
         }
 
         /**
@@ -47,7 +47,7 @@
                 dataType: 'json',
                 data: '',
                 headers: APISERVICE.headers
-            }).then(handleSuccess, handleFailure);
+            }).then(handleSuccess, handleError);
         }
 
         /**
@@ -61,7 +61,7 @@
                 dataType: 'json',
                 data: '',
                 headers: APISERVICE.headers
-            }).then(handleSuccess, handleFailure);
+            }).then(handleSuccess, handleError);
         }
 
         /**
@@ -75,7 +75,7 @@
                 dataType: 'json',
                 data: '',
                 headers: APISERVICE.headers
-            }).then(handleSuccess, handleFailure);
+            }).then(handleSuccess, handleError);
         }
 
         /**
@@ -92,7 +92,7 @@
                 dataType: 'json',
                 data: '',
                 headers: APISERVICE.headers
-            }).then(handleSuccess, handleFailure);
+            }).then(handleSuccess, handleError);
         }
 
         /**
@@ -105,7 +105,7 @@
                 dataType: 'json',
                 data: '',
                 headers: APISERVICE.headers
-            }).then(handleSuccess, handleFailure);
+            }).then(handleSuccess, handleError);
         }
 
         /**
@@ -119,7 +119,7 @@
                 dataType: 'json',
                 data: review,
                 headers: APISERVICE.headers
-            }).then(handleSuccess, handleFailure);
+            }).then(handleSuccess, handleError);
         }
 
         /**
@@ -133,7 +133,7 @@
                 dataType: 'json',
                 data: '',
                 headers: APISERVICE.headers
-            }).then(handleSuccess, handleFailure);
+            }).then(handleSuccess, handleError);
         }
 
         /**
@@ -147,15 +147,17 @@
                 dataType: 'json',
                 data: '',
                 headers: APISERVICE.headers
-            }).then(handleSuccess, handleFailure);
+            }).then(handleSuccess, handleError);
         }
 
         // private functions
         function handleSuccess(response) {
+            logger.success('API call successful', response, 'reviewservice');
             return $q.resolve(response.data);
         }
 
         function handleError(response) {
+            logger.error('API call unsuccessful', response, 'reviewservice');
             return $q.reject(response);
         }
     }
