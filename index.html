@@ -10,7 +10,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/libs/toastr/toastr.css" rel="stylesheet" />
+    <link href="assets/libs/angular-dialog-service/dist/dialogs.css" rel="stylesheet">
+    <link href="assets/libs/toastr/toastr.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="assets/css/app.css" rel="stylesheet">
     <link href="app/components/footer/footer.css" rel="stylesheet">
@@ -45,6 +46,9 @@
     <script src="assets/libs/angular/angular.js"></script>
     <script src="assets/libs/angular-cookies/angular-cookies.js"></script>
     <script src="assets/libs/angular-new-router/dist/router.es5.js"></script>
+    <script src="assets/libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="assets/libs/angular-dialog-service/dist/dialogs.js"></script>
+    <script src="assets/libs/angular-sanitize/angular-sanitize.js"></script>
     <script src="app/app.module.js"></script>
     <script src="app/app.routes.js"></script>
 
@@ -53,13 +57,16 @@
 
     <!-- services -->
     <script src="app/shared/services/services.module.js"></script>
+    <script src="app/shared/services/apiservice.js"></script>
     <script src="app/shared/services/authservice.js"></script>
     <script src="app/shared/services/config.js"></script>
     <script src="app/shared/services/constants.js"></script>
     <script src="app/shared/services/dataservice.js"></script>
     <script src="app/shared/services/logger.js"></script>
-    <script src="app/shared/services/session.js"></script>
+    <script src="app/shared/services/ratingservice.js"></script>
     <script src="app/shared/services/reviewservice.js"></script>
+    <script src="app/shared/services/session.js"></script>
+    <script src="app/shared/services/tagservice.js"></script>
     <script src="app/shared/services/userservice.js"></script>
     <!-- header -->
     <script src="app/components/header/header.module.js"></script>
@@ -79,6 +86,7 @@
     <script src="app/components/home/home.js"></script>
     <!-- review -->
     <script src="app/components/review/review.module.js"></script>
+    <script src="app/components/review/review.config.js"></script>
     <script src="app/components/review/review.js"></script>
     <!-- review editor -->
     <script src="app/components/review-editor/reviewEditor.module.js"></script>

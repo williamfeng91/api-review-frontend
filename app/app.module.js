@@ -5,6 +5,8 @@
         .module('app', [
             'ngNewRouter',
             'ngCookies',
+            'ui.bootstrap',
+            'dialogs.main',
             'app.services',
             'app.header',
             'app.footer',
