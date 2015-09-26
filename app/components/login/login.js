@@ -5,7 +5,7 @@
         .module('app.login')
         .controller('LoginController', LoginController);
 
-    function LoginController($scope, $location, authservice, session, toastr, logger) {
+    function LoginController($location, authservice, session, toastr, logger) {
         var vm = this;
 
         vm.login = login;
@@ -30,7 +30,6 @@
                 vm.dataLoading = false;
             }
         };
-        $scope.login = vm;
     }
 
 })();

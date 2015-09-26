@@ -5,7 +5,7 @@
         .module('app.register')
         .controller('RegisterController', RegisterController);
 
-    function RegisterController($scope, $location, userservice, logger) {
+    function RegisterController($location, userservice, logger) {
         var vm = this;
 
         vm.register = register;
@@ -25,7 +25,6 @@
                 vm.error = "Registration failed";
             }
         };
-        $scope.register = vm;
     }
 
 })();

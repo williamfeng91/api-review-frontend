@@ -3,7 +3,6 @@
 
     angular
         .module('app', [
-            // 'ngNewRouter',
             'ui.router',
             'ngCookies',
             'ui.bootstrap',

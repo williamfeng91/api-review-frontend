@@ -6,13 +6,13 @@
         .controller('ReviewEditorController', ReviewEditorController);
 
     /** @ngInject */
-    function ReviewEditorController($location, $routeParams, reviewservice, apiservice,
+    function ReviewEditorController($location, $stateParams, reviewservice, apiservice,
         userservice, tagservice, ratingservice, session, toastr, logger) {
         var vm = this;
 
         vm.review = session.getCurrentReview();
-        if (vm.review.id != $routeParams.id) {
-            reviewservice.getById($routeParams.id)
+        if (vm.review.id != $stateParams.id) {
+            reviewservice.getById($stateParams.id)
                 .then(function (review) {
                     vm.review = review;
                     return userservice.getById(vm.review.reviewer);
@@ -40,6 +40,7 @@
             }
         }
         vm.loadTags = loadTags;
+        vm.showDialog = showDialog;
         vm.submit = submitReview;
         vm.cancel = cancelEdit;
 
@@ -53,8 +54,33 @@
                 });
         }
 
+        function showDialog() {
+            var dlg = dialogs.confirm(
+                'Confirm deletion',
+                'Do you really want to delete this review?');
+            dlg.result.then(confirmDelete, cancel);
+
+            function confirmDelete(btn) {
+                reviewservice.delete(vm.review.id)
+                    .then(deleteSuccessful, deleteFailed);
+
+                function deleteSuccessful(result) {
+                    $location.path('/reviews');
+                    toastr.success('Review deleted');
+                }
+
+                function deleteFailed(error) {
+                    toastr.error('Failed to delete the review. Please try again.');
+                }
+            }
+
+            function cancel(btn) {
+                logger.info('Delete review cancelled');
+            }
+        }
+
         function submitReview() {
-            logger.info('Submitting');
+            logger.log(vm.review);
         }
 
         function cancelEdit() {

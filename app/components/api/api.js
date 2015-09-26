@@ -5,7 +5,7 @@
         .module('app.api')
         .controller('ApiController', ApiController);
 
-    function ApiController($location, $routeParams, dialogs, apiservice, reviewservice,
+    function ApiController($location, $stateParams, dialogs, apiservice, reviewservice,
         toastr, logger) {
         var vm = this;
 

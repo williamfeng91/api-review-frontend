@@ -3,13 +3,13 @@
 
     <div class="col-md-6 col-md-offset-3">
     <h2>Register</h2>
-    <div ng-show="register.error" class="alert alert-danger">{{register.error}}</div>
-    <form name="form" ng-submit="register.register()" role="form">
+    <div ng-show="registerCtrl.error" class="alert alert-danger">{{registerCtrl.error}}</div>
+    <form name="form" ng-submit="registerCtrl.register()" role="form">
         <div class="form-group" ng-class="{ 'has-error': form.username.$touched && form.username.$invalid }">
             <label for="username">Email</label>
             <div class="input-group margin-bottom-sm">
                 <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                <input type="email" name="username" id="username" class="form-control" ng-model="register.user.username" placeholder="Email address" required />
+                <input type="email" name="username" id="username" class="form-control" ng-model="registerCtrl.user.username" placeholder="Email address" required />
             </div>
             <span ng-show="form.username.$touched && form.username.$error.required" class="help-block">Email is required</span>
             <span ng-show="form.username.$touched && form.username.$error.email" class="help-block">Invalid email address</span>
@@ -18,7 +18,7 @@
             <label for="password">Password</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                <input type="password" name="password" id="password" class="form-control" ng-model="register.user.password" placeholder="Password" required />
+                <input type="password" name="password" id="password" class="form-control" ng-model="registerCtrl.user.password" placeholder="Password" required />
             </div>
             <span ng-show="form.password.$touched && form.password.$error.required" class="help-block">Password is required</span>
         </div>
@@ -31,8 +31,8 @@
             <span ng-show="form.confirmPassword.$touched && form.password.$error.required" class="help-block">Passwords must match</span>
         </div>
         <div class="form-actions">
-            <button type="submit" ng-disabled="form.$invalid || register.dataLoading" class="btn btn-primary">Register</button>
-            <img ng-if="register.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <button type="submit" ng-disabled="form.$invalid || registerCtrl.dataLoading" class="btn btn-primary">Register</button>
+            <img ng-if="registerCtrl.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
             <a ui-sref="login" class="btn btn-link">Cancel</a>
         </div>
     </form>

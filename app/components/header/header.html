@@ -19,16 +19,16 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Content <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="opt in vm.contentMenu"><a ui-sref="{{opt.link}}">{{opt.title}}</a></li>
+                        <li ng-repeat="opt in headerCtrl.contentMenu"><a ui-sref="{{opt.link}}">{{opt.title}}</a></li>
                     </ul>
                 </li>
-                <li ng-hide="vm.authservice.isAuthenticated()"><a ui-sref="login">Login</a></li>
-                <li ng-show="vm.authservice.isAuthenticated()" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{vm.session.getCurrentUser().username}} <span class="caret"></span></a>
+                <li ng-hide="headerCtrl.authservice.isAuthenticated()"><a ui-sref="login">Login</a></li>
+                <li ng-show="headerCtrl.authservice.isAuthenticated()" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{headerCtrl.session.getCurrentUser().username}} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="opt in vm.userMenu"><a ui-sref="{{opt.link}}">{{opt.title}}</a></li>
+                        <li ng-repeat="opt in headerCtrl.userMenu"><a ui-sref="{{opt.link}}">{{opt.title}}</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href ng-click="vm.logout()">Logout</a></li>
+                        <li><a href ng-click="headerCtrl.logout()">Logout</a></li>
                     </ul>
                 </li>
             </ul>

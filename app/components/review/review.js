@@ -2,13 +2,12 @@
     'use strict';
 
     angular
-        .module('app.review', ['dialogs.main'])
+        .module('app.review')
         .controller('ReviewController', ReviewController);
 
-    function ReviewController($scope, $location, $stateParams, dialogs, reviewservice,
-        ratingservice, tagservice, apiservice, userservice, toastr, logger) {
+    function ReviewController($location, $stateParams, dialogs, reviewservice, apiservice,
+        userservice, tagservice, ratingservice, session, toastr, logger) {
         var vm = this;
-        $scope.review = vm;
 
         (function initController() {
             // load the review

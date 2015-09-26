@@ -1,35 +1,35 @@
-angular
-    .module('app.header', [
-      'app.services',
-      'ngCookies',
-    ])
-    .controller('HeaderController', HeaderController);
+(function() {
+    'use strict';
 
-function HeaderController($scope, $location, authservice, session, logger) {
-    var vm = this;
+    angular
+        .module('app.header')
+        .controller('HeaderController', HeaderController);
 
-    vm.contentMenu = [
-        {title: 'APIs', link: 'apiList'},
-        {title: 'Reviews', link: 'main:reviewList'},
-        {title: 'Reviewers', link: 'userList'}];
-    vm.userMenu = [
-        {title: 'My profile', link: 'userProfile'},
-        {title: 'My reviews', link: 'userReviewList'}];
-    vm.authservice = authservice;
-    vm.session = session;
-    vm.logout = logout;
+    function HeaderController($location, authservice, session, logger) {
+        var vm = this;
 
-    $scope.vm = vm;
+        vm.contentMenu = [
+            {title: 'APIs', link: 'api-list'},
+            {title: 'Reviews', link: 'review-list'},
+            {title: 'Reviewers', link: 'user-list'}];
+        vm.userMenu = [
+            {title: 'My profile', link: 'user-profile'},
+            {title: 'My reviews', link: 'user-review-list'}];
+        vm.authservice = authservice;
+        vm.session = session;
+        vm.logout = logout;
 
-    function logout() {
-        authservice.logout()
-            .then(logoutSuccessful, logoutFailed);
+        function logout() {
+            authservice.logout()
+                .then(logoutSuccessful, logoutFailed);
 
-        function logoutSuccessful(response) {
-            $location.path('/');
-        }
+            function logoutSuccessful(response) {
+                $location.path('/');
+            }
 
-        function logoutFailed(response) {
+            function logoutFailed(response) {
+            }
         }
     }
-}
+
+})();
