@@ -4,42 +4,60 @@
     <div class="row">
         <div class="col-lg-8">
 
-            <h1><a href="">{{review.review.title}}</a></h1>
-            <h2><small>Review of <a href="/apis/{{review.review.api.id}}">{{review.review.api.name}}</a></small></h2>
-            <p class="lead">
-                <i class="fa fa-user"></i> by
-                <a href="/users/{{review.review.reviewer.id}}">{{review.review.reviewer.username}}</a>
-            </p>
+            <h1><a href="">Review Editor</a></h1>
             <hr>
-            <div class="row">
-                <div class="col-lg-9">
-                    <p><i class="fa fa-calendar"></i> Posted on {{review.review.publishTime}}</p>
-                    <p>
-                        <i class="fa fa-tags"></i> Tags:
-                        <a title="{{tag}}" href="" ng-repeat="tag in review.review.tags">
-                            <span class="badge badge-info">{{tag}}</span>
-                        </a>
-                    </p>
+            <form name="form" ng-submit="reviewEditor.submit()" role="form">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" class="form-control" ng-model="reviewEditor.review.title" value="reviewEditor.review.title" required />
                 </div>
-                <div class="col-lg-3">
-                    <div class="btn-group review-actions">
-                        <a title="Edit my review" class="btn btn-default" ng-link="reviewEditor()">
-                            <i class="fa fa-pencil"></i>
-                        </a>
-                        <a title="Delete my review" class="btn btn-default" href="">
-                            <i class="fa fa-remove"></i>
-                        </a>
-                        <a title="Add to favourite" class="btn btn-default" href="">
-                            <i class="fa fa-star-o"></i>
-                        </a>
+                <div class="form-group">
+                    <label for="api">API</label>
+                    <input type="text" name="api" id="api" class="form-control" ng-model="reviewEditor.review.api.name" value="reviewEditor.review.api.name" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="title">Content</label>
+                    <textarea ui-tinymce ng-model="reviewEditor.review.content" rows="20"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tags">Tags</label>
+                    <tags-input ng-model="reviewEditor.review.tags" display-property="name">
+                        <auto-complete source="reviewEditor.loadTags($query)"></auto-complete>
+                    </tags-input>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Submit</button>
+                    <button type="button" ng-click="reviewEditor.cancel()" class="btn btn-primary">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div id="review-sidebar" class="col-lg-4"><!--
+            <div class="well">
+                <h4><i class="fa fa-tags"></i> Actions</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li><a href="">Edit my review</a>
+                            </li>
+                             <li><a href="">Add to favourite</a>
+                            </li>
+                             <li><a href="">Leave a comment</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-
-            <hr>
-            <img src="http://placehold.it/900x300" class="img-responsive">
-            <hr>
-            <p class="lead">{{review.review.content}}</p>
-            <br/>
+            <!-- /well -->
+            <div class="well">
+                <h4><i class="fa fa-info"></i> Review Info</h4>
+                <p>Date created: {{reviewEditor.review.datetime_created}}</p>
+                <p>Last updated: {{reviewEditor.review.last_updated}}</p>
+                <p>Positive rating: {{reviewEditor.review.rating.approve}}</p>
+                <p>Negative rating: {{reviewEditor.review.rating.disapprove}}</p>
+            </div>
+            <!-- /well -->
+        </div>
     </div>
 </div>
