@@ -8,6 +8,7 @@
     /** @ngInject */
     function tagservice($http, $q, APISERVICE, logger) {
         var service = {
+            create: createTag,
             addToReview: addToReview,
             getByReview: getByReview,
             updateForReview: updateForReview
@@ -17,7 +18,21 @@
         /////////////////////
 
         /**
-         * Add tags to a review
+         * Creates a new tag
+         * @param name the name of the tag
+         */
+        function createTag(name) {
+            return $http({
+                url: APISERVICE.tagUrl,
+                method: 'POST',
+                dataType: 'json',
+                data: name,
+                headers: APISERVICE.headers
+            }).then(handleSuccess, handleError);
+        }
+
+        /**
+         * Adds tags to a review
          * @param reviewId the id of the review
          * @param tags an array of tags to be added to a review
          */

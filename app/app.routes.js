@@ -25,7 +25,7 @@
         }
         $componentLoaderProvider.setTemplateMapping(changeNameTmpl);
         $locationProvider.html5Mode({
-          enabled: true,
+          enabled: false,
           requireBase: false
         });
     }
@@ -55,20 +55,30 @@
             component: getCompObj('register')
         },
         {
+            path: '/apis/:id',
+            component: getCompObj('api')
+        },
+        {
             path: '/reviews/:id',
             component: getCompObj('review')
         },
         {
             path: '/reviews/:id/edit',
-            component: getCompObj('reviewEditor')
+            component: getCompObj('reviewEditor'),
+            as: 'editReview'
         },
         {
             path: '/reviews/new',
-            component: getCompObj('reviewEditor')
+            component: getCompObj('reviewEditor'),
+            as: 'newReview'
         },
         {
             path: '/reviews',
             component: getCompObj('reviewList')
+        },
+        {
+            path: '/users/:id',
+            component: getCompObj('user')
         }
     ];
 
