@@ -6,11 +6,17 @@
         .controller('ReviewEditorController', ReviewEditorController);
 
     /** @ngInject */
-    function ReviewEditorController($location, $stateParams, reviewservice, apiservice,
-        userservice, tagservice, ratingservice, session, toastr, logger) {
+    function ReviewEditorController($location, $stateParams, dialogs, reviewservice,
+        apiservice, userservice, tagservice, ratingservice, session, toastr, logger) {
         var vm = this;
 
         vm.review = session.getCurrentReview();
+        vm.loadTags = loadTags;
+        vm.showDialog = showDialog;
+        vm.submit = submitReview;
+        vm.cancel = cancelEdit;
+
+        // Use review stored in session if valid
         if (vm.review.id != $stateParams.id) {
             reviewservice.getById($stateParams.id)
                 .then(function (review) {
@@ -39,10 +45,6 @@
                 toastr.error('Failed to retrieve the review. Please try again.');
             }
         }
-        vm.loadTags = loadTags;
-        vm.showDialog = showDialog;
-        vm.submit = submitReview;
-        vm.cancel = cancelEdit;
 
         function loadTags(query) {
             return tagservice.getAll()
@@ -55,32 +57,55 @@
         }
 
         function showDialog() {
-            var dlg = dialogs.confirm(
-                'Confirm deletion',
-                'Do you really want to delete this review?');
-            dlg.result.then(confirmDelete, cancel);
+            var dlg = dialogs.create(
+                '/app/components/review-editor/create-tag-dialog.html',
+                'createTagDialogController',
+                {});
+            dlg.result.then(saveTag, cancel);
 
-            function confirmDelete(btn) {
-                reviewservice.delete(vm.review.id)
-                    .then(deleteSuccessful, deleteFailed);
+            function saveTag(name) {
+                var tag = {
+                    'name': name
+                }
+                tagservice.create(tag)
+                    .then(createTagSuccessful, createTagFailed);
 
-                function deleteSuccessful(result) {
-                    $location.path('/reviews');
-                    toastr.success('Review deleted');
+                function createTagSuccessful(result) {
+                    vm.review.tags.push(result);
+                    toastr.success('New tag \'' + result.name + '\' added!');
                 }
 
-                function deleteFailed(error) {
-                    toastr.error('Failed to delete the review. Please try again.');
+                function createTagFailed(error) {
+                    toastr.error('Failed to add the tag. Please try again.');
                 }
             }
 
             function cancel(btn) {
-                logger.info('Delete review cancelled');
             }
         }
 
         function submitReview() {
             logger.log(vm.review);
+            var review = {
+                'id': vm.review.id,
+                'title': vm.review.title,
+                'content': vm.review.content,
+                'api': vm.review.api.id,
+                'reviewer': vm.review.reviewer.id,
+                'datetime_created': vm.review.datetime_created,
+                'last_updated': vm.review.last_updated
+            };
+            reviewservice.update(review)
+                .then(updateReviewSuccessful, updateReviewFailed);
+
+            function updateReviewSuccessful(result) {
+                $location.path('/reviews/' + vm.review.id);
+                toastr.success('Review successfully updated!');
+            }
+
+            function updateReviewFailed(result) {
+                toastr.error('Failed to submit review. Please try again.');
+            }
         }
 
         function cancelEdit() {

@@ -23,12 +23,12 @@
          * Creates a new tag
          * @param name the name of the tag
          */
-        function createTag(name) {
+        function createTag(tag) {
             return $http({
                 url: APISERVICE.tagUrl,
                 method: 'POST',
                 dataType: 'json',
-                data: name,
+                data: tag,
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
         }

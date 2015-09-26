@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4 class="modal-title"><span class="fa fa-tag"></span> New Tag</h4>
+</div>
+<div class="modal-body">
+    <ng-form name="form" novalidate role="form">
+        <div class="form-group input-group-lg" ng-class="{ 'has-error': form.tagName.$touched && form.tagName.$invalid }">
+            <label class="control-label" for="tagName">Name:</label>
+            <input type="text" class="form-control" name="tagName" id="tagName" ng-model="tag.name" ng-keyup="hitEnter($event)" required>
+            <span ng-show="form.tagName.$touched && form.tagName.$error.required" class="help-block">Please enter the tag name.</span>
+        </div>
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="(form.$dirty && form.$invalid) || form.$pristine">Save</button>
+</div>
