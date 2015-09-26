@@ -13,9 +13,11 @@
             'app.login',
             'app.register',
             'app.home',
+            'app.api',
             'app.review',
             'app.reviewEditor',
-            'app.reviewList'
+            'app.reviewList',
+            'app.user'
         ])
         .run(run);
 

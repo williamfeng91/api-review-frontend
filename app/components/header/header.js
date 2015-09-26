@@ -6,12 +6,12 @@ function HeaderController($location, authservice, session, logger) {
     var vm = this;
 
     vm.contentMenu = [
-        {title: 'APIs', link: 'apis()'},
-        {title: 'Reviews', link: 'main:reviewList()'},
-        {title: 'Reviewers', link: 'reviewers()'}];
+        {title: 'APIs', link: 'apiList'},
+        {title: 'Reviews', link: 'main:reviewList'},
+        {title: 'Reviewers', link: 'userList'}];
     vm.userMenu = [
-        {title: 'My profile', link: 'userProfile()'},
-        {title: 'My reviews', link: 'userReviewList()'}];
+        {title: 'My profile', link: 'userProfile'},
+        {title: 'My reviews', link: 'userReviewList'}];
     vm.authservice = authservice;
     vm.session = session;
     vm.logout = logout;
