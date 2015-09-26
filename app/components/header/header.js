@@ -1,8 +1,11 @@
 angular
-    .module('app.header')
+    .module('app.header', [
+      'app.services',
+      'ngCookies',
+    ])
     .controller('HeaderController', HeaderController);
 
-function HeaderController($location, authservice, session, logger) {
+function HeaderController($scope, $location, authservice, session, logger) {
     var vm = this;
 
     vm.contentMenu = [
@@ -15,6 +18,8 @@ function HeaderController($location, authservice, session, logger) {
     vm.authservice = authservice;
     vm.session = session;
     vm.logout = logout;
+
+    $scope.vm = vm;
 
     function logout() {
         authservice.logout()
