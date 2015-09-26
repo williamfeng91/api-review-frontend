@@ -14,7 +14,9 @@
         })
         .constant('APISERVICE', {
             url: 'http://jsonstub.com',
+            apiUrl: 'http://jsonstub.com/apis',
             reviewUrl: 'http://jsonstub.com/reviews',
+            tagUrl: 'http://jsonstub.com/tags',
             userUrl: 'http://jsonstub.com/users',
             headers: {
                 'Content-Type': 'application/json',

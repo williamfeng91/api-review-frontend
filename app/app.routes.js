@@ -24,8 +24,10 @@
             return './app/components/' + dashName + '/' + dashName + ext;
         }
         $componentLoaderProvider.setTemplateMapping(changeNameTmpl);
-        // $locationProvider.html5mode = {enabled:true};
-        // console.log($locationProvider.html5mode);
+        $locationProvider.html5Mode({
+          enabled: false,
+          requireBase: false
+        });
     }
 
     function getCompObj(main, header, footer) {
@@ -53,20 +55,30 @@
             component: getCompObj('register')
         },
         {
+            path: '/apis/:id',
+            component: getCompObj('api')
+        },
+        {
             path: '/reviews/:id',
             component: getCompObj('review')
         },
         {
             path: '/reviews/:id/edit',
-            component: getCompObj('reviewEditor')
+            component: getCompObj('reviewEditor'),
+            as: 'editReview'
         },
         {
             path: '/reviews/new',
-            component: getCompObj('reviewEditor')
+            component: getCompObj('reviewEditor'),
+            as: 'newReview'
         },
         {
             path: '/reviews',
             component: getCompObj('reviewList')
+        },
+        {
+            path: '/users/:id',
+            component: getCompObj('user')
         }
     ];
 
