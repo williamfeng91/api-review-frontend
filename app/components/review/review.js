@@ -6,8 +6,8 @@
         .controller('ReviewController', ReviewController);
 
     /** @ngInject */
-    function ReviewController($location, $routeParams, dialogs, reviewservice,
-        ratingservice, tagservice, apiservice, userservice, session, toastr, logger) {
+    function ReviewController($location, $routeParams, dialogs, reviewservice, apiservice,
+        userservice, tagservice, ratingservice, session, toastr, logger) {
         var vm = this;
 
         (function initController() {
@@ -28,8 +28,8 @@
                 .then(function (rating) {
                     vm.review.rating = rating;
                     return tagservice.getByReview(vm.review.id);
-                }, getReviewFailed).
-                then(function (tagsObj) {
+                }, getReviewFailed)
+                .then(function (tagsObj) {
                     vm.review.tags = tagsObj.tags;
                     session.setCurrentReview(vm.review);
                 }, getReviewFailed);
