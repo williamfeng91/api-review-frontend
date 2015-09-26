@@ -6,7 +6,9 @@
             'ngNewRouter',
             'ngCookies',
             'ui.bootstrap',
+            'ui.tinymce',
             'dialogs.main',
+            'ngTagsInput',
             'app.services',
             'app.header',
             'app.footer',
@@ -25,6 +27,9 @@
         // keep user logged in after page refresh
         if ($cookieStore.get('currentUser')) {
             session.create($cookieStore.get('currentUser'));
+        }
+        if ($cookieStore.get('currentReview')) {
+            session.setCurrentReview($cookieStore.get('currentReview'));
         }
 
         // disable for convenience when developing

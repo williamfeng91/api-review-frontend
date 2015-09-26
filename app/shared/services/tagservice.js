@@ -11,6 +11,8 @@
             create: createTag,
             addToReview: addToReview,
             getByReview: getByReview,
+            getAll: getAll,
+            search: search,
             updateForReview: updateForReview
         };
 
@@ -53,6 +55,33 @@
         function getByReview(reviewId) {
             return $http({
                 url: APISERVICE.reviewUrl + '/' + reviewId + '/tags',
+                method: 'GET',
+                dataType: 'json',
+                data: '',
+                headers: APISERVICE.headers
+            }).then(handleSuccess, handleError);
+        }
+
+        /**
+         * Retrieves all tags
+         */
+        function getAll() {
+            return $http({
+                url: APISERVICE.tagUrl,
+                method: 'GET',
+                dataType: 'json',
+                data: '',
+                headers: APISERVICE.headers
+            }).then(handleSuccess, handleError);
+        }
+
+        /**
+         * Search tags containing a keyword
+         * @param keyword the keyword used to search
+         */
+        function search(keyword) {
+            return $http({
+                url: APISERVICE.tagUrl + '?query=' + keyword,
                 method: 'GET',
                 dataType: 'json',
                 data: '',

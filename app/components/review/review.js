@@ -5,8 +5,9 @@
         .module('app.review')
         .controller('ReviewController', ReviewController);
 
+    /** @ngInject */
     function ReviewController($location, $routeParams, dialogs, reviewservice,
-        ratingservice, tagservice, apiservice, userservice, toastr, logger) {
+        ratingservice, tagservice, apiservice, userservice, session, toastr, logger) {
         var vm = this;
 
         (function initController() {
@@ -17,19 +18,20 @@
                     return userservice.getById(vm.review.reviewer);
                 }, getReviewFailed)
                 .then(function (reviewer) {
-                    vm.reviewer = reviewer;
+                    vm.review.reviewer = reviewer;
                     return apiservice.getById(vm.review.api);
                 }, getReviewFailed)
                 .then(function (api) {
-                    vm.api = api;
+                    vm.review.api = api;
                     return ratingservice.getByReview(vm.review.id);
                 }, getReviewFailed)
                 .then(function (rating) {
-                    vm.rating = rating;
+                    vm.review.rating = rating;
                     return tagservice.getByReview(vm.review.id);
                 }, getReviewFailed).
                 then(function (tagsObj) {
-                    vm.tags = tagsObj.tags;
+                    vm.review.tags = tagsObj.tags;
+                    session.setCurrentReview(vm.review);
                 }, getReviewFailed);
 
             function getReviewFailed(error) {

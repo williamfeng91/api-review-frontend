@@ -5,12 +5,12 @@
         <div class="col-lg-8">
 
             <h1><a href="">{{review.review.title}}</a></h1>
-            <h2><small>Review of <a href="/apis/{{review.api.id}}">{{review.api.name}}</a></small></h2>
+            <h2><small>Review of <a href="/apis/{{review.review.api.id}}">{{review.review.api.name}}</a></small></h2>
             <div class="row">
                 <div class="col-lg-9">
                     <p class="lead">
                         <i class="fa fa-user"></i> by
-                        <a href="/users/{{review.reviewer.id}}">{{review.reviewer.first_name}} {{review.reviewer.last_name}}</a>
+                        <a href="/users/{{review.review.reviewer.id}}">{{review.review.reviewer.first_name}} {{review.review.reviewer.last_name}}</a>
                     </p>
                 </div>
                 <div class="col-lg-3">
@@ -34,7 +34,7 @@
                     <p><i class="fa fa-calendar"></i> Posted on {{review.review.datetime_created}}</p>
                     <p>
                         <i class="fa fa-tags"></i> Tags:
-                        <a title="{{tag}}" href="" ng-repeat="tag in review.tags">
+                        <a title="{{tag.name}}" href="" ng-repeat="tag in review.review.tags">
                             <span class="badge badge-info">{{tag}}</span>
                         </a>
                     </p>
@@ -45,20 +45,18 @@
                             <a title="Like it" class="" href>
                                 <i class="fa fa-thumbs-o-up"></i>
                             </a>
-                            <span>{{review.rating.approve}}</span>
+                            <span>{{review.review.rating.approve}}</span>
                         </div>
                         <div class="col-lg-6">
                             <a title="Dislike it" class="" href>
                                 <i class="fa fa-thumbs-o-down"></i>
                             </a>
-                            <span>{{review.rating.disapprove}}</span>
+                            <span>{{review.review.rating.disapprove}}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <hr>
-            <img src="http://placehold.it/900x300" class="img-responsive">
             <hr>
             <p class="lead">{{review.review.content}}</p>
             <br/>
