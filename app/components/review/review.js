@@ -2,17 +2,17 @@
     'use strict';
 
     angular
-        .module('app.review')
+        .module('app.review', ['dialogs.main'])
         .controller('ReviewController', ReviewController);
 
-    /** @ngInject */
-    function ReviewController($location, $routeParams, dialogs, reviewservice, apiservice,
-        userservice, tagservice, ratingservice, session, toastr, logger) {
+    function ReviewController($scope, $location, $stateParams, dialogs, reviewservice,
+        ratingservice, tagservice, apiservice, userservice, toastr, logger) {
         var vm = this;
+        $scope.review = vm;
 
         (function initController() {
             // load the review
-            reviewservice.getById($routeParams.id)
+            reviewservice.getById($stateParams.id)
                 .then(function (review) {
                     vm.review = review;
                     return userservice.getById(vm.review.reviewer);

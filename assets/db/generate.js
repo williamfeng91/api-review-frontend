@@ -16,7 +16,7 @@ module.exports = function(){
                 },
                 review: faker.lorem.paragraphs(),
                 created_at: faker.date.past(),
-                rating: (n%5) + 1
+                rating: (faker.random.number()%5) + 1
             }
         })
     }

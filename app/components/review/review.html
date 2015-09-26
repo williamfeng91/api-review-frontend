@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="btn-group review-actions">
-                        <a title="Edit my review" class="btn btn-default" ng-link="editReview({id:review.review.id})">
+                        <a title="Edit my review" class="btn btn-default" ui-sref="reviews-item-edit({id:review.review.id})">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a title="Delete my review" class="btn btn-default" ng-click="review.showDialog()">
