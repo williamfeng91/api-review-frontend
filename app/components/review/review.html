@@ -4,21 +4,21 @@
     <div class="row">
         <div class="col-lg-8">
 
-            <h1><a href="">{{review.review.title}}</a></h1>
-            <h2><small>Review of <a href="/apis/{{review.review.api.id}}">{{review.review.api.name}}</a></small></h2>
+            <h1><a href="">{{reviewCtrl.review.title}}</a></h1>
+            <h2><small>Review of <a href="/apis/{{reviewCtrl.review.api.id}}">{{reviewCtrl.review.api.name}}</a></small></h2>
             <div class="row">
                 <div class="col-lg-9">
                     <p class="lead">
                         <i class="fa fa-user"></i> by
-                        <a href="/users/{{review.review.reviewer.id}}">{{review.review.reviewer.first_name}} {{review.review.reviewer.last_name}}</a>
+                        <a href="/users/{{reviewCtrl.review.reviewer.id}}">{{reviewCtrl.review.reviewer.first_name}} {{reviewCtrl.review.reviewer.last_name}}</a>
                     </p>
                 </div>
                 <div class="col-lg-3">
                     <div class="btn-group review-actions">
-                        <a title="Edit my review" class="btn btn-default" ui-sref="reviews-item-edit({id:review.review.id})">
+                        <a title="Edit my review" class="btn btn-default" ui-sref="reviews-item-edit({id:reviewCtrl.review.id})">
                             <i class="fa fa-pencil"></i>
                         </a>
-                        <a title="Delete my review" class="btn btn-default" ng-click="review.showDialog()">
+                        <a title="Delete my review" class="btn btn-default" ng-click="reviewCtrl.showDialog()">
                             <i class="fa fa-remove"></i>
                         </a>
                         <!--
@@ -31,10 +31,10 @@
             <hr>
             <div class="row">
                 <div class="col-lg-10">
-                    <p><i class="fa fa-calendar"></i> Posted on {{review.review.datetime_created}}</p>
+                    <p><i class="fa fa-calendar"></i> Posted on {{reviewCtrl.review.datetime_created}}</p>
                     <p>
                         <i class="fa fa-tags"></i> Tags:
-                        <a title="{{tag.name}}" href="" ng-repeat="tag in review.review.tags">
+                        <a title="{{tag.name}}" href="" ng-repeat="tag in reviewCtrl.review.tags">
                             <span class="badge badge-info">{{tag}}</span>
                         </a>
                     </p>
@@ -45,20 +45,20 @@
                             <a title="Like it" class="" href>
                                 <i class="fa fa-thumbs-o-up"></i>
                             </a>
-                            <span>{{review.review.rating.approve}}</span>
+                            <span>{{reviewCtrl.review.rating.approve}}</span>
                         </div>
                         <div class="col-lg-6">
                             <a title="Dislike it" class="" href>
                                 <i class="fa fa-thumbs-o-down"></i>
                             </a>
-                            <span>{{review.review.rating.disapprove}}</span>
+                            <span>{{reviewCtrl.review.rating.disapprove}}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <hr>
-            <p class="lead">{{review.review.content}}</p>
+            <p class="lead">{{reviewCtrl.review.content}}</p>
             <br/>
             <hr>
 
@@ -128,7 +128,7 @@
             <div class="well">
                 <h4><i class="fa fa-files-o"></i> Related Reviews</h4>
                 <ul>
-                    <li ng-repeat="article in review.relatedReviews">
+                    <li ng-repeat="article in reviewCtrl.relatedReviews">
                         <a ng-href="/reviews/{{article.id}}">{{article.title}}</a>
                     </li>
                 </ul>

@@ -1,6 +1,11 @@
-angular
-    .module('app.footer')
-    .controller('FooterController', FooterController);
+(function() {
+    'use strict';
 
-function FooterController() {
-}
+    angular
+        .module('app.footer')
+        .controller('FooterController', FooterController);
+
+    function FooterController() {
+    }
+
+})();

@@ -1,5 +1,11 @@
-angular
-    .module('app.home')
-    .controller('HomeController', HomeController);
+(function() {
+    'use strict';
 
-function HomeController($scope) {}
+    angular
+        .module('app.home')
+        .controller('HomeController', HomeController);
+
+    function HomeController() {
+    }
+
+})();
