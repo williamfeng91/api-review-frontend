@@ -5,23 +5,23 @@
         .module('app.register')
         .controller('RegisterController', RegisterController);
 
-    function RegisterController($state, userservice, logger) {
+    function RegisterController($state, userservice, toastr, logger) {
         var vm = this;
 
         vm.register = register;
 
         function register() {
             vm.dataLoading = true;
-            userservice.create(vm.user)
+            userservice.register(vm.user)
                 .then(registerSuccessful, registerFailed);
 
             function registerSuccessful(response) {
                 $state.go('login');
+                toastr.success('An email has been sent to you for verification.', 'Registration Successful!');
             }
 
             function registerFailed(response) {
                 vm.dataLoading = false;
-                vm.error = "Registration failed";
             }
         };
     }

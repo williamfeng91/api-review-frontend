@@ -22,7 +22,7 @@
 
             function loginSuccessful(response) {
                 $state.go('home');
-                toastr.success('Successfully logged in!', 'Welcome ' + session.getCurrentUser().given_name);
+                toastr.success('You have been successfully logged in.', 'Welcome ' + session.getCurrentUser().given_name + '!');
             }
 
             function loginFailed(response) {

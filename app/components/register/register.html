@@ -6,32 +6,33 @@
     <div ng-show="registerCtrl.error" class="alert alert-danger">{{registerCtrl.error}}</div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <form name="form" ng-submit="registerCtrl.register()" role="form">
-                <div class="form-group" ng-class="{ 'has-error': form.email.$touched && form.email.$invalid }">
+            <form name="form" ng-submit="registerCtrl.register()" role="form" novalidate>
+                <div class="form-group required" ng-class="{ 'has-error': form.email.$touched && form.email.$invalid }">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" ng-model="registerCtrl.user.email" placeholder="Email address" required />
+                    <input type="email" name="email" id="email" class="form-control" ng-model="registerCtrl.user.email" required />
                     <span ng-show="form.email.$touched && form.email.$error.required" class="help-block">Email is required</span>
                     <span ng-show="form.email.$touched && form.email.$error.email" class="help-block">Invalid email address</span>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error': form.firstName.$touched && form.firstName.$invalid }">
+                <div class="form-group required" ng-class="{ 'has-error': form.firstName.$touched && form.firstName.$invalid }">
                     <label for="firstName">First Name</label>
-                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="registerCtrl.user.given_name" placeholder="First Name" required />
+                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="registerCtrl.user.given_name" required />
                     <span ng-show="form.firstName.$touched && form.firstName.$error.required" class="help-block">First name is required</span>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error': form.lastName.$touched && form.lastName.$invalid }">
+                <div class="form-group required" ng-class="{ 'has-error': form.lastName.$touched && form.lastName.$invalid }">
                     <label for="lastName">Last Name</label>
-                    <input type="text" name="lastName" id="lastName" class="form-control" ng-model="registerCtrl.user.lastName" placeholder="Last Name" required />
+                    <input type="text" name="lastName" id="lastName" class="form-control" ng-model="registerCtrl.user.surname" required />
                     <span ng-show="form.lastName.$touched && form.lastName.$error.required" class="help-block">Last name is required</span>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error': form.password.$touched && form.password.$invalid }">
+                <div class="form-group required" ng-class="{ 'has-error': form.password.$touched && form.password.$invalid }">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" class="form-control" ng-model="registerCtrl.user.password" placeholder="Password" required />
                     <span ng-show="form.password.$touched && form.password.$error.required" class="help-block">Password is required</span>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error': form.confirmPassword.$touched && form.confirmPassword.$invalid }">
+                <div class="form-group required" ng-class="{ 'has-error': form.confirmPassword.$touched && form.confirmPassword.$invalid }">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm Password" required />
-                    <span ng-show="form.confirmPassword.$touched && form.password.$error.required" class="help-block">Passwords must match</span>
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" ng-model="registerCtrl.confirmPassword" match-password="password" placeholder="Confirm Password" required />
+                    <span ng-show="form.confirmPassword.$touched && form.confirmPassword.$error.required" class="help-block">Confirm password is required</span>
+                    <span ng-show="!form.confirmPassword.$error.required && form.confirmPassword.$touched && form.confirmPassword.$error.passwordMatch" class="help-block">Passwords must match</span>
                 </div>
                 <div class="form-actions">
                     <button type="submit" ng-disabled="form.$invalid || registerCtrl.dataLoading" class="btn btn-primary">Register</button>
