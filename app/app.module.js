@@ -18,6 +18,7 @@
             'app.register',
             'app.home',
             'app.api',
+            'app.apiEditor',
             'app.review',
             'app.reviewEditor',
             'app.reviewList',
@@ -30,7 +31,7 @@
         if ($cookieStore.get('currentUser')) {
             session.create($cookieStore.get('currentUser'));
         }
-        if ($cookieStore.get('currentReview')) {
+        if ($cookieStore.get('currentReview')) {    // debugging only
             session.setCurrentReview($cookieStore.get('currentReview'));
         }
 
