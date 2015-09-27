@@ -5,7 +5,7 @@
         .module('app.register')
         .controller('RegisterController', RegisterController);
 
-    function RegisterController($location, userservice, logger) {
+    function RegisterController($state, userservice, logger) {
         var vm = this;
 
         vm.register = register;
@@ -16,11 +16,10 @@
                 .then(registerSuccessful, registerFailed);
 
             function registerSuccessful(response) {
-                $location.path('/login');
+                $state.go('login');
             }
 
             function registerFailed(response) {
-                // FlashService.Error(response.message);
                 vm.dataLoading = false;
                 vm.error = "Registration failed";
             }

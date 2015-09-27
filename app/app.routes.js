@@ -42,7 +42,8 @@
         };
     }
 
-    function stateConfig($stateProvider, $urlRouterProvider) {
+    function stateConfig($stateProvider, $urlRouterProvider, $uiViewScrollProvider) {
+        $uiViewScrollProvider.useAnchorScroll();
         $stateProvider
             .state('home', {
                 url: '/',
@@ -56,21 +57,49 @@
                 url: '/register',
                 views: getUICompObj('register')
             })
-            .state('reviews-item-view', {
+            .state('review-item-new', {
+                url: '/reviews/new',
+                views: getUICompObj('review-editor')
+            })
+            .state('review-item-view', {
                 url: '/reviews/:id',
                 views: getUICompObj('review')
             })
-            .state('reviews-item-edit', {
+            .state('review-item-edit', {
                 url: '/reviews/:id/edit',
                 views: getUICompObj('review-editor'),
-            })
-            .state('reviews-item-new', {
-                url: '/reviews/new',
-                views: getUICompObj('review-editor')
             })
             .state('review-list', {
                 url: '/reviews',
                 views: getUICompObj('review-list')
+            })
+            .state('api-item-new', {
+                url: '/apis/new',
+                views: getUICompObj('api-editor')
+            })
+            .state('api-item-view', {
+                url: '/apis/:id',
+                views: getUICompObj('api')
+            })
+            .state('api-item-edit', {
+                url: '/apis/:id/edit',
+                views: getUICompObj('api-editor'),
+            })
+            .state('api-list', {
+                url: '/apis',
+                views: getUICompObj('api-list')
+            })
+            .state('user-profile-view', {
+                url: '/apis/:id',
+                views: getUICompObj('user')
+            })
+            .state('user-profile-edit', {
+                url: '/apis/:id/edit',
+                views: getUICompObj('user-editor'),
+            })
+            .state('user-list', {
+                url: '/apis',
+                views: getUICompObj('user-list')
             });
     }
 

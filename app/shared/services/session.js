@@ -13,13 +13,14 @@
         this.create = function (user) {
             this.currentUser = user;
             $cookieStore.put('currentUser', user);
-            logger.info('Session created for user ' + user.username, this.currentUser, 'session.create');
+            logger.info('Session created for user ' + user.email, this.currentUser, 'session.create');
         }
 
         this.destroy = function () {
             this.currentUser = null;
             this.currentReview = null;
             $cookieStore.remove('currentUser');
+            $cookieStore.remove('currentReview');
             logger.info('Session destroyed', this.currentUser, 'session.destroy');
         }
 

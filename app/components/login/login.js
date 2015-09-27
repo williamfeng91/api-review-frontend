@@ -5,7 +5,7 @@
         .module('app.login')
         .controller('LoginController', LoginController);
 
-    function LoginController($location, authservice, session, toastr, logger) {
+    function LoginController($state, authservice, session, toastr, logger) {
         var vm = this;
 
         vm.login = login;
@@ -21,12 +21,11 @@
                 .then(loginSuccessful, loginFailed);
 
             function loginSuccessful(response) {
-                $location.path('/');
-                toastr.success('Successfully logged in!', 'Welcome ' + session.getCurrentUser().username);
+                $state.go('home');
+                toastr.success('Successfully logged in!', 'Welcome ' + session.getCurrentUser().given_name);
             }
 
             function loginFailed(response) {
-                // FlashService.Error(response.message);
                 vm.dataLoading = false;
             }
         };

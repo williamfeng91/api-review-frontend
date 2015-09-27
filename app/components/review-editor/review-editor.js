@@ -6,50 +6,61 @@
         .controller('ReviewEditorController', ReviewEditorController);
 
     /** @ngInject */
-    function ReviewEditorController($location, $stateParams, dialogs, reviewservice,
+    function ReviewEditorController($state, $stateParams, dialogs, reviewservice,
         apiservice, userservice, tagservice, ratingservice, session, toastr, logger) {
         var vm = this;
 
-        vm.review = session.getCurrentReview();
+        vm.isEditMode = ($state.current.name == 'review-item-edit');
         vm.loadTags = loadTags;
         vm.showDialog = showDialog;
         vm.submit = submitReview;
         vm.cancel = cancelEdit;
+        vm.review = {
+            'title': '',
+            'content': '',
+            'description': '',
+            'api': {},
+            'tags': []
+        };
 
-        // Use review stored in session if valid
-        if (vm.review.id != $stateParams.id) {
-            reviewservice.getById($stateParams.id)
-                .then(function (review) {
-                    vm.review = review;
-                    return userservice.getById(vm.review.reviewer);
-                }, getReviewFailed)
-                .then(function (reviewer) {
-                    vm.review.reviewer = reviewer;
-                    return apiservice.getById(vm.review.api);
-                }, getReviewFailed)
-                .then(function (api) {
-                    vm.review.api = api;
-                    return ratingservice.getByReview(vm.review.id);
-                }, getReviewFailed)
-                .then(function (rating) {
-                    vm.review.rating = rating;
-                    return tagservice.getByReview(vm.review.id);
-                }, getReviewFailed)
-                .then(function (tagsObj) {
-                    vm.review.tags = tagsObj.tags;
+        // Get all APIs for autocomplete
+        vm.allApis = [];
+
+        apiservice.getAll()
+            .then(getAllAPIsSuccess, getAllAPIsFailed);
+
+        function getAllAPIsSuccess(result) {
+            vm.allApis = result.results;
+            logger.log(vm.allApis);
+        }
+
+        function getAllAPIsFailed(result) {
+        }
+
+        // Use review stored in session if valid when editing review
+        if (vm.isEditMode) {
+            vm.review = session.getCurrentReview();
+
+            if (vm.review.id != $stateParams.id) {
+                reviewservice.getById($stateParams.id)
+                    .then(getReviewSuccessful, getReviewFailed);
+
+                function getReviewSuccessful(result) {
+                    vm.review = result;
                     session.setCurrentReview(vm.review);
-                }, getReviewFailed);
+                }
 
-            function getReviewFailed(error) {
-                $location.path('/reviews');
-                toastr.error('Failed to retrieve the review. Please try again.');
+                function getReviewFailed(error) {
+                    $state.go('review-list');
+                    toastr.error('Failed to retrieve the review. Please try again.');
+                }
             }
         }
 
         function loadTags(query) {
             return tagservice.getAll()
                 .then(function (result) {
-                    var tags = result.tags;
+                    var tags = result.results;
                     return tags.filter(function (tag) {
                         return tag.name.toLowerCase().indexOf(query.toLowerCase()) != -1;
                     });
@@ -85,32 +96,48 @@
         }
 
         function submitReview() {
+            vm.dataLoading = true;
             logger.log(vm.review);
-            var review = {
-                'id': vm.review.id,
+            var reviewObj = {
                 'title': vm.review.title,
                 'content': vm.review.content,
+                'description': vm.review.description,
                 'api': vm.review.api.id,
-                'reviewer': vm.review.reviewer.id,
-                'datetime_created': vm.review.datetime_created,
-                'last_updated': vm.review.last_updated
+                'tags': []
             };
-            reviewservice.update(review)
-                .then(updateReviewSuccessful, updateReviewFailed);
+            angular.forEach(vm.review.tags, function(tag) {
+                reviewObj.tags.push(tag.id);
+            });
+            logger.log(reviewObj);
+            if (vm.isEditMode) {
+                reviewObj.id = vm.review.id;
+                reviewservice.update(reviewObj)
+                    .then(updateReviewSuccessful, submitReviewFailed);
+            } else {
+                reviewObj.api = vm.selectedApi.originalObject;
+                reviewservice.create(reviewObj)
+                    .then(createReviewSuccessful, submitReviewFailed);
+            }
+
+            function createReviewSuccessful(result) {
+                $state.go('review-item-view', {id: result.id});
+                toastr.success('Review successfully created!');
+            }
 
             function updateReviewSuccessful(result) {
-                $location.path('/reviews/' + vm.review.id);
+                $state.go('review-item-view', {id: vm.review.id});
                 toastr.success('Review successfully updated!');
             }
 
-            function updateReviewFailed(result) {
+            function submitReviewFailed(result) {
+                vm.dataLoading = false;
                 toastr.error('Failed to submit review. Please try again.');
             }
         }
 
         function cancelEdit() {
-            $location.path('/reviews/' + vm.review.id);
-            logger.info('Editting cancelled');
+            $state.go('review-item-view', {id: vm.review.id});
+            logger.info('Editing cancelled');
         }
     }
 })();

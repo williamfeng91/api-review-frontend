@@ -5,7 +5,7 @@
         .module('app.header')
         .controller('HeaderController', HeaderController);
 
-    function HeaderController($location, authservice, session, logger) {
+    function HeaderController($state, authservice, session, logger) {
         var vm = this;
 
         vm.contentMenu = [
@@ -24,7 +24,7 @@
                 .then(logoutSuccessful, logoutFailed);
 
             function logoutSuccessful(response) {
-                $location.path('/');
+                $state.go('home');
             }
 
             function logoutFailed(response) {
