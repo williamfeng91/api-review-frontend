@@ -35,7 +35,7 @@
         }
 
         /**
-         * Creates a new user
+         * User registration
          * @param user a user object that captures all details the API needs
          */
         function register(user) {

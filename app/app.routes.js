@@ -42,7 +42,12 @@
         };
     }
 
-    function stateConfig($stateProvider, $urlRouterProvider, $uiViewScrollProvider) {
+    function stateConfig($locationProvider, $stateProvider, $urlRouterProvider, $uiViewScrollProvider) {
+        $locationProvider.html5Mode({
+            enabled: false, // set to true to remove hash. Don't want to set it now because it
+                            // doesn't allow access to pages by typing url directly
+            requireBase: false
+        });
         $uiViewScrollProvider.useAnchorScroll();
         $stateProvider
             .state('home', {

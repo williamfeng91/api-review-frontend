@@ -12,7 +12,7 @@
 
         vm.isEditMode = ($state.current.name == 'review-item-edit');
         vm.loadTags = loadTags;
-        vm.showDialog = showDialog;
+        vm.showCreateTagDialog = showCreateTagDialog;
         vm.submit = submitReview;
         vm.cancel = cancelEdit;
         vm.review = {
@@ -41,7 +41,7 @@
         if (vm.isEditMode) {
             vm.review = session.getCurrentReview();
 
-            if (vm.review.id != $stateParams.id) {
+            if (vm.review == null || vm.review.id != $stateParams.id) {
                 reviewservice.getById($stateParams.id)
                     .then(getReviewSuccessful, getReviewFailed);
 
@@ -67,7 +67,7 @@
                 });
         }
 
-        function showDialog() {
+        function showCreateTagDialog() {
             var dlg = dialogs.create(
                 '/app/components/review-editor/create-tag-dialog.html',
                 'createTagDialogController',
@@ -108,16 +108,16 @@
             angular.forEach(vm.review.tags, function(tag) {
                 reviewObj.tags.push(tag.id);
             });
-            logger.log(reviewObj);
             if (vm.isEditMode) {
                 reviewObj.id = vm.review.id;
                 reviewservice.update(reviewObj)
                     .then(updateReviewSuccessful, submitReviewFailed);
             } else {
-                reviewObj.api = vm.selectedApi.originalObject;
+                reviewObj.api = vm.selectedApi.originalObject.id;
                 reviewservice.create(reviewObj)
                     .then(createReviewSuccessful, submitReviewFailed);
             }
+            logger.log(reviewObj);
 
             function createReviewSuccessful(result) {
                 $state.go('review-item-view', {id: result.id});

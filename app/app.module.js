@@ -5,6 +5,7 @@
         .module('app', [
             'ui.router',
             'ngCookies',
+            'ngPassword',
             'ui.bootstrap',
             'ui.tinymce',
             'dialogs.main',

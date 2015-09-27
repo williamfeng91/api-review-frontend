@@ -23,11 +23,11 @@
             authservice.logout()
                 .then(logoutSuccessful, logoutFailed);
 
-            function logoutSuccessful(response) {
+            function logoutSuccessful() {
                 $state.go('home');
             }
 
-            function logoutFailed(response) {
+            function logoutFailed() {
             }
         }
     }
