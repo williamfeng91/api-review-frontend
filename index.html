@@ -13,6 +13,7 @@
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <!-- Angular UI plugins CSS -->
     <link href="assets/libs/angular-dialog-service/dist/dialogs.css" rel="stylesheet">
+    <link href="assets/libs/angucomplete-alt/angucomplete-alt.css" rel="stylesheet">
     <link href="assets/libs/ng-tags-input/ng-tags-input.css" rel="stylesheet">
     <link href="assets/libs/toastr/toastr.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -33,7 +34,7 @@
 <body>
     <ar-content ng-controller="AppController as app">
       <div ui-view="header"></div>
-      <div ui-view="main"></div>
+      <div ui-view="main" autoscroll="true"></div>
       <div ui-view="footer"></div>
     </ar-content>
 
@@ -50,18 +51,22 @@
     <script src="assets/libs/angular/angular.js"></script>
     <script src="assets/libs/angular-cookies/angular-cookies.js"></script>
     <script src="assets/libs/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <!-- Angular UI Plugins -->
     <script src="assets/libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="assets/libs/angular-dialog-service/dist/dialogs.js"></script>
     <script src="assets/libs/angular-sanitize/angular-sanitize.js"></script>
     <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
-    <script src="assets/libs/tinymce-dist/themes/modern/theme.js"></script>
     <script src="assets/libs/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="assets/libs/angucomplete-alt/angucomplete-alt.js"></script>
     <script src="assets/libs/ng-tags-input/ng-tags-input.js"></script>
-    <script src="app/app.module.js"></script>
-    <script src="app/app.routes.js"></script>
 
     <!-- Toastr -->
     <script src="assets/libs/toastr/toastr.js"></script>
+
+    <!-- API Review app -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.routes.js"></script>
 
     <!-- services -->
     <script src="app/shared/services/services.module.js"></script>

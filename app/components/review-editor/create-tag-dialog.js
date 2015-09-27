@@ -5,7 +5,7 @@
         .module('app.reviewEditor')
         .controller('createTagDialogController', createTagDialogController);
 
-    function createTagDialogController($scope, $modalInstance, logger) {
+    function createTagDialogController($scope, $modalInstance) {
         //-- Variables --//
         $scope.tag = {
             name: ''

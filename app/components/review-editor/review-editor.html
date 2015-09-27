@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-8">
 
-            <h1><a href="">Review Editor</a></h1>
+            <h1><a>Review Editor</a></h1>
             <hr>
             <form name="form" ng-submit="reviewEditorCtrl.submit()" role="form">
                 <div class="form-group">
@@ -13,7 +13,22 @@
                 </div>
                 <div class="form-group">
                     <label for="api">API</label>
-                    <input type="text" name="api" id="api" class="form-control" ng-model="reviewEditorCtrl.review.api.name" value="reviewEditorCtrl.review.api.name" readonly />
+                    <input ng-show="reviewEditorCtrl.isEditMode" type="text" name="api" id="api" class="form-control" value="{{reviewEditorCtrl.review.api.name}}" readonly />
+                    <angucomplete-alt id="apis"
+                                  ng-hide="reviewEditorCtrl.isEditMode"
+                                  placeholder="Type to search for an existing API"
+                                  pause="400"
+                                  selected-object="reviewEditorCtrl.selectedApi"
+                                  local-data="reviewEditorCtrl.allApis"
+                                  search-fields="name"
+                                  title-field="name"
+                                  minlength="1"
+                                  input-class="form-control form-control-small"
+                                  field-required="true" />
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" class="form-control" ng-model="reviewEditorCtrl.review.description" rows="5"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">Content</label>
@@ -21,19 +36,22 @@
                 </div>
                 <div class="form-group">
                     <label for="tags">Tags</label>
-                    <tags-input ng-model="reviewEditorCtrl.review.tags"
+                    <tags-input name="tags" id="tags"
+                                ng-model="reviewEditorCtrl.review.tags"
                                 display-property="name"
                                 add-from-autocomplete-only="true"
                                 placeholder="Add an existing tag"
                                 class="taginput">
-                        <auto-complete source="reviewEditorCtrl.loadTags($query)"></auto-complete>
+                        <auto-complete source="reviewEditorCtrl.loadTags($query)"
+                                       min-length="1"></auto-complete>
                     </tags-input>
                 </div>
-                <div class="form-group">
+                <div ng-show="form.tags.$invalid" class="form-group">
                     <p>Tag not found? Click <a href ng-click="reviewEditorCtrl.showDialog()">HERE</a> to create a new tag!</p>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Submit</button>
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"><i class="fa fa-share"></i> Submit</button>
+                    <img ng-if="reviewEditorCtrl.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                     <button type="button" ng-click="reviewEditorCtrl.cancel()" class="btn btn-primary">Cancel</button>
                 </div>
             </form>
@@ -61,8 +79,8 @@
                 <h4><i class="fa fa-info"></i> Review Info</h4>
                 <p>Date created: {{reviewEditorCtrl.review.datetime_created}}</p>
                 <p>Last updated: {{reviewEditorCtrl.review.last_updated}}</p>
-                <p>Positive rating: {{reviewEditorCtrl.review.rating.approve}}</p>
-                <p>Negative rating: {{reviewEditorCtrl.review.rating.disapprove}}</p>
+                <p>Total rated: {{reviewEditorCtrl.review.total_rated}}</p>
+                <p>Current rating: {{reviewEditorCtrl.review.current_rating}}</p>
             </div>
             <!-- /well -->
         </div>

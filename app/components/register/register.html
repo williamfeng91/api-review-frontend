@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.firstName.$touched && form.firstName.$invalid }">
                     <label for="firstName">First Name</label>
-                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="registerCtrl.user.firstName" placeholder="First Name" required />
+                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="registerCtrl.user.given_name" placeholder="First Name" required />
                     <span ng-show="form.firstName.$touched && form.firstName.$error.required" class="help-block">First name is required</span>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.lastName.$touched && form.lastName.$invalid }">

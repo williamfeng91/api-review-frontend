@@ -8,6 +8,7 @@
             'ui.bootstrap',
             'ui.tinymce',
             'dialogs.main',
+            'angucomplete-alt',
             'ngTagsInput',
             'app.services',
             'app.header',
