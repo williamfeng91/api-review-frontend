@@ -59,7 +59,7 @@
             $http.defaults.headers.common.Authorization = 'Basic ';
             logger.success(
                 'authservice: Successfully logged out',
-                response,
+                {},
                 'authservice.logout');
             return $q.resolve();
 

@@ -13,15 +13,15 @@
         this.create = function (user) {
             this.currentUser = user;
             $cookieStore.put('currentUser', user);
-            logger.info('Session created for user ' + user.email, this.currentUser, 'session.create');
+            // logger.info('Session created for user ' + user.email, this.currentUser, 'session.create');
         }
 
         this.destroy = function () {
             this.currentUser = null;
+            this.currentAPI = null;
             this.currentReview = null;
             $cookieStore.remove('currentUser');
-            $cookieStore.remove('currentReview');
-            logger.info('Session destroyed', this.currentUser, 'session.destroy');
+            // logger.info('Session destroyed', this.currentUser, 'session.destroy');
         }
 
         // Current user
@@ -38,6 +38,16 @@
             return this.currentUser ? this.currentUser.user_role : '';
         }
 
+        // Current api
+        this.getCurrentAPI = function () {
+            return this.currentAPI;
+        }
+
+        this.setCurrentAPI = function (api) {
+            this.currentAPI = api;
+            logger.info('API stored in session', this.currentAPI, 'session.setCurrentAPI');
+        }
+
         // Current review
         this.getCurrentReview = function () {
             return this.currentReview;
@@ -45,7 +55,6 @@
 
         this.setCurrentReview = function (review) {
             this.currentReview = review;
-            $cookieStore.put('currentReview', this.currentReview);
             logger.info('Review stored in session', this.currentReview, 'session.setCurrentReview');
         }
     }
