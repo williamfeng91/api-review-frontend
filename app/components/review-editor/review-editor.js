@@ -23,6 +23,7 @@
             'tags': []
         };
 
+        // Populate API info if API id found in url param
         if (typeof $stateParams.api !== undefined) {
             var api = session.getCurrentAPI();
             if (api != null && api.id == $stateParams.api) {
@@ -67,6 +68,10 @@
                     $state.go('review-list');
                     toastr.error('Failed to retrieve the review. Please try again.');
                 }
+            } else {
+                vm.selectedApi = {
+                    'originalObject': vm.review.api
+                };
             }
         }
 
