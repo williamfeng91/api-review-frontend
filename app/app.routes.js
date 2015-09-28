@@ -67,7 +67,7 @@
                 views: getUICompObj('reset-password')
             })
             .state('review-item-new', {
-                url: '/reviews/new',
+                url: '/reviews/new?api',
                 views: getUICompObj('review-editor')
             })
             .state('review-item-view', {

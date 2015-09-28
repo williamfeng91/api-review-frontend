@@ -23,6 +23,16 @@
             'tags': []
         };
 
+        if (typeof $stateParams.api !== undefined) {
+            var api = session.getCurrentAPI();
+            if (api != null && api.id == $stateParams.api) {
+                vm.review.api = api;
+                vm.selectedApi = {
+                    'originalObject': api
+                };
+            }
+        }
+
         // Get all APIs for autocomplete
         vm.allApis = [];
 
@@ -47,6 +57,9 @@
 
                 function getReviewSuccessful(result) {
                     vm.review = result;
+                    vm.selectedApi = {
+                        'originalObject': vm.review.api
+                    };
                     session.setCurrentReview(vm.review);
                 }
 

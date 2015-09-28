@@ -22,11 +22,19 @@
                         <li ng-repeat="opt in headerCtrl.contentMenu"><a ui-sref="{{opt.link}}">{{opt.title}}</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="opt in headerCtrl.createMenu"><a ui-sref="{{opt.link}}">{{opt.title}}</a></li>
+                    </ul>
+                </li>
                 <li ng-hide="headerCtrl.authservice.isAuthenticated()"><a ui-sref="login">Login</a></li>
                 <li ng-hide="headerCtrl.authservice.isAuthenticated()"><a ui-sref="register">Register</a></li>
                 <li ng-show="headerCtrl.authservice.isAuthenticated()" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{headerCtrl.session.getCurrentUser().given_name}} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a ui-sref="admin">Admin console</a></li>
+                        <li role="separator" class="divider"></li>
                         <li ng-repeat="opt in headerCtrl.userMenu"><a ui-sref="{{opt.link}}">{{opt.title}}</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href ng-click="headerCtrl.logout()">Logout</a></li>

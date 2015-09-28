@@ -4,18 +4,25 @@
     <div class="row">
         <div class="col-lg-8">
             <h1><a href ng-click="apiCtrl.reload()">{{apiCtrl.api.name}}</a></h1>
-			<div class="row">
-				<div class="col-lg-9">
+            <div class="row">
+                <div class="col-lg-9">
                     <p class="lead">
-                       <h2><small>API Homepage <a href="{{apiCtrl.api.link}}">{{apiCtrl.api.link}}</a></small></h2>
+                        <p><i class="fa fa-home"></i> Homepage</p>
+                        <p><a ng-href="{{apiCtrl.api.link}}" target="_blank">{{apiCtrl.api.link}}</a></p>
                     </p>
                 </div>
                 <div class="col-lg-3" >
-                    <div class="btn-group api-actions">
-                        <a title="Edit my api" class="btn btn-default" ui-sref="api-item-edit({id:apiCtrl.api.id})">
+                    <div class="btn-group action-btns">
+                        <a title="Write a review" class="btn btn-default" ui-sref="review-item-new({api:apiCtrl.api.id})">
                             <i class="fa fa-pencil"></i>
                         </a>
-                        <a title="Delete my api" class="btn btn-default" ng-click="apiCtrl.showDialog()">
+                        <a title="Add an API" class="btn btn-default" ui-sref="api-item-new">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <a title="Edit this API" class="btn btn-default" ui-sref="api-item-edit({id:apiCtrl.api.id})">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a title="Delete this API" class="btn btn-default" ng-click="apiCtrl.showDialog()">
                             <i class="fa fa-remove"></i>
                         </a>
                         <!--
@@ -23,16 +30,16 @@
                             <i class="fa fa-star-o"></i>
                         </a>-->
                     </div>
-				</div>
-			</div>
-			<hr>
-			 <div class="row">
+                </div>
+            </div>
+            <hr>
+             <div class="row">
                 <div class="col-lg-12">
                     <p><i class="fa fa-info"></i> Description</p>
                     <p>{{apiCtrl.api.description}}</p>
                 </div>
             </div>
-		</div>
+        </div>
 
         <div id="api-sidebar" class="col-lg-4">
             <div class="well">

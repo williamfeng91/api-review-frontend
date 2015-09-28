@@ -4,6 +4,10 @@ body {
     font-size: 180%;
 }
 
+div[ui-view="main"] {
+    min-height: 600px;
+}
+
 /***** Forms *****/
 .form-group.required label:after {
     content: " *";
