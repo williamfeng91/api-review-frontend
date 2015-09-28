@@ -94,16 +94,16 @@
                 url: '/apis',
                 views: getUICompObj('api-list')
             })
-            .state('user-profile-view', {
-                url: '/apis/:id',
-                views: getUICompObj('user')
-            })
             .state('user-profile-edit', {
-                url: '/apis/:id/edit',
-                views: getUICompObj('user-editor'),
+                url: '/users/my-profile',
+                views: getUICompObj('user-profile-editor'),
+            })
+            .state('user-profile-view', {
+                url: '/users/:id',
+                views: getUICompObj('user-profile')
             })
             .state('user-list', {
-                url: '/apis',
+                url: '/users',
                 views: getUICompObj('user-list')
             });
     }

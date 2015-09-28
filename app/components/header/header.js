@@ -13,7 +13,7 @@
             {title: 'Reviews', link: 'review-list'},
             {title: 'Reviewers', link: 'user-list'}];
         vm.userMenu = [
-            {title: 'My profile', link: 'user-profile'},
+            {title: 'My profile', link: 'user-profile-edit'},
             {title: 'My reviews', link: 'user-review-list'}];
         vm.authservice = authservice;
         vm.session = session;
