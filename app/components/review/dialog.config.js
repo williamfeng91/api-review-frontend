@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.review')
+        .module('app.api')
         .config(['dialogsProvider', config]);
 
     function config(dialogsProvider) {
