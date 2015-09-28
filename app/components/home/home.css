@@ -55,7 +55,7 @@
 }
 
 @media screen and (max-width: 768px) {
-.features h1, h2, h3, h4, h5, h6, p {
+.features h1, .features h2, .features h3, .features h4, .features h5, .features h6, .features p {
     text-align: center!important;
 }
 }
