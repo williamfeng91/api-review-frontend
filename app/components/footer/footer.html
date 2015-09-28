@@ -1,31 +1,80 @@
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h2 class="text-center text-light">Subscribe to our newsletter</h2>
-                <p class="text-light text-center">Sign up now to our newsletter and you'll be one of the first to know when the site is ready:</p>
-            </div>
-        </div>
-        <div class="row">
+<footer class="footer-site">
+    <div class="row">
+        <!-- MAIN FOOTER STUFF -->
+        <div class="col-lg-4">
+            <!-- <img src="" class="secondary-logo" /> -->
+            <p class="lead">API REVIEW</p>
+            <!-- <p>
+                Our mission is blah blah blah.
+            </p> -->
+            <!-- facebook -->
+            <a class="facebook social button" href="" target="_blank" rel="nofollow">
+                <span class="icon">
+                    <i class="fa fa-facebook-official"></i>
+                </span>
+                Facebook
+            </a>
+            <!-- twitter -->
+            <a class="twitter social button" href="" target="_blank" rel="nofollow">
+                <span class="icon">
+                    <i class="fa fa-twitter"></i>
+                </span>
+                Twitter
+            </a>
+            <!-- google+ -->
+            <a class="google social button" href="" target="_blank" rel="nofollow">
+                <span class="icon">
+                    <i class="fa fa-google-plus-square"></i>
+                </span>
+                Google+
+            </a>
+            <!-- newsletter -->
+            <!-- <p>Subscribe to our newsletter for weekly updates.</p>
+            <div class="row collapse signup-form">
 
-            <!-- Begin MailChimp Signup Form -->
-            <form class="subscribe-form validate" action="http://8guild.us3.list-manage.com/subscribe/post?u=168a366a98d3248fbc35c0b67&amp;id=73d49e0d23" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate="novalidate">
-                <div class="form-group col-lg-7 col-md-8 col-sm-8 col-lg-offset-1">
-                    <label class="sr-only" for="mce-EMAIL">Email address</label>
-                    <input type="email" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Enter email" required="">
-                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                    <div style="position: absolute; left: -5000px;"><input type="text" name="b_168a366a98d3248fbc35c0b67_73d49e0d23" value=""></div>
+                <div ng-show="emailSubmitted" class="newsletter-signup-success-message" ng-cloak>
+                    Thank you for subscribing.
                 </div>
-                <div class="form-group col-lg-3 col-md-4 col-sm-4"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary btn-block"></div>
-            </form>
-            <!-- Close MailChimp Signup Form -->
-
+                <div ng-show="newsletterSignupError" class="alert radius alert-box" ng-cloak>
+                    There was an error. Please try again.
+                </div>
+                <form method="POST" ng-hide="emailSubmitted" name="newsletterSignupForm" novalidate>
+                    <div class="col-sm-8">
+                        <label>
+                            <input type="text" placeholder="Email" name="newsletterEmail" required  ng-model="newsletterEmail" />
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="orange button postfix" ng-click="submitNewsletterSignUp(newsletterEmail)" ng-disabled="newsletterSignupForm.$invalid">Submit</button>
+                    </div>
+                </form>
+            </div> -->
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <p class="copyright">© 2015 API REVIEW. All Rights Reserved. Designed by  <a href="" target="_blank"></a></p>
+        <!-- SITE MAP -->
+        <div class="col-sm-7 col-lg-offset-1">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>APIs</h4>
+                    <ul class="side-nav">
+                        <li><a ui-sref="api-list">Browse APIs</a></li>
+                        <li><a href="">Search</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Reviews</h4>
+                    <ul class="side-nav">
+                        <li><a ui-sref="review-list">Browse reviews</a></li>
+                        <li><a href="">Search</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Reviewers</h4>
+                    <ul class="side-nav">
+                        <li><a ui-sref="user-list">Brower reviewers</a></li>
+                        <li><a href="">Search</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <!-- /.container -->
 </footer>
