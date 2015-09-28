@@ -4,7 +4,33 @@ body {
     font-size: 180%;
 }
 
+/***** Forms *****/
 .form-group.required label:after {
     content: " *";
     color: red;
+}
+
+/***** Buttons *****/
+.action-btns {
+    float: right;
+}
+
+.action-btns .btn-default {
+    color: #eb6864;
+    background-color: #fff;
+    border-color: #eb6864;
+}
+.action-btns .btn-default:focus,
+.action-btns .btn-default.focus {
+    color: #ffffff;
+    background-color: #eb6864;
+}
+.action-btns .btn-default:hover {
+    color: #ffffff;
+    background-color: #eb6864;
+}
+.action-btns .btn-default:active,
+.action-btns .btn-default.active {
+    color: #ffffff;
+    background-color: #eb6864;
 }
