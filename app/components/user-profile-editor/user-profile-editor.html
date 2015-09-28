@@ -37,15 +37,13 @@
                 <p>Date created: {{userProfileEditorCtrl.userProfile.datetime_created}}</p>
                 <p>Last updated: {{userProfileEditorCtrl.userProfile.last_updated}}</p>
             </div>
-            <!-- /well --><!--
+            <!-- /well -->
             <div class="well">
-                <h4><i class="fa fa-tags"></i> Actions</h4>
+                <h4><i class="fa fa-arrow-circle-o-right"></i> Actions</h4>
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="list-unstyled">
-                            <li><a ui-sref="userProfile-item-new">Add a new User Profile</a>
-                            </li>
-                             <li><a href ng-click="userProfileEditorCtrl.showCreateTagDialog()">Create a new tag</a>
+                            <li><a href ng-click="userProfileEditorCtrl.showChangePasswordDialog()">Change Password</a>
                             </li>
                         </ul>
                     </div>

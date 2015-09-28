@@ -70,7 +70,7 @@
         function showCreateTagDialog() {
             var dlg = dialogs.create(
                 '/app/components/review-editor/create-tag-dialog.html',
-                'createTagDialogController',
+                'CreateTagDialogController',
                 {});
             dlg.result.then(saveTag, cancel);
 

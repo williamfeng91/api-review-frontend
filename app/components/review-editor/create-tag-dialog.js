@@ -3,9 +3,9 @@
 
     angular
         .module('app.reviewEditor')
-        .controller('createTagDialogController', createTagDialogController);
+        .controller('CreateTagDialogController', CreateTagDialogController);
 
-    function createTagDialogController($scope, $modalInstance) {
+    function CreateTagDialogController($scope, $modalInstance) {
         //-- Variables --//
         $scope.tag = {
             name: ''
