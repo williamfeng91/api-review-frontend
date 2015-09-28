@@ -12,6 +12,9 @@
             {title: 'APIs', link: 'api-list'},
             {title: 'Reviews', link: 'review-list'},
             {title: 'Reviewers', link: 'user-list'}];
+        vm.createMenu = [
+            {title: 'New API', link: 'api-item-new'},
+            {title: 'New Review', link: 'review-item-new'}];
         vm.userMenu = [
             {title: 'My profile', link: 'user-profile-edit'},
             {title: 'My reviews', link: 'user-review-list'}];
