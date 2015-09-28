@@ -16,6 +16,7 @@
             'app.footer',
             'app.login',
             'app.register',
+            'app.resetPassword',
             'app.home',
             'app.api',
             'app.apiEditor',

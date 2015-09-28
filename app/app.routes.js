@@ -62,6 +62,10 @@
                 url: '/register',
                 views: getUICompObj('register')
             })
+            .state('reset-password', {
+                url: '/reset-password',
+                views: getUICompObj('reset-password')
+            })
             .state('review-item-new', {
                 url: '/reviews/new',
                 views: getUICompObj('review-editor')

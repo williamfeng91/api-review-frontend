@@ -25,12 +25,12 @@
                 </div>
                 <div class="form-group required" ng-class="{ 'has-error': form.password.$touched && form.password.$invalid }">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" ng-model="registerCtrl.user.password" placeholder="Password" required />
+                    <input type="password" name="password" id="password" class="form-control" ng-model="registerCtrl.user.password" required />
                     <span ng-show="form.password.$touched && form.password.$error.required" class="help-block">Password is required</span>
                 </div>
                 <div class="form-group required" ng-class="{ 'has-error': form.confirmPassword.$touched && form.confirmPassword.$invalid }">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" ng-model="registerCtrl.confirmPassword" match-password="password" placeholder="Confirm Password" required />
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" ng-model="registerCtrl.confirmPassword" match-password="password" required />
                     <span ng-show="form.confirmPassword.$touched && form.confirmPassword.$error.required" class="help-block">Confirm password is required</span>
                     <span ng-show="!form.confirmPassword.$error.required && form.confirmPassword.$touched && form.confirmPassword.$error.passwordMatch" class="help-block">Passwords must match</span>
                 </div>
