@@ -9,15 +9,21 @@
     <title>API Review</title>
     <!-- Bootstrap Core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Angular UI plugins CSS -->
     <link href="assets/libs/angular-dialog-service/dist/dialogs.css" rel="stylesheet">
+    <link href="assets/libs/angucomplete-alt/angucomplete-alt.css" rel="stylesheet">
+    <link href="assets/libs/ng-tags-input/ng-tags-input.css" rel="stylesheet">
     <link href="assets/libs/toastr/toastr.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="assets/css/app.css" rel="stylesheet">
+    <link href="app/components/header/search.css" rel="stylesheet">
     <link href="app/components/footer/footer.css" rel="stylesheet">
     <link href="app/components/home/home.css" rel="stylesheet">
     <link href="app/components/review/review.css" rel="stylesheet">
-    <link href="app/components/review-list/reviewList.css" rel="stylesheet">
+    <link href="app/components/review-editor/review-editor.css" rel="stylesheet">
+    <link href="app/components/review-list/review-list.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -28,9 +34,9 @@
 
 <body>
     <ar-content ng-controller="AppController as app">
-      <div ng-viewport=header></div>
-      <div ng-viewport=main></div>
-      <div ng-viewport=footer></div>
+      <div ui-view="header"></div>
+      <div ui-view="main" autoscroll="true"></div>
+      <div ui-view="footer"></div>
     </ar-content>
 
     <!-- jQuery -->
@@ -40,20 +46,30 @@
     <script src="assets/libs/bootstrap.min.js"></script>
 
     <!-- Underscore -->
-    <script src="assets/libs//underscore.js"></script>
+    <script src="assets/libs/underscore.js"></script>
 
     <!-- AngularJS -->
     <script src="assets/libs/angular/angular.js"></script>
     <script src="assets/libs/angular-cookies/angular-cookies.js"></script>
-    <script src="assets/libs/angular-new-router/dist/router.es5.js"></script>
+    <script src="assets/libs/angular-password/angular-password.js"></script>
+    <script src="assets/libs/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <!-- Angular UI Plugins -->
     <script src="assets/libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="assets/libs/angular-dialog-service/dist/dialogs.js"></script>
     <script src="assets/libs/angular-sanitize/angular-sanitize.js"></script>
-    <script src="app/app.module.js"></script>
-    <script src="app/app.routes.js"></script>
+    <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+    <script src="assets/libs/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="assets/libs/angucomplete-alt/angucomplete-alt.js"></script>
+    <script src="assets/libs/ng-tags-input/ng-tags-input.js"></script>
 
     <!-- Toastr -->
     <script src="assets/libs/toastr/toastr.js"></script>
+
+    <!-- API Review app -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.routes.js"></script>
+    <script src="app/shared/dialog.config.js"></script>
 
     <!-- services -->
     <script src="app/shared/services/services.module.js"></script>
@@ -81,25 +97,35 @@
     <!-- register -->
     <script src="app/components/register/register.module.js"></script>
     <script src="app/components/register/register.js"></script>
+    <!-- reset password -->
+    <script src="app/components/reset-password/reset-password.module.js"></script>
+    <script src="app/components/reset-password/reset-password.js"></script>
     <!-- api -->
     <script src="app/components/api/api.module.js"></script>
     <script src="app/components/api/api.js"></script>
+    <!-- api editor -->
+    <script src="app/components/api-editor/api-editor.module.js"></script>
+    <script src="app/components/api-editor/api-editor.js"></script>
     <!-- home -->
     <script src="app/components/home/home.module.js"></script>
     <script src="app/components/home/home.js"></script>
     <!-- review -->
     <script src="app/components/review/review.module.js"></script>
-    <script src="app/components/review/review.config.js"></script>
     <script src="app/components/review/review.js"></script>
     <!-- review editor -->
-    <script src="app/components/review-editor/reviewEditor.module.js"></script>
-    <script src="app/components/review-editor/reviewEditor.js"></script>
+    <script src="app/components/review-editor/review-editor.module.js"></script>
+    <script src="app/components/review-editor/review-editor.js"></script>
+    <script src="app/components/review-editor/create-tag-dialog.js"></script>
     <!-- review list -->
-    <script src="app/components/review-list/reviewList.module.js"></script>
-    <script src="app/components/review-list/reviewList.js"></script>
+    <script src="app/components/review-list/review-list.module.js"></script>
+    <script src="app/components/review-list/review-list.js"></script>
     <!-- user -->
     <script src="app/components/user/user.module.js"></script>
     <script src="app/components/user/user.js"></script>
+    <!-- user profile editor -->
+    <script src="app/components/user-profile-editor/user-profile-editor.module.js"></script>
+    <script src="app/components/user-profile-editor/user-profile-editor.js"></script>
+    <script src="app/components/user-profile-editor/change-password-dialog.js"></script>
 
     <!-- Custom JS -->
     <!-- <script src="assets/js/review.js"></script> -->

@@ -5,35 +5,21 @@
         .module('app.review')
         .controller('ReviewController', ReviewController);
 
-    function ReviewController($location, $routeParams, dialogs, reviewservice,
-        ratingservice, tagservice, apiservice, userservice, toastr, logger) {
+    function ReviewController($state, $stateParams, dialogs, reviewservice, session, toastr, logger) {
         var vm = this;
 
         (function initController() {
             // load the review
-            reviewservice.getById($routeParams.id)
-                .then(function (review) {
-                    vm.review = review;
-                    return userservice.getById(vm.review.reviewer);
-                }, getReviewFailed)
-                .then(function (reviewer) {
-                    vm.reviewer = reviewer;
-                    return apiservice.getById(vm.review.api);
-                }, getReviewFailed)
-                .then(function (api) {
-                    vm.api = api;
-                    return ratingservice.getByReview(vm.review.id);
-                }, getReviewFailed)
-                .then(function (rating) {
-                    vm.rating = rating;
-                    return tagservice.getByReview(vm.review.id);
-                }, getReviewFailed).
-                then(function (tagsObj) {
-                    vm.tags = tagsObj.tags;
-                }, getReviewFailed);
+            reviewservice.getById($stateParams.id)
+                .then(getReviewSuccessful, getReviewFailed);
+
+            function getReviewSuccessful(result) {
+                vm.review = result;
+                session.setCurrentReview(vm.review);
+            }
 
             function getReviewFailed(error) {
-                $location.path('/reviews');
+                $state.go('review-list');
                 toastr.error('Failed to retrieve the review. Please try again.');
             }
         })();
@@ -49,7 +35,7 @@
                     .then(deleteSuccessful, deleteFailed);
 
                 function deleteSuccessful(result) {
-                    $location.path('/reviews');
+                    $state.go('review-list');
                     toastr.success('Review deleted');
                 }
 
@@ -63,5 +49,8 @@
             }
         }
 
+        vm.reload = function () {
+            $state.reload();
+        }
     }
 })();

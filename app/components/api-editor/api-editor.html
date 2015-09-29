@@ -1,0 +1,58 @@
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-8">
+
+            <h1><a>API Editor</a></h1>
+            <hr>
+            <div ng-show="apiEditorCtrl.error" class="alert alert-danger">{{apiEditorCtrl.error}}</div>
+            <form name="form" ng-submit="apiEditorCtrl.submit()" role="form" novalidate>
+                <div class="form-group required" ng-class="{ 'has-error': form.name.$touched && form.name.$invalid }">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" ng-model="apiEditorCtrl.api.name" value="apiEditorCtrl.api.name" required />
+                    <span ng-show="form.name.$touched && form.name.$error.required" class="help-block">Name is required</span>
+                </div>
+                <div class="form-group required" ng-class="{ 'has-error': form.link.$touched && form.link.$invalid }">
+                    <label for="link">Home Page</label>
+                    <input type="url" name="link" id="link" class="form-control" ng-model="apiEditorCtrl.api.content" required />
+                    <span ng-show="form.link.$touched && form.link.$error.required" class="help-block">Link is required</span>
+                    <span ng-show="form.link.$touched && form.link.$error.url" class="help-block">Invalid url</span>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" class="form-control" ng-model="apiEditorCtrl.api.description" rows="5"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"><i class="fa fa-share"></i> Submit</button>
+                    <img ng-if="apiEditorCtrl.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    <button type="button" ng-click="apiEditorCtrl.cancel()" class="btn btn-primary">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div id="api-sidebar" class="col-lg-4">
+            <div ng-show="apiEditorCtrl.isEditMode" class="well">
+                <h4><i class="fa fa-info"></i> API Info</h4>
+                <p>Date created: {{apiEditorCtrl.api.datetime_created}}</p>
+                <p>Last updated: {{apiEditorCtrl.api.last_updated}}</p>
+            </div>
+            <!-- /well --><!--
+            <div class="well">
+                <h4><i class="fa fa-arrow-circle-o-right"></i> Actions</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li><a ui-sref="api-item-new">Add a new API</a>
+                            </li>
+                             <li><a href ng-click="apiEditorCtrl.showCreateTagDialog()">Create a new tag</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /well -->
+        </div>
+    </div>
+</div>

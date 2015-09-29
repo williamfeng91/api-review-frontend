@@ -4,42 +4,94 @@
     <div class="row">
         <div class="col-lg-8">
 
-            <h1><a href="">{{review.review.title}}</a></h1>
-            <h2><small>Review of <a href="/apis/{{review.review.api.id}}">{{review.review.api.name}}</a></small></h2>
-            <p class="lead">
-                <i class="fa fa-user"></i> by
-                <a href="/users/{{review.review.reviewer.id}}">{{review.review.reviewer.username}}</a>
-            </p>
+            <h1><a>Review Editor</a></h1>
             <hr>
-            <div class="row">
-                <div class="col-lg-9">
-                    <p><i class="fa fa-calendar"></i> Posted on {{review.review.publishTime}}</p>
-                    <p>
-                        <i class="fa fa-tags"></i> Tags:
-                        <a title="{{tag}}" href="" ng-repeat="tag in review.review.tags">
-                            <span class="badge badge-info">{{tag}}</span>
-                        </a>
-                    </p>
+            <div ng-show="reviewEditorCtrl.error" class="alert alert-danger">{{reviewEditorCtrl.error}}</div>
+            <form name="form" ng-submit="reviewEditorCtrl.submit()" role="form" novalidate>
+                <div class="form-group required">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" class="form-control" ng-model="reviewEditorCtrl.review.title" required />
                 </div>
-                <div class="col-lg-3">
-                    <div class="btn-group review-actions">
-                        <a title="Edit my review" class="btn btn-default" ng-link="reviewEditor()">
-                            <i class="fa fa-pencil"></i>
-                        </a>
-                        <a title="Delete my review" class="btn btn-default" href="">
-                            <i class="fa fa-remove"></i>
-                        </a>
-                        <a title="Add to favourite" class="btn btn-default" href="">
-                            <i class="fa fa-star-o"></i>
-                        </a>
+                <div class="form-group required">
+                    <label for="api">API</label>
+                    <angucomplete-alt id="apis"
+                                      placeholder="Type to search for an existing API"
+                                      pause="400"
+                                      initial-value="reviewEditorCtrl.review.api.name"
+                                      selected-object="reviewEditorCtrl.selectedApi"
+                                      local-data="reviewEditorCtrl.allApis"
+                                      search-fields="name"
+                                      title-field="name"
+                                      minlength="1"
+                                      input-class="form-control form-control-small"
+                                      field-required="true"></angucomplete-alt>
+                    <div>
+                        <p>Or add a new API <a href ui-sref="api-item-new">HERE</a></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" class="form-control" ng-model="reviewEditorCtrl.review.description" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea ui-tinymce ng-model="reviewEditorCtrl.review.content" rows="20"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tags">Tags</label>
+                    <tags-input name="tags" id="tags"
+                                ng-model="reviewEditorCtrl.review.tags"
+                                display-property="name"
+                                add-from-autocomplete-only="true"
+                                replaceSpacesWithDashes="false"
+                                placeholder="Type to search for an existing tag"
+                                class="taginput">
+                        <auto-complete source="reviewEditorCtrl.loadTags($query)"
+                                       min-length="1"
+                                       debounceDelay="400"></auto-complete>
+                    </tags-input>
+                </div>
+                <div>
+                    <p>Couldn't find a tag? Click <a href ng-click="reviewEditorCtrl.showCreateTagDialog()">HERE</a> to create a new tag!</p>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"><i class="fa fa-share"></i> Submit</button>
+                    <img ng-if="reviewEditorCtrl.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    <button type="button" ng-click="reviewEditorCtrl.cancel()" class="btn btn-primary">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div id="review-sidebar" class="col-lg-4"><!--
+            <div class="well">
+                <h4><i class="fa fa-arrow-circle-o-right"></i> Actions</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li><a ui-sref="api-item-new">Add a new API</a>
+                            </li>
+                             <li><a href ng-click="reviewEditorCtrl.showCreateTagDialog()">Create a new tag</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-
-            <hr>
-            <img src="http://placehold.it/900x300" class="img-responsive">
-            <hr>
-            <p class="lead">{{review.review.content}}</p>
-            <br/>
+            <!-- /well -->
+            <div ng-if="reviewEditorCtrl.isEditMode" class="well">
+                <h4><i class="fa fa-info"></i> Review Info</h4>
+                <p>Date created: {{reviewEditorCtrl.review.datetime_created}}</p>
+                <p>Last updated: {{reviewEditorCtrl.review.last_updated}}</p>
+                <p>Total rated: {{reviewEditorCtrl.review.total_rated}}</p>
+                <p>Current rating: {{reviewEditorCtrl.review.current_rating}}</p>
+            </div>
+            <!-- /well -->
+            <div ng-if="reviewEditorCtrl.selectedApi" class="well">
+                <h4><i class="fa fa-info"></i> API Info</h4>
+                <p>Name: {{reviewEditorCtrl.selectedApi.originalObject.name}}</p>
+                <p>Homepage: <a ng-href="{{reviewEditorCtrl.selectedApi.originalObject.link}}" target="_blank">{{reviewEditorCtrl.selectedApi.originalObject.link}}</a></p>
+                <p>Description: {{reviewEditorCtrl.selectedApi.originalObject.description}}</p>
+            </div>
+        </div>
     </div>
 </div>

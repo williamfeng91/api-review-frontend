@@ -33,10 +33,10 @@
             function loginComplete(response) {
                 var user = response.data;
                 session.create(user);
-                var authdata = Base64.encode(credentials.username + ':' + credentials.password);
+                var authdata = Base64.encode(credentials.email + ':' + credentials.password);
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
                 logger.success(
-                    'User ' + user.username + ' successfully logged in',
+                    'User ' + user.email + ' successfully logged in',
                     response,
                     'authservice.login');
                 return $q.resolve(response);
@@ -55,31 +55,40 @@
          * Logs the user out
          */
         function logout() {
-            return $http({
-                url: APISERVICE.url + '/logout',
-                method: 'POST',
-                dataType: 'json',
-                data: '',
-                headers: APISERVICE.headers
-            }).then(logoutComplete, logoutFailed);
+            session.destroy();
+            $http.defaults.headers.common.Authorization = 'Basic ';
+            logger.success(
+                'authservice: Successfully logged out',
+                {},
+                'authservice.logout');
+            return $q.resolve();
 
-            function logoutComplete(response) {
-                session.destroy();
-                $http.defaults.headers.common.Authorization = 'Basic ';
-                logger.success(
-                    'authservice: Successfully logged out',
-                    response,
-                    'authservice.logout');
-                return $q.resolve(response);
-            }
+            // No logout on server side
+            // return $http({
+            //     url: APISERVICE.url + '/logout',
+            //     method: 'POST',
+            //     dataType: 'json',
+            //     data: '',
+            //     headers: APISERVICE.headers
+            // }).then(logoutComplete, logoutFailed);
 
-            function logoutFailed(response) {
-                logger.error(
-                    'Failed to logout',
-                    response,
-                    'authservice.logout');
-                return $q.reject(response);
-            }
+            // function logoutComplete(response) {
+            //     session.destroy();
+            //     $http.defaults.headers.common.Authorization = 'Basic ';
+            //     logger.success(
+            //         'authservice: Successfully logged out',
+            //         response,
+            //         'authservice.logout');
+            //     return $q.resolve(response);
+            // }
+
+            // function logoutFailed(response) {
+            //     logger.error(
+            //         'Failed to logout',
+            //         response,
+            //         'authservice.logout');
+            //     return $q.reject(response);
+            // }
         }
 
         function isAuthenticated() {

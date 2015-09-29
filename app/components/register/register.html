@@ -3,40 +3,44 @@
 
     <div class="col-md-6 col-md-offset-3">
     <h2>Register</h2>
-    <div ng-show="register.error" class="alert alert-danger">{{register.error}}</div>
-    <form name="form" ng-submit="register.register()" role="form">
-        <div class="form-group" ng-class="{ 'has-error': form.username.$touched && form.username.$invalid }">
-            <label for="username">Email</label>
-            <div class="input-group margin-bottom-sm">
-                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                <input type="email" name="username" id="username" class="form-control" ng-model="register.user.username" placeholder="Email address" required />
-            </div>
-            <span ng-show="form.username.$touched && form.username.$error.required" class="help-block">Email is required</span>
-            <span ng-show="form.username.$touched && form.username.$error.email" class="help-block">Invalid email address</span>
+    <div ng-show="registerCtrl.error" class="alert alert-danger">{{registerCtrl.error}}</div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form name="form" ng-submit="registerCtrl.register()" role="form" novalidate>
+                <div class="form-group required" ng-class="{ 'has-error': form.email.$touched && form.email.$invalid }">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" ng-model="registerCtrl.user.email" required />
+                    <span ng-show="form.email.$touched && form.email.$error.required" class="help-block">Email is required</span>
+                    <span ng-show="form.email.$touched && form.email.$error.email" class="help-block">Invalid email address</span>
+                </div>
+                <div class="form-group required" ng-class="{ 'has-error': form.firstName.$touched && form.firstName.$invalid }">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="registerCtrl.user.given_name" required />
+                    <span ng-show="form.firstName.$touched && form.firstName.$error.required" class="help-block">First name is required</span>
+                </div>
+                <div class="form-group required" ng-class="{ 'has-error': form.lastName.$touched && form.lastName.$invalid }">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" class="form-control" ng-model="registerCtrl.user.surname" required />
+                    <span ng-show="form.lastName.$touched && form.lastName.$error.required" class="help-block">Last name is required</span>
+                </div>
+                <div class="form-group required" ng-class="{ 'has-error': form.password.$touched && form.password.$invalid }">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" ng-model="registerCtrl.user.password" required />
+                    <span ng-show="form.password.$touched && form.password.$error.required" class="help-block">Password is required</span>
+                </div>
+                <div class="form-group required" ng-class="{ 'has-error': form.confirmPassword.$touched && form.confirmPassword.$invalid }">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" ng-model="registerCtrl.confirmPassword" match-password="password" required />
+                    <span ng-show="form.confirmPassword.$touched && form.confirmPassword.$error.required" class="help-block">Confirm password is required</span>
+                    <span ng-show="!form.confirmPassword.$error.required && form.confirmPassword.$touched && form.confirmPassword.$error.passwordMatch" class="help-block">Passwords must match</span>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" ng-disabled="form.$invalid || registerCtrl.dataLoading" class="btn btn-primary">Register</button>
+                    <img ng-if="registerCtrl.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    <a ui-sref="login" class="btn btn-link">Cancel</a>
+                </div>
+            </form>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.password.$touched && form.password.$invalid }">
-            <label for="password">Password</label>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                <input type="password" name="password" id="password" class="form-control" ng-model="register.user.password" placeholder="Password" required />
-            </div>
-            <span ng-show="form.password.$touched && form.password.$error.required" class="help-block">Password is required</span>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': form.confirmPassword.$touched && form.confirmPassword.$invalid }">
-            <label for="confirmPassword">Confirm Password</label>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm Password" required />
-            </div>
-            <span ng-show="form.confirmPassword.$touched && form.password.$error.required" class="help-block">Passwords must match</span>
-        </div>
-        <div class="form-actions">
-            <button type="submit" ng-disabled="form.$invalid || register.dataLoading" class="btn btn-primary">Register</button>
-            <img ng-if="register.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <a ng-link="main:login" class="btn btn-link">Cancel</a>
-        </div>
-    </form>
-</div>
-
+    </div>
 </div>
 <!-- /.container -->

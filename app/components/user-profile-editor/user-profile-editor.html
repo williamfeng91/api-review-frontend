@@ -1,0 +1,55 @@
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-8">
+
+            <h1><a>My Profile</a></h1>
+            <hr>
+            <div ng-show="userProfileEditorCtrl.error" class="alert alert-danger">{{userProfileEditorCtrl.error}}</div>
+            <form name="form" ng-submit="userProfileEditorCtrl.submit()" role="form" novalidate>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" ng-model="userProfileEditorCtrl.currentUser.email" readonly />
+                </div>
+                <div class="form-group required" ng-class="{ 'has-error': form.firstName.$touched && form.firstName.$invalid }">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="userProfileEditorCtrl.currentUser.given_name" required />
+                    <span ng-show="form.firstName.$touched && form.firstName.$error.required" class="help-block">First name is required</span>
+                </div>
+                <div class="form-group required" ng-class="{ 'has-error': form.lastName.$touched && form.lastName.$invalid }">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" class="form-control" ng-model="userProfileEditorCtrl.currentUser.surname" required />
+                    <span ng-show="form.lastName.$touched && form.lastName.$error.required" class="help-block">Last name is required</span>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                    <img ng-if="userProfileEditorCtrl.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQUser ProfileAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    <button type="button" ng-click="userProfileEditorCtrl.resetForm()" class="btn btn-primary">Reset</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div id="userProfile-sidebar" class="col-lg-4"><!--
+            <div ng-show="userProfileEditorCtrl.isEditMode" class="well">
+                <h4><i class="fa fa-info"></i> User Profile Info</h4>
+                <p>Date created: {{userProfileEditorCtrl.userProfile.datetime_created}}</p>
+                <p>Last updated: {{userProfileEditorCtrl.userProfile.last_updated}}</p>
+            </div>
+            <!-- /well -->
+            <div class="well">
+                <h4><i class="fa fa-arrow-circle-o-right"></i> Actions</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li><a href ng-click="userProfileEditorCtrl.showChangePasswordDialog()">Change Password</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /well -->
+        </div>
+    </div>
+</div>

@@ -14,6 +14,7 @@
             getAll: getAll,
             update: updateUser,
             delete: deleteUser,
+            resetPassword: resetPassword,
             activate: activate
         };
 
@@ -35,7 +36,7 @@
         }
 
         /**
-         * Creates a new user
+         * User registration
          * @param user a user object that captures all details the API needs
          */
         function register(user) {
@@ -126,6 +127,23 @@
                 method: 'DELETE',
                 dataType: 'json',
                 data: '',
+                headers: APISERVICE.headers
+            }).then(handleSuccess, handleError);
+        }
+
+        /**
+         * Resets a user's password
+         * @param request a request object required by the API
+         */
+        function resetPassword(email) {
+            var request = {
+                'email': email
+            };
+            return $http({
+                url: APISERVICE.userUrl + '/reset-password',
+                method: 'POST',
+                dataType: 'json',
+                data: request,
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
         }

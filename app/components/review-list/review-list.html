@@ -1,11 +1,11 @@
 <div id="main">
 <div id="container">
     <div class="clear"></div>
-    <section class="list"  ng-repeat="review in reviewList.reviews"> 
+    <section class="list"  ng-repeat="review in reviewList.reviews">
 		<span class="titleimg"><a href="#">
             <img src="app/components/review-list/reviews-logo.jpg" />
             </a> </span>
-       <a href="#" class="up">10</a> 
+       <a href="#" class="up">10</a>
 	   <div class="mecc">
         <h2 class="mecctitle"> <a href="#">
          {{review.title}}
@@ -20,7 +20,7 @@
 		<p>
 		<time>Last Upate - {{review.last_updated}}</time>
 	</p>
-		
+
    </address><p>
 	   API-
    	<a href="/#">
@@ -37,15 +37,15 @@
         <!--Page End-->
     	<nav class="navigation">
 	  	  <div class="nav-previous"><a href="#" >previous page</a></div>
-			
+
 						<div class="nav-next"><a href="#" >next page</a></div>
 				</nav><!-- .navigation -->
-	    <!--phonepage--> 
+	    <!--phonepage-->
   </div>
   <!--Container-->
   <div class="clear"></div>
 </div>
-  <!--bottom--> 
+  <!--bottom-->
 	<div class="scrollTopButton" id="scrollTopButton" style="display:none">
 		TOP
 	</div>
@@ -57,21 +57,21 @@
 	$(function(){
 		showScroll();
 		function showScroll(){
-			$(window).scroll( function() { 
+			$(window).scroll( function() {
 				var scrollTopValue=$(window).scrollTop();
 				var scrollBotValue=$('#container').height()-scrollTopValue;
 				console.log = scrollBotValue;
-				
+
 				scrollTopValue > 10 ? $('#scrollTopButton').fadeIn():$('#scrollTopButton').fadeOut();
 				scrollBotValue > 450 ? $('#scrollBotButton').fadeIn():$('#scrollBotButton').fadeOut();
-			} );	
+			} );
 			$('#scrollTopButton').click(function(){
-				$("html,body").animate({scrollTop:0},200);	
-			});	
-			
+				$("html,body").animate({scrollTop:0},200);
+			});
+
 			$('#scrollBotButton').click(function(){
-				$("html,body").animate({scrollTop:$('#container').height()-350},200);	
-			});			
+				$("html,body").animate({scrollTop:$('#container').height()-350},200);
+			});
 		}
 	})
 	</script>

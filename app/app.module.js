@@ -3,21 +3,28 @@
 
     angular
         .module('app', [
-            'ngNewRouter',
+            'ui.router',
             'ngCookies',
+            'ngPassword',
             'ui.bootstrap',
+            'ui.tinymce',
             'dialogs.main',
+            'angucomplete-alt',
+            'ngTagsInput',
             'app.services',
             'app.header',
             'app.footer',
             'app.login',
             'app.register',
+            'app.resetPassword',
             'app.home',
             'app.api',
+            'app.apiEditor',
             'app.review',
             'app.reviewEditor',
             'app.reviewList',
-            'app.user'
+            'app.user',
+            'app.userProfileEditor'
         ])
         .run(run);
 
@@ -25,6 +32,9 @@
         // keep user logged in after page refresh
         if ($cookieStore.get('currentUser')) {
             session.create($cookieStore.get('currentUser'));
+        }
+        if ($cookieStore.get('currentReview')) {    // debugging only
+            session.setCurrentReview($cookieStore.get('currentReview'));
         }
 
         // disable for convenience when developing
