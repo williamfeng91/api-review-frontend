@@ -1,3 +1,66 @@
+<<<<<<< HEAD
+<div id="main">
+<div id="container">
+    <div class="clear"></div>
+    <section class="list"  ng-repeat="review in reviewListCtrl.reviews">
+		<span class="titleimg"><a href="#">
+            <img src="app/components/review-list/reviews-logo.jpg" />
+            </a> </span>
+       <a href="#" class="up">{{review.total_rated}}</a>
+	   <div class="mecc">
+        <h2 class="mecctitle"> <a href="#">
+         {{review.title}}
+          </a> </h2>
+        <address class="meccaddress">
+			<div class="mectags-body">
+			<font ng-repeat="tag in review.tags">{{tag.name}}</font>
+		    </div>
+        <time>PublishTime - {{review.datetime_created}}</time><span class= "meccname">
+			<time>Last Upate - {{review.last_updated}}</time>
+		</span>
+		<p>
+
+ 	   Reviewer | <a href="#">{{review.author.surname}} {{review.author.given_name}}</a>
+	</p>
+
+   </address>
+   <p>
+   	
+	Description:
+	{{review.description}};
+	
+   </p>
+   <p>
+	   API-
+   	<a href="{{review.api.link}}">
+	 {{review.api.name}}
+</a>
+   </p>
+</div>
+      <div class="clear"></div>
+    </section>
+	  <div class="clear"></div>
+    <!--list-->
+        <div class="pagenavi">	
+     	   <span class="page-numbers" >{{reviewListCtrl.currentPage}} / {{reviewListCtrl.pageCount()}} </span> 
+	  		 	<a class='page-numbers' href ng-click="reviewListCtrl.prevPage()" title='previous page'>previous page</a> 
+	  			<a class='page-numbers'  ng-repeat="pageNum in reviewListCtrl.pageRange" ng-class="{true: 'active', false: 'inactive'}[reviewListCtrl.currentPage == pageNum]" href ng-click="reviewListCtrl.selectPage(pageNum)">{{pageNum}}</a>
+ 	 	 	   <a class='page-numbers' href ng-click="reviewListCtrl.nextPage()" title='previous page'>next page</a> 
+
+	   </div>
+        <!--Page End-->
+  </div>
+  <!--Container-->
+  <div class="clear"></div>
+</div>
+  <!--bottom-->
+	<div class="scrollTopButton" id="scrollTopButton" style="display:none">
+		TOP
+	</div>
+	<div class="scrollBotButton" id="scrollBotButton" style="display:none">
+		BOTTOM
+	</div>
+=======
 <div id="container" class="container">
 
     <hgroup class="mb20">
@@ -34,6 +97,7 @@
     <div class="scrollBotButton" id="scrollBotButton" style="display:none">
         BOTTOM
     </div>
+>>>>>>> 8329b002b688c3136e880d5d7d45f188d1fdf6cf
 </div>
 <!--Container-->
 

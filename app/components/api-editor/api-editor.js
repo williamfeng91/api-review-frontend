@@ -21,22 +21,22 @@
 
         // Use API stored in session if valid when editing review
         if (vm.isEditMode) {
-            // vm.api = session.getCurrentAPI();
+            vm.api = session.getCurrentAPI();
 
-            // if (vm.api == null || vm.api.id != $stateParams.id) {
+            if (vm.api == null || vm.api.id != $stateParams.id) {
                 apiservice.getById($stateParams.id)
                     .then(getAPISuccessful, getAPIFailed);
 
                 function getAPISuccessful(result) {
                     vm.api = result;
-                    // session.setCurrentAPI(vm.api);
+                    session.setCurrentAPI(vm.api);
                 }
 
                 function getAPIFailed(error) {
                     $state.go('api-list');
                     toastr.error('Failed to retrieve the API. Please try again.');
                 }
-            // }
+            }
         }
 
         function submitAPI() {
