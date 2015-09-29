@@ -52,7 +52,7 @@
 
             function createAPISuccessful(result) {
                 $state.go('api-item-view', {id: result.id});
-                toastr.success('API successfully created!');
+                toastr.success('Successfully created!', 'New API');
             }
 
             function updateAPISuccessful(result) {
