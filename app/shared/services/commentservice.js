@@ -3,43 +3,44 @@
 
     angular
         .module('app.services')
-        .factory('apiservice', apiservice);
+        .factory('commentservice', commentservice);
 
     /** @ngInject */
-    function apiservice($http, $q, APISERVICE, logger) {
+    function commentservice($http, $q, APISERVICE, logger) {
         var service = {
-            create: createAPI,
+            create: createComment,
             getById: getById,
+            getByReview: getByReview,
             getPage: getPage,
             getAll: getAll,
-            update: updateAPI,
-            delete: deleteAPI
+            update: updateComment,
+            delete: deleteComment
         };
 
         return service;
         /////////////////////
 
         /**
-         * Creates a new API
-         * @param api an api object that captures all details the API needs
+         * Creates a new comment
+         * @param comment a comment object that captures all details the API needs
          */
-        function createAPI(api) {
+        function createComment(comment) {
             return $http({
-                url: APISERVICE.apiUrl,
+                url: APISERVICE.commentUrl,
                 method: 'POST',
                 dataType: 'json',
-                data: api,
+                data: comment,
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
         }
 
         /**
-         * Retrieves an API
-         * @param id the id of the API to be retrieved
+         * Retrieves a comment
+         * @param id the id of the comment to be retrieved
          */
         function getById(id) {
             return $http({
-                url: APISERVICE.apiUrl + '/' + id,
+                url: APISERVICE.commentUrl + '/' + id,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -48,15 +49,28 @@
         }
 
         /**
-         * Retrieves a page of APIs
-         * @param offset the starting index of APIs returned
-         * @param limit the number of APIs returned
+         * Retrieves all comments of a review
+         */
+        function getByReview(reviewId) {
+            return $http({
+                url: APISERVICE.reviewUrl + '/' + reviewId + '/comments',
+                method: 'GET',
+                dataType: 'json',
+                data: '',
+                headers: APISERVICE.headers
+            }).then(handleSuccess, handleError);
+        }
+
+        /**
+         * Retrieves a page of comments
+         * @param offset the starting index of comments returned
+         * @param limit the number of comments returned
          */
         function getPage(offset, limit) {
             offset = typeof offset !== 'undefined' ? offset : 0;
             limit = typeof limit !== 'undefined' ? limit : 20;
             return $http({
-                url: APISERVICE.apiUrl + '?offset=' + offset + '&limit=' + limit,
+                url: APISERVICE.commentUrl + '?offset=' + offset + '&limit=' + limit,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -65,11 +79,11 @@
         }
 
         /**
-         * Retrieves all APIs
+         * Retrieves all comments
          */
         function getAll() {
             return $http({
-                url: APISERVICE.apiUrl,
+                url: APISERVICE.commentUrl,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -78,26 +92,26 @@
         }
 
         /**
-         * Updates an API
-         * @param api the api object with updated information
+         * Updates a comment
+         * @param comment the comment object with updated information
          */
-        function updateAPI(api) {
+        function updateComment(comment) {
             return $http({
-                url: APISERVICE.apiUrl + '/' + api.id,
+                url: APISERVICE.commentUrl + '/' + comment.id,
                 method: 'PUT',
                 dataType: 'json',
-                data: api,
+                data: comment,
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
         }
 
         /**
-         * Deletes an API
-         * @param id the id of the API to be deleted
+         * Deletes a comment
+         * @param id the id of the comment to be deleted
          */
-        function deleteAPI(id) {
+        function deleteComment(id) {
             return $http({
-                url: APISERVICE.apiUrl + '/' + id,
+                url: APISERVICE.commentUrl + '/' + id,
                 method: 'DELETE',
                 dataType: 'json',
                 data: '',
@@ -107,12 +121,12 @@
 
         // private functions
         function handleSuccess(response) {
-            logger.success('API call successful', response, 'apiservice');
+            logger.success('API call successful', response, 'commentservice');
             return $q.resolve(response.data);
         }
 
         function handleError(response) {
-            logger.error('API call unsuccessful', response, 'apiservice');
+            logger.error('API call unsuccessful', response, 'commentservice');
             return $q.reject(response);
         }
     }

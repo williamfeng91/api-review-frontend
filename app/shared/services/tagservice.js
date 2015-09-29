@@ -9,11 +9,12 @@
     function tagservice($http, $q, APISERVICE, logger) {
         var service = {
             create: createTag,
-            addToReview: addToReview,
-            getByReview: getByReview,
-            getAll: getAll,
+            getById: getById,
             search: search,
-            updateForReview: updateForReview
+            getPage: getPage,
+            getAll: getAll,
+            update: updateTag,
+            delete: deleteTag
         };
 
         return service;
@@ -34,27 +35,29 @@
         }
 
         /**
-         * Adds tags to a review
-         * @param reviewId the id of the review
-         * @param tags an array of tags to be added to a review
+         * Retrieves tags whose name contain the query
+         * @param query the string being searched
          */
-        function addToReview(reviewId, tags) {
+        function search(query) {
             return $http({
-                url: APISERVICE.reviewUrl + '/' + reviewId + '/tags',
-                method: 'POST',
+                url: APISERVICE.tagUrl + '?q=' + query,
+                method: 'GET',
                 dataType: 'json',
-                data: tags,
+                data: '',
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
         }
 
         /**
-         * Retrieves tags of a review
-         * @param reviewId the id of the review
+         * Retrieves a page of tags
+         * @param offset the starting index of tags returned
+         * @param limit the number of tags returned
          */
-        function getByReview(reviewId) {
+        function getPage(offset, limit) {
+            offset = typeof offset !== 'undefined' ? offset : 0;
+            limit = typeof limit !== 'undefined' ? limit : 20;
             return $http({
-                url: APISERVICE.reviewUrl + '/' + reviewId + '/tags',
+                url: APISERVICE.tagUrl + '?offset=' + offset + '&limit=' + limit,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -76,30 +79,29 @@
         }
 
         /**
-         * Search tags containing a keyword
-         * @param keyword the keyword used to search
+         * Updates a tag
+         * @param tag the tag object with updated information
          */
-        function search(keyword) {
+        function updateTag(tag) {
             return $http({
-                url: APISERVICE.tagUrl + '?query=' + keyword,
-                method: 'GET',
+                url: APISERVICE.tagUrl + '/' + tag.id,
+                method: 'PUT',
                 dataType: 'json',
-                data: '',
+                data: tag,
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
         }
 
         /**
-         * Updates tags of a review
-         * @param reviewId the id of the review
-         * @param tags the updated array of tags
+         * Deletes a tag
+         * @param id the id of the tag to be deleted
          */
-        function updateForReview(reviewId, tags) {
+        function deleteTag(id) {
             return $http({
-                url: APISERVICE.reviewUrl + '/' + reviewId + '/tags',
-                method: 'PUT',
+                url: APISERVICE.tagUrl + '/' + id,
+                method: 'DELETE',
                 dataType: 'json',
-                data: tags,
+                data: '',
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
         }
