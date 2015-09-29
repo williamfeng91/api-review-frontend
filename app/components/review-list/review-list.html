@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div id="main">
 <div id="container">
     <div class="clear"></div>
@@ -59,26 +60,66 @@
 	<div class="scrollBotButton" id="scrollBotButton" style="display:none">
 		BOTTOM
 	</div>
+=======
+<div id="container" class="container">
+
+    <hgroup class="mb20">
+        <h1>Review List</h1>
+    </hgroup>
+
+    <section ng-repeat="review in reviewListCtrl.reviews" class="col-xs-12 col-sm-6 col-md-12">
+        <div class="search-result row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-left">
+                <h3><a ui-sref="review-item-view({id:review.id})" title="">{{review.title}}</a></h3>
+                <p><a ui-sref="user-profile-view({id:review.author.id})">{{review.author.given_name}} {{review.author.surname}}</a></p>
+                <p>{{review.description}}</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-right">
+                <ul class="meta-search">
+                    <li><i class="fa fa-calendar-plus-o"></i> <span>Date created: {{review.date_created}}</span></li>
+                    <li><i class="fa fa-calendar"></i> <span>Last updated: {{review.last_modified}}</span></li>
+                </ul>
+            </div>
+            <span class="clearfix borda"></span>
+        </div>
+    </section>
+    <paging
+      page="reviewListCtrl.currentPage"
+      page-size="reviewListCtrl.reviews.length"
+      total="reviewListCtrl.totalNum"
+      scroll-top="true"
+      show-prev-next="true"
+      paging-action="reviewListCtrl.doPaging('Paging Clicked', page)">
+    </paging>
+    <div class="scrollTopButton" id="scrollTopButton" style="display:none">
+        TOP
+    </div>
+    <div class="scrollBotButton" id="scrollBotButton" style="display:none">
+        BOTTOM
+    </div>
+>>>>>>> 8329b002b688c3136e880d5d7d45f188d1fdf6cf
 </div>
-	<script type="text/javascript">
-	$(function(){
-		showScroll();
-		function showScroll(){
-			$(window).scroll( function() {
-				var scrollTopValue=$(window).scrollTop();
-				var scrollBotValue=$('#container').height()-scrollTopValue;
-				console.log = scrollBotValue;
+<!--Container-->
 
-				scrollTopValue > 10 ? $('#scrollTopButton').fadeIn():$('#scrollTopButton').fadeOut();
-				scrollBotValue > 450 ? $('#scrollBotButton').fadeIn():$('#scrollBotButton').fadeOut();
-			} );
-			$('#scrollTopButton').click(function(){
-				$("html,body").animate({scrollTop:0},200);
-			});
+<script type="text/javascript">
+$(function(){
+	showScroll();
+	function showScroll(){
+		$(window).scroll( function() {
+			var scrollTopValue=$(window).scrollTop();
+			var scrollBotValue=$('#container').height()-scrollTopValue;
+			console.log = scrollBotValue;
 
-			$('#scrollBotButton').click(function(){
-				$("html,body").animate({scrollTop:$('#container').height()-350},200);
-			});
-		}
-	})
-	</script>
+			scrollTopValue > 10 ? $('#scrollTopButton').fadeIn():$('#scrollTopButton').fadeOut();
+			scrollBotValue > 450 ? $('#scrollBotButton').fadeIn():$('#scrollBotButton').fadeOut();
+		} );
+		$('#scrollTopButton').click(function(){
+			$("html,body").animate({scrollTop:0},200);
+		});
+
+		$('#scrollBotButton').click(function(){
+			$("html,body").animate({scrollTop:$('#container').height()-550},200);
+		});
+	}
+})
+</script>
