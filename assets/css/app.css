@@ -38,3 +38,54 @@ div[ui-view="main"] {
     color: #ffffff;
     background-color: #eb6864;
 }
+
+/***** List *****/
+.container { margin-top: 20px; }
+.mb20 { margin-bottom: 20px; }
+
+hgroup { padding-left: 15px; }
+hgroup h1 { color: #2a3644; margin-top: 0; line-height: 1.15; }
+hgroup h2.lead { color: #2a3644; margin: 0; padding-bottom: 10px; }
+
+.search-result .thumbnail { border-radius: 0 !important; }
+.search-result:first-child { margin-top: 0 !important; }
+.search-result { padding: 20px 0 10px 0; border-top: 1px solid #ccc; }
+.search-result .col-left { border-right: 1px dotted #ccc; min-height: 140px; }
+.search-result ul { padding-left: 0 !important; list-style: none;  }
+.search-result ul li { line-height: 30px; }
+.search-result ul li i { padding-right: 5px; }
+.search-result .col-right { position: relative; }
+.search-result h3 { margin-top: 0 !important; margin-bottom: 10px !important; }
+.search-result h3 > a { color: #248dc1 !important; }
+.search-result span.plus { position: absolute; right: 0; top: 126px; }
+.search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
+.search-result span.plus a:hover { background-color: #414141; }
+.search-result span.plus a i { color: #fff !important; }
+.search-result span.border { display: block; width: 97%; margin: 0 15px; border-bottom: 1px dotted #ccc; }
+
+.scrollTopButton{
+    background: #d6623d none repeat scroll 0 0;
+    bottom: 163px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    height: 80px;
+    line-height: 80px;
+    position: fixed;
+    right: 30px;
+    text-align: center;
+    width: 80px;
+}
+.scrollBotButton{
+    background: #d6623d none repeat scroll 0 0;
+    bottom: 73px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    height: 80px;
+    line-height: 80px;
+    position: fixed;
+    right: 30px;
+    text-align: center;
+    width: 80px;
+}
