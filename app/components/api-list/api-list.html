@@ -1,32 +1,32 @@
 <div id="container" class="container">
 
     <hgroup class="mb20">
-        <h1>Review List</h1>
+        <h1>API List</h1>
     </hgroup>
 
-    <section ng-repeat="review in reviewListCtrl.reviews" class="col-xs-12 col-sm-6 col-md-12">
+    <section ng-repeat="api in apiListCtrl.apis" class="col-xs-12 col-sm-6 col-md-12">
         <div class="search-result row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-left">
-                <h3><a ui-sref="review-item-view({id:review.id})" title="">{{review.title}}</a></h3>
-                <p><a ui-sref="user-profile-view({id:review.author.id})">{{review.author.given_name}} {{review.author.surname}}</a></p>
-                <p>{{review.description}}</p>
+                <h3><a ui-sref="api-item-view({id:api.id})" title="">{{api.name}}</a></h3>
+                <p><a ng-href="{{api.link}}">{{api.link}}</a></p>
+                <p>{{api.description}}</p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-right">
                 <ul class="meta-search">
-                    <li><i class="fa fa-calendar-plus-o"></i> <span>Date created: {{review.date_created}}</span></li>
-                    <li><i class="fa fa-calendar"></i> <span>Last updated: {{review.last_modified}}</span></li>
+                    <li><i class="fa fa-calendar-plus-o"></i> <span>Date created: {{api.date_created}}</span></li>
+                    <li><i class="fa fa-calendar"></i> <span>Last updated: {{api.last_modified}}</span></li>
                 </ul>
             </div>
             <span class="clearfix borda"></span>
         </div>
     </section>
     <paging
-      page="reviewListCtrl.currentPage"
-      page-size="reviewListCtrl.reviews.length"
-      total="reviewListCtrl.totalNum"
+      page="apiListCtrl.currentPage"
+      page-size="apiListCtrl.apis.length"
+      total="apiListCtrl.totalNum"
       scroll-top="true"
       show-prev-next="true"
-      paging-action="reviewListCtrl.doPaging('Paging Clicked', page)">
+      paging-action="apiListCtrl.doPaging('Paging Clicked', page)">
     </paging>
     <div class="scrollTopButton" id="scrollTopButton" style="display:none">
         TOP

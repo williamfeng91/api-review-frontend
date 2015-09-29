@@ -18,6 +18,7 @@
     "angular-loader": "~1.4.0",
     "angular-mocks": "~1.4.0",
     "angular-password": "latest",
+    "angular-paging": "latest",
     "angular-dialog-service": "~5.2.8",
     "angular-ui-tinymce": "latest",
     "angucomplete-alt": "latest",
