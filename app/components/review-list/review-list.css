@@ -290,6 +290,10 @@ img {
     padding: 5px 8px 4px;
     transition: all 0.3s ease-in-out 0s;
 }
+.active{
+    border-bottom: 5px solid #d6623d;
+    color: #f34c02;
+}
 .page-numbers:hover, .pagenavi .current {
     border-bottom: 5px solid #d6623d;
     color: #f34c02;
