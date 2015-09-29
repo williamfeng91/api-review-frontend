@@ -139,7 +139,7 @@
 
             function createReviewSuccessful(result) {
                 $state.go('review-item-view', {id: result.id});
-                toastr.success('Review successfully created!');
+                toastr.success('Successfully created!', 'New Review');
             }
 
             function updateReviewSuccessful(result) {

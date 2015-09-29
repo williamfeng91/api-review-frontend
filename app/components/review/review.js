@@ -5,18 +5,20 @@
         .module('app.review')
         .controller('ReviewController', ReviewController);
 
-    function ReviewController($state, $stateParams, dialogs, reviewservice, session, toastr, logger) {
+    function ReviewController($state, $stateParams, dialogs, reviewservice, commentservice, session, toastr, logger) {
         var vm = this;
 
         (function initController() {
             // load the review
             reviewservice.getById($stateParams.id)
-                .then(getReviewSuccessful, getReviewFailed);
-
-            function getReviewSuccessful(result) {
-                vm.review = result;
-                session.setCurrentReview(vm.review);
-            }
+                .then(function (result) {
+                    vm.review = result;
+                    return commentservice.getByReview($stateParams.id);
+                }, getReviewFailed)
+                .then(function (result) {
+                    vm.review.comments = result.results;
+                    session.setCurrentReview(vm.review);
+                }, getReviewFailed);
 
             function getReviewFailed(error) {
                 $state.go('review-list');
@@ -24,7 +26,30 @@
             }
         })();
 
-        vm.showDialog = function () {
+        vm.submitComment = submitComment;
+        vm.showDialog = showDialog;
+        vm.reload = reload;
+
+        function submitComment() {
+            vm.dataloading = true;
+            var comment = {
+                'content': vm.newComment
+            };
+            commentservice.create(comment)
+                .then(submitCommentSuccessful, submitCommentFailed);
+
+            function submitCommentSuccessful(result) {
+                $state.reload();
+                toastr.success('Successfully submitted!', 'New Comment');
+            }
+
+            function submitCommentFailed(error) {
+                vm.dataloading = false;
+                toastr.error('Failed to submit comment. Please try again.');
+            }
+        }
+
+        function showDialog() {
             var dlg = dialogs.confirm(
                 'Confirm deletion',
                 'Do you really want to delete this review?');
@@ -49,7 +74,7 @@
             }
         }
 
-        vm.reload = function () {
+        function reload() {
             $state.reload();
         }
     }
