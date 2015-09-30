@@ -30,22 +30,40 @@
         ])
         .run(run);
 
-    function run($rootScope, $location, $cookieStore, authservice, session) {
+    function run($rootScope, $state, $cookieStore, authservice, session, toastr) {
         // keep user logged in after page refresh
         if ($cookieStore.get('currentUser')) {
             session.create($cookieStore.get('currentUser'));
         }
-        if ($cookieStore.get('currentReview')) {    // debugging only
-            session.setCurrentReview($cookieStore.get('currentReview'));
+        if ($cookieStore.get('pageSize')) {
+            session.setPageSize($cookieStore.get('pageSize'));
         }
 
-        // disable for convenience when developing
-        // $rootScope.$on('$locationChangeStart', function (event, next, current) {
-        //     // redirect to login page if not logged in and trying to access a restricted page
-        //     var restrictedPage = $.inArray($location.path(), ['/login', '/register', '/']) === -1;
-        //     if (restrictedPage && !authservice.isAuthenticated()) {
-        //         $location.path('/login');
-        //     }
-        // });
+        $rootScope.stateIsLoading = false;
+        $rootScope.$on('$stateChangeStart', function() {
+            $rootScope.stateIsLoading = true;
+        });
+        $rootScope.$on('$stateChangeSuccess', function() {
+            $rootScope.stateIsLoading = false;
+        });
+        $rootScope.$on('$stateChangeError', function (evt, toState, toParams, fromState, fromParams, error) {
+            if (angular.isObject(error) && angular.isString(error.code)) {
+                switch (error.code) {
+                    case 'NOT_AUTHENTICATED':
+                        // go to the login page
+                        $state.go('login');
+                        break;
+                    default:
+                        // set the error object on the error state and go there
+                        $state.get('error').error = error;
+                        $state.go('error');
+                }
+                toastr.error(error.message);
+            }
+            else {
+                // unexpected error
+                $state.go('error');
+            }
+        });
     }
 })();

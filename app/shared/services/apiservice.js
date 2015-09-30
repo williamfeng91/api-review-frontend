@@ -6,7 +6,7 @@
         .factory('apiservice', apiservice);
 
     /** @ngInject */
-    function apiservice($http, $q, APISERVICE, logger) {
+    function apiservice($http, $q, session, APISERVICE, logger) {
         var service = {
             create: createAPI,
             getById: getById,
@@ -54,7 +54,7 @@
          */
         function getPage(offset, limit) {
             offset = typeof offset !== 'undefined' ? offset : 0;
-            limit = typeof limit !== 'undefined' ? limit : 20;
+            limit = typeof limit !== 'undefined' ? limit : session.getPageSize();
             return $http({
                 url: APISERVICE.apiUrl + '?offset=' + offset + '&limit=' + limit,
                 method: 'GET',

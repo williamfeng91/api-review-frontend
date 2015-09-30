@@ -8,7 +8,9 @@
     /** @ngInject */
     function session($cookieStore, logger) {
         this.currentUser = null;
+        this.currentAPI = null;
         this.currentReview = null;
+        this.pageSize = 10;
 
         this.create = function (user) {
             this.currentUser = user;
@@ -45,7 +47,7 @@
 
         this.setCurrentAPI = function (api) {
             this.currentAPI = api;
-            logger.info('API stored in session', this.currentAPI, 'session.setCurrentAPI');
+            // logger.info('API stored in session', this.currentAPI, 'session.setCurrentAPI');
         }
 
         // Current review
@@ -55,7 +57,17 @@
 
         this.setCurrentReview = function (review) {
             this.currentReview = review;
-            logger.info('Review stored in session', this.currentReview, 'session.setCurrentReview');
+            // logger.info('Review stored in session', this.currentReview, 'session.setCurrentReview');
+        }
+
+        // Page size
+        this.getPageSize = function () {
+            return this.pageSize;
+        }
+
+        this.setPageSize = function (size) {
+            this.pageSize = size;
+            $cookieStore.put('pageSize', this.pageSize);
         }
     }
 }());

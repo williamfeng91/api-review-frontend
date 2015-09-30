@@ -23,22 +23,23 @@
             return unCapitalizeFirstLetter(getControllerName(name));
         }
 
-        function getSubCompObj(component) {
+        function getSubCompObj(component, resolveObj) {
         return {
             templateUrl: 'app/components/' + component + '/' + component + '.html',
             controller: getControllerName(component) + 'Controller',
-            controllerAs: getControllerAlias(component) + 'Ctrl'
+            controllerAs: getControllerAlias(component) + 'Ctrl',
+            resolve: resolveObj
         };
     }
 
-    function getUICompObj(main, header, footer) {
+    function getUICompObj(main, header, footer, resolveObj) {
         main = typeof main !== 'undefined' ? main : 'main';
         header = typeof header !== 'undefined' ? header : 'header';
         footer = typeof footer !== 'undefined' ? footer : 'footer';
         return {
             'header': getSubCompObj(header),
             'footer': getSubCompObj(footer),
-            'main': getSubCompObj(main)
+            'main': getSubCompObj(main, resolveObj)
         };
     }
 
@@ -88,7 +89,23 @@
             })
             .state('api-item-view', {
                 url: '/apis/:id',
-                views: getUICompObj('api')
+                views: getUICompObj('api', undefined, undefined, {
+                    init: function ($q, $state, $stateParams, apiservice) {
+                        return apiservice.getById($stateParams.id)
+                            .then(getApiSuccessful, getApiFailed);
+
+                        function getApiSuccessful(result) {
+                            return $q.resolve(result);
+                        }
+
+                        function getApiFailed(error){
+                            return $q.reject({
+                                code: 'NOT_FOUND',
+                                message: 'Failed to retrieve API.'
+                            });
+                        }
+                    }
+                }),
             })
             .state('api-item-edit', {
                 url: '/apis/:id/edit',
@@ -96,7 +113,11 @@
             })
             .state('api-list', {
                 url: '/apis',
-                views: getUICompObj('api-list')
+                views: getUICompObj('api-list', undefined, undefined, {
+                    init: function (apiservice) {
+                        return apiservice.getPage();
+                    }
+                }),
             })
             .state('user-profile-edit', {
                 url: '/users/my-profile',
@@ -109,6 +130,10 @@
             .state('user-list', {
                 url: '/users',
                 views: getUICompObj('user-list')
+            })
+            .state('error', {
+                url: '/error',
+                views: getUICompObj('login')
             });
     }
 

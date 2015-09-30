@@ -5,23 +5,13 @@
         .module('app.api')
         .controller('ApiController', ApiController);
 
-    function ApiController($state, $stateParams, dialogs, apiservice, session, toastr, logger) {
+    function ApiController($state, init, dialogs, apiservice, session, toastr, logger) {
         var vm = this;
 
         (function initController() {
             // load the API
-			apiservice.getById($stateParams.id)
-				.then(getApiSuccessful,getApiFailed);
-
-			function getApiSuccessful(result) {
-				vm.api = result;
-				session.setCurrentAPI(vm.api)
-			}
-
-			function getApiFailed(error){
-				$state.go('api-list');
-				toastr.error('Failed to retrieve the API. Please try again.')
-			}
+			vm.api = init;
+			session.setCurrentAPI(vm.api);
         })();
 
          vm.showDialog = function () {
