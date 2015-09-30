@@ -31,7 +31,7 @@
            //handler next page
            vm.nextPage = function() {
            		if (vm.currentPage < vm.pageCount()) {
-           			vm.currentPage;
+           			vm.currentPage++;
 			    	reviewservice.getPage(vm.currentPage,100).then(function(data) { vm.reviews = data.result;});
            	 	}
         	};
