@@ -1,42 +1,69 @@
-<div id="container" class="container">
+<div id="main">
+<div id="container">
+    <div class="clear"></div>
+    <section class="list"  ng-repeat="review in reviewListCtrl.reviews">
+       <a href="#" class="up">{{review.total_rated}}</a>
+	   <div class="mecc">
+        <h2 class="mecctitle"> <a href="#">
+         {{review.title}}
+          </a> </h2>
+        <address class="meccaddress">
+			<div class="mectags-body">
+			<font ng-repeat="tag in review.tags">{{tag.name}}</font>
+		    </div>
+        <time>PublishTime - {{review.datetime_created}}</time><span class= "meccname">
+			<time>Last Upate - {{review.last_updated}}</time>
+		</span>
+		<p>
 
-    <hgroup class="mb20">
-        <h1>Review List</h1>
-    </hgroup>
+ 	   Reviewer | <a href="#">{{review.author.surname}} {{review.author.given_name}}</a>
+	</p>
 
-    <section ng-repeat="review in reviewListCtrl.reviews" class="col-xs-12 col-sm-6 col-md-12">
-        <div class="search-result row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-left">
-                <h3><a ui-sref="review-item-view({id:review.id})" title="">{{review.title}}</a></h3>
-                <p><a ui-sref="user-profile-view({id:review.author.id})">{{review.author.given_name}} {{review.author.surname}}</a></p>
-                <p>{{review.description}}</p>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-right">
-                <ul class="meta-search">
-                    <li><i class="fa fa-calendar-plus-o"></i> <span>Date created: {{review.date_created}}</span></li>
-                    <li><i class="fa fa-calendar"></i> <span>Last updated: {{review.last_modified}}</span></li>
-                </ul>
-            </div>
-            <span class="clearfix borda"></span>
-        </div>
-    </section>
-    <paging
-      page="reviewListCtrl.currentPage"
-      page-size="reviewListCtrl.reviews.length"
-      total="reviewListCtrl.totalNum"
-      scroll-top="true"
-      show-prev-next="true"
-      paging-action="reviewListCtrl.doPaging('Paging Clicked', page)">
-    </paging>
-    <div class="scrollTopButton" id="scrollTopButton" style="display:none">
-        TOP
-    </div>
-    <div class="scrollBotButton" id="scrollBotButton" style="display:none">
-        BOTTOM
-    </div>
+   </address>
+   <p>
+   	
+	Description:
+	{{review.description}};
+	
+   </p>
+   <p>
+	   API-
+   	<a href="{{review.api.link}}">
+	 {{review.api.name}}
+</a>
+   </p>
 </div>
-<!--Container-->
+      <div class="clear"></div>
+    </section>
+	  <div class="clear"></div>
+    <!--list-->
+        <div class="pagenavi">	
+     	   <span class="page-numbers" >{{reviewListCtrl.currentPage}} / {{reviewListCtrl.pageCount()}} </span> 
+	  		 	<a class='page-numbers' href ng-click="reviewListCtrl.prevPage()" title='previous page'>previous page</a> 
+	  			<a class='page-numbers'  ng-repeat="pageNum in reviewListCtrl.pageRange" ng-class="{true: 'active', false: 'inactive'}[reviewListCtrl.currentPage == pageNum]" href ng-click="reviewListCtrl.selectPage(pageNum)">{{pageNum}}</a>
+ 	 	 	   <a class='page-numbers' href ng-click="reviewListCtrl.nextPage()" title='previous page'>next page</a> 
 
+	   </div>
+        <!--Page End-->
+  </div>
+  <!--Container-->
+  <div class="clear"></div>
+  <!--bottom-->
+	<div class="scrollTopButton" id="scrollTopButton" style="display:none">
+		TOP
+	</div>
+	<div class="scrollBotButton" id="scrollBotButton" style="display:none">
+		BOTTOM
+	</div>
+ <div id="container" class="container">
+ 
+     <hgroup class="mb20">
+     <div class="scrollBotButton" id="scrollBotButton" style="display:none">
+         BOTTOM
+     </div>
+ </div>
+</div>
+ <!--Container-->
 <script type="text/javascript">
 $(function(){
 	showScroll();
@@ -54,7 +81,7 @@ $(function(){
 		});
 
 		$('#scrollBotButton').click(function(){
-			$("html,body").animate({scrollTop:$('#container').height()-550},200);
+			$("html,body").animate({scrollTop:$('#container').height()-450},200);
 		});
 	}
 })
