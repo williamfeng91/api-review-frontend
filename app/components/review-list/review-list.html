@@ -1,7 +1,7 @@
-<div id="main">
-<div id="container">
+<div id="reivewList-main">
+<div id="reivewList-container">
     <div class="clear"></div>
-    <section class="list"  ng-repeat="review in reviewListCtrl.reviews">
+    <section class="reivewList-list"  ng-repeat="review in reviewListCtrl.reviews">
        <a href="#" class="up">{{review.total_rated}}</a>
 	   <div class="mecc">
         <h2 class="mecctitle"> <a href="#">
@@ -30,18 +30,18 @@
 	   API-
    	<a href="{{review.api.link}}">
 	 {{review.api.name}}
-</a>
+	</a>
    </p>
 </div>
       <div class="clear"></div>
     </section>
 	  <div class="clear"></div>
     <!--list-->
-        <div class="pagenavi">	
-     	   <span class="page-numbers" >{{reviewListCtrl.currentPage}} / {{reviewListCtrl.pageCount()}} </span> 
-	  		 	<a class='page-numbers' href ng-click="reviewListCtrl.prevPage()" title='previous page'>previous page</a> 
-	  			<a class='page-numbers'  ng-repeat="pageNum in reviewListCtrl.pageRange" ng-class="{true: 'active', false: 'inactive'}[reviewListCtrl.currentPage == pageNum]" href ng-click="reviewListCtrl.selectPage(pageNum)">{{pageNum}}</a>
- 	 	 	   <a class='page-numbers' href ng-click="reviewListCtrl.nextPage()" title='previous page'>next page</a> 
+        <div class="reivewList-pagenavi">	
+     	   <span class="reivewList-page-numbers" >{{reviewListCtrl.currentPage}} / {{reviewListCtrl.pageCount()}} </span> 
+	  		 	<a class='reivewList-page-numbers' href ng-click="reviewListCtrl.prevPage()" title='previous page'>previous page</a> 
+	  			<a class='reivewList-page-numbers'  ng-repeat="pageNum in reviewListCtrl.pageRange" ng-class="{true: 'active', false: 'inactive'}[reviewListCtrl.currentPage == pageNum]" href ng-click="reviewListCtrl.selectPage(pageNum)">{{pageNum}}</a>
+ 	 	 	   <a class='reivewList-page-numbers' href ng-click="reviewListCtrl.nextPage()" title='previous page'>next page</a> 
 
 	   </div>
         <!--Page End-->
@@ -49,16 +49,16 @@
   <!--Container-->
   <div class="clear"></div>
   <!--bottom-->
-	<div class="scrollTopButton" id="scrollTopButton" style="display:none">
+	<div class="reivewList-scrollTopButton" id="scrollTopButton" style="display:none">
 		TOP
 	</div>
-	<div class="scrollBotButton" id="scrollBotButton" style="display:none">
+	<div class="reivewList-scrollBotButton" id="scrollBotButton" style="display:none">
 		BOTTOM
 	</div>
- <div id="container" class="container">
+ <div id="reivewList-container" class="reivewList-container">
  
      <hgroup class="mb20">
-     <div class="scrollBotButton" id="scrollBotButton" style="display:none">
+     <div class="reivewList-scrollBotButton" id="scrollBotButton" style="display:none">
          BOTTOM
      </div>
  </div>
@@ -70,7 +70,7 @@ $(function(){
 	function showScroll(){
 		$(window).scroll( function() {
 			var scrollTopValue=$(window).scrollTop();
-			var scrollBotValue=$('#container').height()-scrollTopValue;
+			var scrollBotValue=$('#reivewList-container').height()-scrollTopValue;
 			console.log = scrollBotValue;
 
 			scrollTopValue > 10 ? $('#scrollTopButton').fadeIn():$('#scrollTopButton').fadeOut();
@@ -81,7 +81,7 @@ $(function(){
 		});
 
 		$('#scrollBotButton').click(function(){
-			$("html,body").animate({scrollTop:$('#container').height()-450},200);
+			$("html,body").animate({scrollTop:$('#reivewList-container').height()-450},200);
 		});
 	}
 })
