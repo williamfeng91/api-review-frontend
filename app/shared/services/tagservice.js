@@ -9,7 +9,6 @@
     function tagservice($http, $q, APISERVICE, logger) {
         var service = {
             create: createTag,
-            getById: getById,
             search: search,
             getPage: getPage,
             getAll: getAll,

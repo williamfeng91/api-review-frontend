@@ -18,6 +18,7 @@
     <link href="assets/libs/toastr/toastr.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="assets/css/app.css" rel="stylesheet">
+    <link href="app/components/loading/loading.css" rel="stylesheet">
     <link href="app/components/header/search.css" rel="stylesheet">
     <link href="app/components/footer/footer.css" rel="stylesheet">
     <link href="app/components/home/home.css" rel="stylesheet">
@@ -35,7 +36,8 @@
 <body>
     <ar-content ng-controller="AppController as app">
       <div ui-view="header"></div>
-      <div ui-view="main" autoscroll="true"></div>
+      <div ui-view="main" ng-if="!stateIsLoading" autoscroll="true" class="main"></div>
+      <loading ng-if="stateIsLoading"></loading>
       <div ui-view="footer"></div>
     </ar-content>
 
@@ -86,6 +88,8 @@
     <script src="app/shared/services/session.js"></script>
     <script src="app/shared/services/tagservice.js"></script>
     <script src="app/shared/services/userservice.js"></script>
+    <!-- loading -->
+    <script src="app/components/loading/loading.directive.js"></script>
     <!-- header -->
     <script src="app/components/header/header.module.js"></script>
     <script src="app/components/header/header.js"></script>

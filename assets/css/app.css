@@ -4,7 +4,7 @@ body {
     font-size: 180%;
 }
 
-div[ui-view="main"] {
+div.main {
     min-height: 600px;
 }
 
