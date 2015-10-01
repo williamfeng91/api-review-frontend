@@ -6,8 +6,9 @@
         .controller('ApiController', ApiController);
 
     /** @ngInject */
-    function ApiController($state, initData, dialogs, apiservice, session, toastr, logger) {
+    function ApiController($state, initData, dialogs, authservice, apiservice, session, toastr, logger) {
         var vm = this;
+        vm.authservice = authservice;
 
         vm.api = initData;
 		session.setCurrentAPI(vm.api);

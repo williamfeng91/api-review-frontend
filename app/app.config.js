@@ -1,9 +1,9 @@
 (function() {
     'use strict';
 
-    var core = angular.module('app.services');
+    var app = angular.module('app');
 
-    core.config(toastrConfig);
+    app.config(toastrConfig);
 
     /* @ngInject */
     function toastrConfig(toastr) {
@@ -18,9 +18,9 @@
         version: '1.0.0'
     };
 
-    core.value('config', config);
+    app.value('config', config);
 
-    core.config(configure);
+    app.config(configure);
 
     /* @ngInject */
     function configure ($logProvider) {

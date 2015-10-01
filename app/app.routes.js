@@ -44,7 +44,7 @@
         };
     }
 
-    function stateConfig($locationProvider, $stateProvider, $urlRouterProvider, $uiViewScrollProvider) {
+    function stateConfig($locationProvider, $stateProvider, $uiViewScrollProvider, USER_ROLES) {
         $locationProvider.html5Mode({
             enabled: false, // set to true to remove hash. Don't want to set it now because it
                             // doesn't allow access to pages by typing url directly
@@ -54,26 +54,46 @@
         $stateProvider
             .state('home', {
                 url: '/',
+                data: {
+                    requireLogin: false
+                },
                 views: getUICompObj('home'),
             })
             .state('login', {
                 url: '/login',
+                data: {
+                    requireLogin: false
+                },
                 views: getUICompObj('login'),
             })
             .state('register', {
                 url: '/register',
+                data: {
+                    requireLogin: false
+                },
                 views: getUICompObj('register'),
             })
             .state('reset-password', {
                 url: '/reset-password',
+                data: {
+                    requireLogin: false
+                },
                 views: getUICompObj('reset-password'),
             })
             .state('review-item-new', {
                 url: '/reviews/new?api',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ADMIN, USER_ROLES.EDITOR, USER_ROLES.REVIEWER]
+                },
                 views: getUICompObj('review-editor'),
             })
             .state('review-item-view', {
                 url: '/reviews/:id',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ALL]
+                },
                 views: getUICompObj('review', undefined, undefined, {
                     initData: function ($q, $stateParams, reviewservice, commentservice) {
                         var review = {};
@@ -98,18 +118,34 @@
             })
             .state('review-item-edit', {
                 url: '/reviews/:id/edit',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ADMIN, USER_ROLES.EDITOR, USER_ROLES.REVIEWER]
+                },
                 views: getUICompObj('review-editor'),
             })
             .state('review-list', {
                 url: '/reviews',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ALL]
+                },
                 views: getUICompObj('review-list'),
             })
             .state('api-item-new', {
                 url: '/apis/new',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ADMIN, USER_ROLES.EDITOR, USER_ROLES.REVIEWER]
+                },
                 views: getUICompObj('api-editor'),
             })
             .state('api-item-view', {
                 url: '/apis/:id',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ALL]
+                },
                 views: getUICompObj('api', undefined, undefined, {
                     initData: function ($q, $state, $stateParams, apiservice) {
                         return apiservice.getById($stateParams.id)
@@ -130,10 +166,18 @@
             })
             .state('api-item-edit', {
                 url: '/apis/:id/edit',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ADMIN, USER_ROLES.EDITOR, USER_ROLES.REVIEWER]
+                },
                 views: getUICompObj('api-editor'),
             })
             .state('api-list', {
                 url: '/apis?page',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ALL]
+                },
                 views: getUICompObj('api-list', undefined, undefined, {
                     initData: function ($stateParams, $q, apiservice, session) {
                         var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
@@ -156,10 +200,18 @@
             })
             .state('user-profile-edit', {
                 url: '/users/my-profile',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ALL]
+                },
                 views: getUICompObj('user-profile-editor'),
             })
             .state('user-profile-view', {
                 url: '/users/:id',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ALL]
+                },
                 views: getUICompObj('user-profile', undefined, undefined, {
                     initData: function ($q, $state, $stateParams, userservice) {
                         return userservice.getById($stateParams.id)
@@ -180,6 +232,10 @@
             })
             .state('user-list', {
                 url: '/users?page',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ALL]
+                },
                 views: getUICompObj('user-list', undefined, undefined, {
                     initData: function ($stateParams, $q, userservice, session) {
                         var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
@@ -201,13 +257,18 @@
                 }),
             })
             .state('error', {
-                url: '/error',
-                views: getUICompObj('login'),
+                url: '/error?type',
+                data: {
+                    requireLogin: false
+                },
+                views: getUICompObj('error'),
             });
     }
 
     function urlConfig($urlRouterProvider) {
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider
+            .when('', '/')
+            .otherwise('/error?type=not-found');
     }
 
     function AppController () {}
