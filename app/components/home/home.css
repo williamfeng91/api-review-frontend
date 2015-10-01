@@ -61,7 +61,7 @@
 }
 
 @media screen and (max-width: 550px) {
-.page-header h2, h1 {
+.page-header h2, .page-header h1 {
     font-size: 3em!important;
 }
 }

@@ -2,29 +2,37 @@
 
     <hgroup class="mb20">
         <h1>User List</h1>
+        <h2 ng-if="userListCtrl.users.length <= 0" class="lead"><strong class="text-danger">0</strong> results were found</h2>
     </hgroup>
 
-    <div>
-        <paging
-          page="userListCtrl.currentPage"
-          page-size="userListCtrl.pageSize"
-          total="userListCtrl.totalNum"
-          scroll-top="true"
-          show-prev-next="true"
-          paging-action="userListCtrl.doPaging('Paging Clicked', page)">
-        </paging>
+    <div class="row" ng-if="userListCtrl.users.length > 0">
+        <div class="col-xs-12 col-sm-12 col-md-10">
+            <paging
+                class="small"
+                page="userListCtrl.currentPage"
+                page-size="userListCtrl.pageSize"
+                total="userListCtrl.totalNum"
+                scroll-top="true"
+                hide-if-empty="true"
+                show-prev-next="true"
+                paging-action="userListCtrl.doPaging('Paging Clicked', page)">
+            </paging>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-2">
+            <span>Number of results</span>
+            <select ng-options="pageSize for pageSize in userListCtrl.availablePageSizes" ng-model="userListCtrl.pageSize" ng-change="userListCtrl.onPageSizeChange()" class="form-control">
+            </select>
+        </div>
     </div>
     <section ng-repeat="user in userListCtrl.users" class="col-xs-12 col-sm-6 col-md-12">
         <div class="search-result row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-left">
                 <h3><a ui-sref="user-item-view({id:user.id})" title="">{{user.given_name}} {{user.surname}}</a></h3>
                 <p><a ng-href="mailto:{{user.email}}">{{user.email}}</a></p>
-                <p>User type: {{user.user_role}}</p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-right">
                 <ul class="meta-search">
-                    <!-- <li><i class="fa fa-calendar-plus-o"></i> <span>Date created: {{user.date_created}}</span></li>
-                    <li><i class="fa fa-calendar"></i> <span>Last updated: {{user.last_modified}}</span></li> -->
+                    <li><i class="fa fa-group"></i> <span>User group: {{user.user_role}}</span></li>
                 </ul>
             </div>
             <span class="clearfix borda"></span>
@@ -32,13 +40,14 @@
     </section>
     <div>
         <paging
-          page="userListCtrl.currentPage"
-          page-size="userListCtrl.pageSize"
-          total="userListCtrl.totalNum"
-          scroll-top="true"
-          hide-if-empty="true"
-          show-prev-next="true"
-          paging-action="userListCtrl.doPaging('Paging Clicked', page)">
+            class="small"
+            page="userListCtrl.currentPage"
+            page-size="userListCtrl.pageSize"
+            total="userListCtrl.totalNum"
+            scroll-top="true"
+            hide-if-empty="true"
+            show-prev-next="true"
+            paging-action="userListCtrl.doPaging('Paging Clicked', page)">
         </paging>
     </div>
     <div class="scrollTopButton" id="scrollTopButton" style="display:none">
@@ -52,23 +61,23 @@
 
 <script type="text/javascript">
 $(function(){
-	showScroll();
-	function showScroll(){
-		$(window).scroll( function() {
-			var scrollTopValue=$(window).scrollTop();
-			var scrollBotValue=$('#container').height()-scrollTopValue;
-			console.log = scrollBotValue;
+    showScroll();
+    function showScroll(){
+        $(window).scroll( function() {
+            var scrollTopValue=$(window).scrollTop();
+            var scrollBotValue=$('#container').height()-scrollTopValue;
+            console.log = scrollBotValue;
 
-			scrollTopValue > 10 ? $('#scrollTopButton').fadeIn():$('#scrollTopButton').fadeOut();
-			scrollBotValue > 450 ? $('#scrollBotButton').fadeIn():$('#scrollBotButton').fadeOut();
-		} );
-		$('#scrollTopButton').click(function(){
-			$("html,body").animate({scrollTop:0},200);
-		});
+            scrollTopValue > 10 ? $('#scrollTopButton').fadeIn():$('#scrollTopButton').fadeOut();
+            scrollBotValue > 450 ? $('#scrollBotButton').fadeIn():$('#scrollBotButton').fadeOut();
+        } );
+        $('#scrollTopButton').click(function(){
+            $("html,body").animate({scrollTop:0},200);
+        });
 
-		$('#scrollBotButton').click(function(){
-			$("html,body").animate({scrollTop:$('#container').height()-550},200);
-		});
-	}
+        $('#scrollBotButton').click(function(){
+            $("html,body").animate({scrollTop:$('#container').height()-550},200);
+        });
+    }
 })
 </script>
