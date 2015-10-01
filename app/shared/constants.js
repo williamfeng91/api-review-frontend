@@ -13,7 +13,7 @@
             READER: 'reader'
         })
         .constant('APISERVICE', (function() {
-            var baseUrl = 'http://jsonstub.com';
+            var baseUrl = 'https://jsonstub.com';
             return {
                 url: baseUrl,
                 apiUrl: baseUrl + '/apis',

@@ -30,7 +30,7 @@
                 </li>
                 <li ng-hide="headerCtrl.authservice.isAuthenticated()"><a ui-sref="login">Login</a></li>
                 <li ng-hide="headerCtrl.authservice.isAuthenticated()"><a ui-sref="register">Register</a></li>
-                <li access="{{headerCtrl.USER_ROLES.ALL}}" class="dropdown">
+                <li ng-show="headerCtrl.authservice.isAuthenticated()" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{headerCtrl.session.getCurrentUser().given_name}} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li access="{{headerCtrl.USER_ROLES.ADMIN}}"><a ui-sref="admin">Admin console</a></li>
