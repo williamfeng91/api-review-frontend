@@ -160,7 +160,23 @@
             })
             .state('user-profile-view', {
                 url: '/users/:id',
-                views: getUICompObj('user-profile'),
+                views: getUICompObj('user-profile', undefined, undefined, {
+                    initData: function ($q, $state, $stateParams, userservice) {
+                        return userservice.getById($stateParams.id)
+                            .then(getApiSuccessful, getApiFailed);
+
+                        function getApiSuccessful(result) {
+                            return $q.resolve(result);
+                        }
+
+                        function getApiFailed(error){
+                            return $q.reject({
+                                code: 'NOT_FOUND',
+                                message: 'Failed to retrieve this User.'
+                            });
+                        }
+                    }
+                }),
             })
             .state('user-list', {
                 url: '/users?page',
