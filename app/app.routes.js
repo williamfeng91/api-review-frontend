@@ -3,6 +3,7 @@
 
     angular.module('app')
         .config(stateConfig)
+        .config(urlConfig)
         .controller('AppController', AppController);
 
     function capitalizeFirstLetter(string) {
@@ -203,6 +204,10 @@
                 url: '/error',
                 views: getUICompObj('login'),
             });
+    }
+
+    function urlConfig($urlRouterProvider) {
+        $urlRouterProvider.otherwise('/');
     }
 
     function AppController () {}
