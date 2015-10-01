@@ -26,7 +26,8 @@
             'app.reviewEditor',
             'app.reviewList',
             'app.user',
-            'app.userProfileEditor'
+            'app.userProfileEditor',
+            'app.userList'
         ])
         .run(run);
 

@@ -22,8 +22,10 @@
             dlg.result.then(updateUserProfile, cancel);
 
             function updateUserProfile(newPassword) {
-                vm.currentUser.new_password = newPassword;
-                userservice.update(vm.currentUser)
+                // make a another copy so that changes in the form are not submitted
+                var user = angular.copy(session.getCurrentUser());
+                user.new_password = newPassword;
+                userservice.update(user)
                     .then(changePasswordSuccessful, changePasswordFailed);
 
                 function changePasswordSuccessful(result) {

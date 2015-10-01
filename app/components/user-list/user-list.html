@@ -1,30 +1,30 @@
 <div id="container" class="container">
 
     <hgroup class="mb20">
-        <h1>API List</h1>
+        <h1>User List</h1>
     </hgroup>
 
     <div>
         <paging
-          page="apiListCtrl.currentPage"
-          page-size="apiListCtrl.pageSize"
-          total="apiListCtrl.totalNum"
+          page="userListCtrl.currentPage"
+          page-size="userListCtrl.pageSize"
+          total="userListCtrl.totalNum"
           scroll-top="true"
           show-prev-next="true"
-          paging-action="apiListCtrl.doPaging('Paging Clicked', page)">
+          paging-action="userListCtrl.doPaging('Paging Clicked', page)">
         </paging>
     </div>
-    <section ng-repeat="api in apiListCtrl.apis" class="col-xs-12 col-sm-6 col-md-12">
+    <section ng-repeat="user in userListCtrl.users" class="col-xs-12 col-sm-6 col-md-12">
         <div class="search-result row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-left">
-                <h3><a ui-sref="api-item-view({id:api.id})" title="">{{api.name}}</a></h3>
-                <p><a ng-href="{{api.link}}">{{api.link}}</a></p>
-                <p>{{api.description}}</p>
+                <h3><a ui-sref="user-item-view({id:user.id})" title="">{{user.given_name}} {{user.surname}}</a></h3>
+                <p><a ng-href="mailto:{{user.email}}">{{user.email}}</a></p>
+                <p>User type: {{user.user_role}}</p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-right">
                 <ul class="meta-search">
-                    <li><i class="fa fa-calendar-plus-o"></i> <span>Date created: {{api.date_created}}</span></li>
-                    <li><i class="fa fa-calendar"></i> <span>Last updated: {{api.last_modified}}</span></li>
+                    <!-- <li><i class="fa fa-calendar-plus-o"></i> <span>Date created: {{user.date_created}}</span></li>
+                    <li><i class="fa fa-calendar"></i> <span>Last updated: {{user.last_modified}}</span></li> -->
                 </ul>
             </div>
             <span class="clearfix borda"></span>
@@ -32,13 +32,13 @@
     </section>
     <div>
         <paging
-          page="apiListCtrl.currentPage"
-          page-size="apiListCtrl.pageSize"
-          total="apiListCtrl.totalNum"
+          page="userListCtrl.currentPage"
+          page-size="userListCtrl.pageSize"
+          total="userListCtrl.totalNum"
           scroll-top="true"
           hide-if-empty="true"
           show-prev-next="true"
-          paging-action="apiListCtrl.doPaging('Paging Clicked', page)">
+          paging-action="userListCtrl.doPaging('Paging Clicked', page)">
         </paging>
     </div>
     <div class="scrollTopButton" id="scrollTopButton" style="display:none">
