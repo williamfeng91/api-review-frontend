@@ -5,7 +5,7 @@
         .module('app.user')
         .controller('UserController', UserController);
 
-    function UserController($state, $routeParams, dialogs, userservice, reviewservice,
+    function UserController($state, $stateParams, dialogs, userservice, reviewservice,
         toastr, logger) {
         var vm = this;
 

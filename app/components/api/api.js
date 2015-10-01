@@ -5,16 +5,14 @@
         .module('app.api')
         .controller('ApiController', ApiController);
 
-    function ApiController($state, init, dialogs, apiservice, session, toastr, logger) {
+    /** @ngInject */
+    function ApiController($state, initData, dialogs, apiservice, session, toastr, logger) {
         var vm = this;
 
-        (function initController() {
-            // load the API
-			vm.api = init;
-			session.setCurrentAPI(vm.api);
-        })();
+        vm.api = initData;
+		session.setCurrentAPI(vm.api);
 
-         vm.showDialog = function () {
+        vm.showDialog = function () {
             var dlg = dialogs.confirm(
                 'Confirm deletion',
                 'Do you really want to delete this API?');

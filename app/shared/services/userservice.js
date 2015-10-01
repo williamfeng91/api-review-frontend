@@ -11,6 +11,7 @@
             create: createUser,
             register: register,
             getById: getById,
+            getPage: getPage,
             getAll: getAll,
             update: updateUser,
             delete: deleteUser,
@@ -82,7 +83,7 @@
                 dataType: 'json',
                 data: '',
                 headers: APISERVICE.headers
-            }).then(handleSuccess, handleFailure);
+            }).then(handleSuccess, handleError);
         }
 
         /**

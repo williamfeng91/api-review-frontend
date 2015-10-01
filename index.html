@@ -38,7 +38,7 @@
       <div ui-view="header"></div>
       <div ui-view="main" ng-if="!stateIsLoading" autoscroll="true" class="main"></div>
       <loading ng-if="stateIsLoading"></loading>
-      <div ui-view="footer"></div>
+      <div ui-view="footer" ng-if="!stateIsLoading"></div>
     </ar-content>
 
     <!-- jQuery -->
@@ -135,6 +135,9 @@
     <script src="app/components/user-profile-editor/user-profile-editor.module.js"></script>
     <script src="app/components/user-profile-editor/user-profile-editor.js"></script>
     <script src="app/components/user-profile-editor/change-password-dialog.js"></script>
+    <!-- user list -->
+    <script src="app/components/user-list/user-list.module.js"></script>
+    <script src="app/components/user-list/user-list.js"></script>
 
     <!-- Custom JS -->
     <!-- <script src="assets/js/review.js"></script> -->

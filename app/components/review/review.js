@@ -5,26 +5,12 @@
         .module('app.review')
         .controller('ReviewController', ReviewController);
 
-    function ReviewController($state, $stateParams, dialogs, reviewservice, commentservice, session, toastr, logger) {
+    /** @ngInject */
+    function ReviewController($state, initData, dialogs, reviewservice, commentservice, session, toastr, logger) {
         var vm = this;
 
-        (function initController() {
-            // load the review
-            reviewservice.getById($stateParams.id)
-                .then(function (result) {
-                    vm.review = result;
-                    return commentservice.getByReview($stateParams.id);
-                }, getReviewFailed)
-                .then(function (result) {
-                    vm.review.comments = result.results;
-                    session.setCurrentReview(vm.review);
-                }, getReviewFailed);
-
-            function getReviewFailed(error) {
-                $state.go('review-list');
-                toastr.error('Failed to retrieve the review. Please try again.');
-            }
-        })();
+        vm.review = initData;
+        session.setCurrentReview(vm.review);
 
         vm.submitComment = submitComment;
         vm.showDialog = showDialog;

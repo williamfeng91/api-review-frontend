@@ -14,7 +14,7 @@
 	margin: 0;
 	padding: 0;
 }
-#reivewList-container ol, ul {
+#reivewList-container ol, #reivewList-container ul {
 	list-style: none;
 }
 #reivewList-container img {

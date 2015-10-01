@@ -5,25 +5,25 @@
         .config(stateConfig)
         .controller('AppController', AppController);
 
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
-        function unCapitalizeFirstLetter(string) {
-            return string.charAt(0).toLowerCase() + string.slice(1);
-        }
+    function unCapitalizeFirstLetter(string) {
+        return string.charAt(0).toLowerCase() + string.slice(1);
+    }
 
-        function getControllerName(name) {
-            return name.split('-').map(function(item){
-                return capitalizeFirstLetter(item);
-            }).join('');
-        }
+    function getControllerName(name) {
+        return name.split('-').map(function(item){
+            return capitalizeFirstLetter(item);
+        }).join('');
+    }
 
-        function getControllerAlias(name) {
-            return unCapitalizeFirstLetter(getControllerName(name));
-        }
+    function getControllerAlias(name) {
+        return unCapitalizeFirstLetter(getControllerName(name));
+    }
 
-        function getSubCompObj(component, resolveObj) {
+    function getSubCompObj(component, resolveObj) {
         return {
             templateUrl: 'app/components/' + component + '/' + component + '.html',
             controller: getControllerName(component) + 'Controller',
@@ -53,27 +53,47 @@
         $stateProvider
             .state('home', {
                 url: '/',
-                views: getUICompObj('home')
+                views: getUICompObj('home'),
             })
             .state('login', {
                 url: '/login',
-                views: getUICompObj('login')
+                views: getUICompObj('login'),
             })
             .state('register', {
                 url: '/register',
-                views: getUICompObj('register')
+                views: getUICompObj('register'),
             })
             .state('reset-password', {
                 url: '/reset-password',
-                views: getUICompObj('reset-password')
+                views: getUICompObj('reset-password'),
             })
             .state('review-item-new', {
                 url: '/reviews/new?api',
-                views: getUICompObj('review-editor')
+                views: getUICompObj('review-editor'),
             })
             .state('review-item-view', {
                 url: '/reviews/:id',
-                views: getUICompObj('review')
+                views: getUICompObj('review', undefined, undefined, {
+                    initData: function ($q, $stateParams, reviewservice, commentservice) {
+                        var review = {};
+                        return reviewservice.getById($stateParams.id)
+                            .then(function (result) {
+                                review = result;
+                                return commentservice.getByReview($stateParams.id);
+                            }, getReviewFailed)
+                            .then(function (result) {
+                                review.comments = result.results;
+                                return review;
+                            }, getReviewFailed);
+
+                        function getReviewFailed(error) {
+                            return $q.reject({
+                                code: 'NOT_FOUND',
+                                message: 'Failed to retrieve review.'
+                            });
+                        }
+                    }
+                }),
             })
             .state('review-item-edit', {
                 url: '/reviews/:id/edit',
@@ -81,16 +101,16 @@
             })
             .state('review-list', {
                 url: '/reviews',
-                views: getUICompObj('review-list')
+                views: getUICompObj('review-list'),
             })
             .state('api-item-new', {
                 url: '/apis/new',
-                views: getUICompObj('api-editor')
+                views: getUICompObj('api-editor'),
             })
             .state('api-item-view', {
                 url: '/apis/:id',
                 views: getUICompObj('api', undefined, undefined, {
-                    init: function ($q, $state, $stateParams, apiservice) {
+                    initData: function ($q, $state, $stateParams, apiservice) {
                         return apiservice.getById($stateParams.id)
                             .then(getApiSuccessful, getApiFailed);
 
@@ -112,10 +132,24 @@
                 views: getUICompObj('api-editor'),
             })
             .state('api-list', {
-                url: '/apis',
+                url: '/apis?page',
                 views: getUICompObj('api-list', undefined, undefined, {
-                    init: function (apiservice) {
-                        return apiservice.getPage();
+                    initData: function ($stateParams, $q, apiservice, session) {
+                        var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
+                        var pageSize = session.getPageSize();
+                        return apiservice.getPage((page - 1) * pageSize, pageSize)
+                            .then(getApiListSuccessful, getApiListFailed);
+
+                        function getApiListSuccessful(result) {
+                            return $q.resolve(result);
+                        }
+
+                        function getApiListFailed(error){
+                            return $q.reject({
+                                code: 'NOT_FOUND',
+                                message: 'Failed to retrieve APIs.'
+                            });
+                        }
                     }
                 }),
             })
@@ -125,15 +159,33 @@
             })
             .state('user-profile-view', {
                 url: '/users/:id',
-                views: getUICompObj('user-profile')
+                views: getUICompObj('user-profile'),
             })
             .state('user-list', {
-                url: '/users',
-                views: getUICompObj('user-list')
+                url: '/users?page',
+                views: getUICompObj('user-list', undefined, undefined, {
+                    initData: function ($stateParams, $q, userservice, session) {
+                        var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
+                        var pageSize = session.getPageSize();
+                        return userservice.getPage((page - 1) * pageSize, pageSize)
+                            .then(getUserListSuccessful, getUserListFailed);
+
+                        function getUserListSuccessful(result) {
+                            return $q.resolve(result);
+                        }
+
+                        function getUserListFailed(error){
+                            return $q.reject({
+                                code: 'NOT_FOUND',
+                                message: 'Failed to retrieve users.'
+                            });
+                        }
+                    }
+                }),
             })
             .state('error', {
                 url: '/error',
-                views: getUICompObj('login')
+                views: getUICompObj('login'),
             });
     }
 
