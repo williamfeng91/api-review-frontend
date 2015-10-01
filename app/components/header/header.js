@@ -5,8 +5,11 @@
         .module('app.header')
         .controller('HeaderController', HeaderController);
 
-    function HeaderController($state, authservice, session, logger) {
+    function HeaderController($state, authservice, session, USER_ROLES) {
         var vm = this;
+        vm.USER_ROLES = USER_ROLES;
+        vm.authservice = authservice;
+        vm.session = session;
 
         vm.contentMenu = [
             {title: 'APIs', link: 'api-list'},
@@ -18,8 +21,6 @@
         vm.userMenu = [
             {title: 'My profile', link: 'user-profile-edit'},
             {title: 'My reviews', link: 'user-review-list'}];
-        vm.authservice = authservice;
-        vm.session = session;
         vm.logout = logout;
 
         function logout() {

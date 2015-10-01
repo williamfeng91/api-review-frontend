@@ -14,7 +14,7 @@
                 vm.statusCode = '403 Forbidden';
                 vm.description = 'You don\'t have the permission to access this page.';
                 break;
-            default 'not-found':
+            default:
                 vm.statusCode = '404 Not Found';
                 vm.description = 'The requested page was not found.';
                 break;
