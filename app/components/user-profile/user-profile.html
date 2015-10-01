@@ -59,7 +59,7 @@
                 <h4><i class="fa fa-files-o"></i> Related Reviews</h4>
                 <ul>
                     <li ng-repeat="article in user.relatedReviews">
-                        <a ng-href="/reviews/{{article.id}}">{{article.title}}</a>
+                        <a href ui-sref="review-item-view({id:article.id})">{{article.title}}</a>
                     </li>
                 </ul>
             </div>

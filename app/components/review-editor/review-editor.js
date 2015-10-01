@@ -6,33 +6,17 @@
         .controller('ReviewEditorController', ReviewEditorController);
 
     /** @ngInject */
-    function ReviewEditorController($state, $stateParams, dialogs, reviewservice,
+    function ReviewEditorController($state, $stateParams, initData, dialogs, reviewservice,
         apiservice, userservice, tagservice, ratingservice, session, toastr, logger) {
         var vm = this;
+
+        vm.review = initData;
 
         vm.isEditMode = ($state.current.name == 'review-item-edit');
         vm.loadTags = loadTags;
         vm.showCreateTagDialog = showCreateTagDialog;
         vm.submit = submitReview;
         vm.cancel = cancelEdit;
-        vm.review = {
-            'title': '',
-            'content': '',
-            'description': '',
-            'api': {},
-            'tags': []
-        };
-
-        // Populate API info if API id found in url param
-        if (typeof $stateParams.api !== undefined) {
-            var api = session.getCurrentAPI();
-            if (api != null && api.id == $stateParams.api) {
-                vm.review.api = api;
-                vm.selectedApi = {
-                    'originalObject': api
-                };
-            }
-        }
 
         // Get all APIs for autocomplete
         vm.allApis = [];
@@ -48,29 +32,17 @@
         function getAllAPIsFailed(result) {
         }
 
-        // Use review stored in session if valid when editing review
+        // Populate API info
         if (vm.isEditMode) {
-            vm.review = session.getCurrentReview();
-
-            if (vm.review == null || vm.review.id != $stateParams.id) {
-                reviewservice.getById($stateParams.id)
-                    .then(getReviewSuccessful, getReviewFailed);
-
-                function getReviewSuccessful(result) {
-                    vm.review = result;
-                    vm.selectedApi = {
-                        'originalObject': vm.review.api
-                    };
-                    session.setCurrentReview(vm.review);
-                }
-
-                function getReviewFailed(error) {
-                    $state.go('review-list');
-                    toastr.error('Failed to retrieve the review. Please try again.');
-                }
-            } else {
+            vm.selectedApi = {
+                'originalObject': vm.review.api
+            };
+        } else if (typeof $stateParams.api !== undefined) {
+            var api = session.getCurrentAPI();
+            if (api != null && api.id == $stateParams.api) {
+                vm.review.api = api;
                 vm.selectedApi = {
-                    'originalObject': vm.review.api
+                    'originalObject': api
                 };
             }
         }

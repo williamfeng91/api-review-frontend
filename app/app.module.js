@@ -32,7 +32,8 @@
         ])
         .run(run);
 
-    function run($rootScope, $state, $cookieStore, authservice, session, toastr) {
+    function run($rootScope, $state, $cookieStore, authservice, session, toastr, logger) {
+        logger.info('Refreshed');
         // keep user logged in after page refresh
         if ($cookieStore.get('currentUser')) {
             session.create($cookieStore.get('currentUser'));
@@ -58,14 +59,19 @@
             $rootScope.stateIsLoading = false;
         });
         $rootScope.$on('$stateChangeError', function (evt, toState, toParams, fromState, fromParams, error) {
+            evt.preventDefault();
             if (angular.isObject(error) && angular.isString(error.code)) {
                 switch (error.code) {
                     case 'NOT_AUTHENTICATED':
                         // go to the login page
                         $state.go('login');
                         break;
+                    case 'NOT_AUTHORISED':
+                        // go to the error page
+                        $state.go('error', {type: 'forbidden'});
+                        break;
                     default:
-                        // go to error page
+                        // go to the error page
                         $state.go('error', {type: 'not-found'});
                 }
                 toastr.error(error.message);

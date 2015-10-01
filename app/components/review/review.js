@@ -6,8 +6,9 @@
         .controller('ReviewController', ReviewController);
 
     /** @ngInject */
-    function ReviewController($state, initData, dialogs, reviewservice, commentservice, session, toastr, logger) {
+    function ReviewController($state, initData, dialogs, reviewservice, commentservice, session, USER_ROLES, toastr) {
         var vm = this;
+        vm.USER_ROLES = USER_ROLES;
 
         vm.review = initData;
         session.setCurrentReview(vm.review);
@@ -56,7 +57,6 @@
             }
 
             function cancel(btn) {
-                logger.info('Delete review cancelled');
             }
         }
 

@@ -86,7 +86,17 @@
                     requireLogin: true,
                     authorisedRoles: [USER_ROLES.ADMIN, USER_ROLES.EDITOR, USER_ROLES.REVIEWER]
                 },
-                views: getUICompObj('review-editor'),
+                views: getUICompObj('review-editor', undefined, undefined, {
+                    initData: function () {
+                        return {
+                            'title': '',
+                            'content': '',
+                            'description': '',
+                            'api': {},
+                            'tags': []
+                        };
+                    }
+                }),
             })
             .state('review-item-view', {
                 url: '/reviews/:id',
@@ -110,7 +120,7 @@
                         function getReviewFailed(error) {
                             return $q.reject({
                                 code: 'NOT_FOUND',
-                                message: 'Failed to retrieve review.'
+                                message: 'Failed to retrieve the review.'
                             });
                         }
                     }
@@ -122,7 +132,46 @@
                     requireLogin: true,
                     authorisedRoles: [USER_ROLES.ADMIN, USER_ROLES.EDITOR, USER_ROLES.REVIEWER]
                 },
-                views: getUICompObj('review-editor'),
+                views: getUICompObj('review-editor', undefined, undefined, {
+                    initData: function ($q, $stateParams, authservice, reviewservice, session) {
+                        var review = session.getCurrentReview();
+                        if (review == null || review.id != $stateParams.id) {
+                            var deferred = $q.defer();
+                            reviewservice.getById($stateParams.id)
+                                .then(getReviewSuccessful, getReviewFailed);
+                            return deferred.promise;
+                        } else {
+                            // check if the current user is the author
+                            if (authservice.belongsTo(review.author.id)) {
+                                return review;
+                            } else {
+                                return $q.reject({
+                                    code: 'NOT_AUTHORISED',
+                                    message: 'No permission to edit the review.'
+                                });
+                            }
+                        }
+
+                        function getReviewSuccessful(result) {
+                            // check if the current user is the author
+                            if (authservice.belongsTo(result.author.id)) {
+                                deferred.resolve(result);
+                            } else {
+                                deferred.reject({
+                                    code: 'NOT_AUTHORISED',
+                                    message: 'No permission to edit the review.'
+                                });
+                            }
+                        }
+
+                        function getReviewFailed(error) {
+                            return $q.reject({
+                                code: 'NOT_FOUND',
+                                message: 'Failed to retrieve the review.'
+                            });
+                        }
+                    }
+                }),
             })
             .state('review-list', {
                 url: '/reviews',
@@ -158,7 +207,7 @@
                         function getApiFailed(error){
                             return $q.reject({
                                 code: 'NOT_FOUND',
-                                message: 'Failed to retrieve API.'
+                                message: 'Failed to retrieve the API.'
                             });
                         }
                     }
@@ -179,7 +228,7 @@
                     authorisedRoles: [USER_ROLES.ALL]
                 },
                 views: getUICompObj('api-list', undefined, undefined, {
-                    initData: function ($stateParams, $q, apiservice, session) {
+                    initData: function ($q, $stateParams, apiservice, session) {
                         var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
                         var pageSize = session.getPageSize();
                         return apiservice.getPage((page - 1) * pageSize, pageSize)
@@ -213,18 +262,18 @@
                     authorisedRoles: [USER_ROLES.ALL]
                 },
                 views: getUICompObj('user-profile', undefined, undefined, {
-                    initData: function ($q, $state, $stateParams, userservice) {
+                    initData: function ($q, $stateParams, userservice) {
                         return userservice.getById($stateParams.id)
-                            .then(getApiSuccessful, getApiFailed);
+                            .then(getUserSuccessful, getUserFailed);
 
-                        function getApiSuccessful(result) {
+                        function getUserSuccessful(result) {
                             return $q.resolve(result);
                         }
 
-                        function getApiFailed(error){
+                        function getUserFailed(error){
                             return $q.reject({
                                 code: 'NOT_FOUND',
-                                message: 'Failed to retrieve this User.'
+                                message: 'Failed to retrieve the user.'
                             });
                         }
                     }
