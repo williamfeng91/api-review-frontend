@@ -6,7 +6,7 @@
         .controller('ApiEditorController', ApiEditorController);
 
     /** @ngInject */
-    function ApiEditorController($state, $stateParams, initData, dialogs, reviewservice,
+    function ApiEditorController($state, $stateParams, dialogs, reviewservice,
         apiservice, userservice, tagservice, ratingservice, session, toastr, logger) {
         var vm = this;
 

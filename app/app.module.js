@@ -13,6 +13,7 @@
             'angucomplete-alt',
             'ngTagsInput',
             'app.services',
+            'app.error',
             'app.header',
             'app.footer',
             'app.login',
@@ -41,8 +42,17 @@
         }
 
         $rootScope.stateIsLoading = false;
-        $rootScope.$on('$stateChangeStart', function() {
-            $rootScope.stateIsLoading = true;
+        $rootScope.$on('$stateChangeStart', function (evt, toState, toParams) {
+            if (toState.data.requireLogin && !authservice.isAuthenticated()) {
+                evt.preventDefault();
+                $state.go('login');
+                toastr.info('Please sign in first.');
+            } else if (toState.data.authorisedRoles && !authservice.isAuthorised(toState.data.authorisedRoles)) {
+                evt.preventDefault();
+                $state.go('error', {type: 'forbidden'});
+            } else {
+                $rootScope.stateIsLoading = true;
+            }
         });
         $rootScope.$on('$stateChangeSuccess', function() {
             $rootScope.stateIsLoading = false;
@@ -55,15 +65,14 @@
                         $state.go('login');
                         break;
                     default:
-                        // set the error object on the error state and go there
-                        $state.get('error').error = error;
-                        $state.go('error');
+                        // go to error page
+                        $state.go('error', {type: 'not-found'});
                 }
                 toastr.error(error.message);
             }
             else {
                 // unexpected error
-                $state.go('error');
+                $state.go('error', {type: 'unknown'});
             }
         });
     }

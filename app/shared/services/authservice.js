@@ -6,7 +6,7 @@
         .factory('authservice', authservice);
 
     /** @ngInject */
-    function authservice($http, $q, session, logger, APISERVICE) {
+    function authservice($http, $q, session, USER_ROLES, APISERVICE, logger) {
         var service = {
             login: login,
             logout: logout,
@@ -96,6 +96,9 @@
         }
 
         function isAuthorised(roles) {
+            if (roles == USER_ROLES.ALL) {
+                return true;
+            }
             if (!angular.isArray(roles)) {
               roles = [roles];
             }
