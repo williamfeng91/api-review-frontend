@@ -59,26 +59,36 @@
             $rootScope.stateIsLoading = false;
         });
         $rootScope.$on('$stateChangeError', function (evt, toState, toParams, fromState, fromParams, error) {
+            $rootScope.stateIsLoading = false;
             evt.preventDefault();
-            if (angular.isObject(error) && angular.isString(error.code)) {
+            if (angular.isObject(error)) {
                 switch (error.code) {
-                    case 'NOT_AUTHENTICATED':
+                    case 401:
                         // go to the login page
                         $state.go('login');
+                        toastr.info('Session expired. Please login again.');
                         break;
-                    case 'NOT_AUTHORISED':
+                    case 403:
                         // go to the error page
                         $state.go('error', {type: 'forbidden'});
                         break;
-                    default:
+                    case 404:
                         // go to the error page
                         $state.go('error', {type: 'not-found'});
+                        break;
+                    case 500:
+                        // go to the error page
+                        $state.go('error', {type: 'server'});
+                        break;
+                    default:
                 }
-                toastr.error(error.message);
+                if (error.message) {
+                    toastr.error(error.message);
+                }
             }
             else {
                 // unexpected error
-                $state.go('error', {type: 'unknown'});
+                $state.go('error');
             }
         });
     }

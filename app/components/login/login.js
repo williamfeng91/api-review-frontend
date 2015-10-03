@@ -5,14 +5,17 @@
         .module('app.login')
         .controller('LoginController', LoginController);
 
-    function LoginController($state, authservice, session, toastr, logger) {
+    /** @ngInject */
+    function LoginController($state, authservice, toastr) {
         var vm = this;
 
         vm.login = login;
 
         (function initController() {
             // reset login status
-            session.destroy();
+            if (authservice.isAuthenticated()) {
+                authservice.logout();
+            }
         })();
 
         function login() {
@@ -20,12 +23,12 @@
             authservice.login(vm.credentials)
                 .then(loginSuccessful, loginFailed);
 
-            function loginSuccessful(response) {
+            function loginSuccessful(result) {
                 $state.go('home');
-                toastr.success('You have been successfully logged in.', 'Welcome ' + session.getCurrentUser().given_name + '!');
+                toastr.success('You have been successfully logged in.', 'Welcome ' + result.given_name + '!');
             }
 
-            function loginFailed(response) {
+            function loginFailed(error) {
                 vm.dataLoading = false;
             }
         };

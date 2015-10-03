@@ -119,8 +119,8 @@
 
                         function getReviewFailed(error) {
                             return $q.reject({
-                                code: 'NOT_FOUND',
-                                message: 'Failed to retrieve the review.'
+                                code: error.status,
+                                message: error.data.message
                             });
                         }
                     }
@@ -146,7 +146,7 @@
                                 return review;
                             } else {
                                 return $q.reject({
-                                    code: 'NOT_AUTHORISED',
+                                    code: 403,
                                     message: 'No permission to edit the review.'
                                 });
                             }
@@ -158,7 +158,7 @@
                                 deferred.resolve(result);
                             } else {
                                 deferred.reject({
-                                    code: 'NOT_AUTHORISED',
+                                    code: 403,
                                     message: 'No permission to edit the review.'
                                 });
                             }
@@ -166,8 +166,8 @@
 
                         function getReviewFailed(error) {
                             return $q.reject({
-                                code: 'NOT_FOUND',
-                                message: 'Failed to retrieve the review.'
+                                code: error.status,
+                                message: error.data.message
                             });
                         }
                     }
@@ -206,8 +206,8 @@
 
                         function getApiFailed(error){
                             return $q.reject({
-                                code: 'NOT_FOUND',
-                                message: 'Failed to retrieve the API.'
+                                code: error.status,
+                                message: error.data.message
                             });
                         }
                     }
@@ -240,8 +240,8 @@
 
                         function getApiListFailed(error){
                             return $q.reject({
-                                code: 'NOT_FOUND',
-                                message: 'Failed to retrieve APIs.'
+                                code: error.status,
+                                message: error.data.message
                             });
                         }
                     }
@@ -272,8 +272,8 @@
 
                         function getUserFailed(error){
                             return $q.reject({
-                                code: 'NOT_FOUND',
-                                message: 'Failed to retrieve the user.'
+                                code: error.status,
+                                message: error.data.message
                             });
                         }
                     }
@@ -298,8 +298,8 @@
 
                         function getUserListFailed(error){
                             return $q.reject({
-                                code: 'NOT_FOUND',
-                                message: 'Failed to retrieve users.'
+                                code: error.status,
+                                message: error.data.message
                             });
                         }
                     }

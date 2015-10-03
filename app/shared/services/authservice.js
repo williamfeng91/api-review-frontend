@@ -35,12 +35,12 @@
                 var user = response.data;
                 session.create(user);
                 var authdata = Base64.encode(credentials.email + ':' + credentials.password);
-                $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
+                session.setBasicAuth('Basic ' + authdata);
                 logger.success(
                     'User ' + user.email + ' successfully logged in',
                     response,
                     'authservice.login');
-                return $q.resolve(response);
+                return $q.resolve(user);
             }
 
             function loginFailed(response) {

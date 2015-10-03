@@ -8,6 +8,7 @@
     /** @ngInject */
     function session($cookieStore, logger) {
         this.currentUser = null;
+        this.basicAuth = '';
         this.currentAPI = null;
         this.currentReview = null;
         this.pageSize = 10;
@@ -20,6 +21,7 @@
 
         this.destroy = function () {
             this.currentUser = null;
+            this.basicAuth = '';
             this.currentAPI = null;
             this.currentReview = null;
             $cookieStore.remove('currentUser');
@@ -38,6 +40,15 @@
 
         this.getUserRole = function () {
             return this.currentUser ? this.currentUser.user_role : '';
+        }
+
+        // Basic Auth
+        this.getBasicAuth = function () {
+            return this.basicAuth;
+        }
+
+        this.setBasicAuth = function(authData) {
+            this.basicAuth = authData;
         }
 
         // Current api
