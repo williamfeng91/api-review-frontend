@@ -132,15 +132,7 @@
                 </ul>
             </div>
             <!-- /well -->
-            <div class="well">
-                <h4><i class="fa fa-files-o"></i> Related Reviews</h4>
-                <ul>
-                    <li ng-repeat="article in reviewCtrl.relatedReviews">
-                        <a href ui-sref="review-item-view({id:article.id})">{{article.title}}</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /well -->
+            <ar-related-reviews api="{{reviewCtrl.review.api.id}}"></ar-related-reviews>
         </div>
     </div>
 </div>

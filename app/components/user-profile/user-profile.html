@@ -55,15 +55,7 @@
                 </div>
                 <!-- /input-group -->
             </div>
-            <div class="well">
-                <h4><i class="fa fa-files-o"></i> Related Reviews</h4>
-                <ul>
-                    <li ng-repeat="article in user.relatedReviews">
-                        <a href ui-sref="review-item-view({id:article.id})">{{article.title}}</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /well -->
+            <ar-related-reviews reviewer="{{userProfileCtrl.user.id}}"></ar-related-reviews>
         </div>
     </div>
 </div>

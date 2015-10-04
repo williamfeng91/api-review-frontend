@@ -311,13 +311,20 @@
                     requireLogin: false
                 },
                 views: getUICompObj('error'),
+            })
+            .state('test', {
+                url: '/test',
+                data: {
+                    requireLogin: false
+                },
+                views: getUICompObj('test'),
             });
     }
 
     function urlConfig($urlRouterProvider) {
         $urlRouterProvider
             .when('', '/')
-            .otherwise('/error?type=not-found');
+            .otherwise('/error');
     }
 
     function AppController () {}
