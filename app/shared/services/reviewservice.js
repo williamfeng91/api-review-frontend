@@ -54,9 +54,11 @@
          * Retrieves reviews about an API
          * @param apiId the id of the API
          */
-        function getByAPI(apiId) {
+        function getByAPI(apiId, offset, limit) {
+            offset = typeof offset !== 'undefined' ? offset : 0;
+            limit = typeof limit !== 'undefined' ? limit : session.getPageSize();
             return $http({
-                url: APISERVICE.apiUrl + '/' + apiId + '/reviews',
+                url: APISERVICE.apiUrl + '/' + apiId + '/reviews?offset=' + offset + '&limit=' + limit,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -68,9 +70,11 @@
          * Retrieves reviews written by a reviewer
          * @param reviewerId the id of the reviewer
          */
-        function getByReviewer(reviewerId) {
+        function getByReviewer(reviewerId, offset, limit) {
+            offset = typeof offset !== 'undefined' ? offset : 0;
+            limit = typeof limit !== 'undefined' ? limit : session.getPageSize();
             return $http({
-                url: APISERVICE.userUrl + '/' + reviewerId + '/reviews',
+                url: APISERVICE.userUrl + '/' + reviewerId + '/reviews?offset=' + offset + '&limit=' + limit,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -85,7 +89,7 @@
          */
         function getPage(offset, limit) {
             offset = typeof offset !== 'undefined' ? offset : 0;
-            limit = typeof limit !== 'undefined' ? limit : 20;
+            limit = typeof limit !== 'undefined' ? limit : session.getPageSize();
             return $http({
                 url: APISERVICE.reviewUrl + '?offset=' + offset + '&limit=' + limit,
                 method: 'GET',
