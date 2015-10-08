@@ -28,8 +28,7 @@
             'app.reviewList',
             'app.userProfile',
             'app.userProfileEditor',
-            'app.userList',
-            'app.test'
+            'app.userList'
         ])
         .run(run);
 
