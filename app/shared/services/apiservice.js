@@ -13,7 +13,8 @@
             getPage: getPage,
             getAll: getAll,
             update: updateAPI,
-            delete: deleteAPI
+            delete: deleteAPI,
+            search: searchAPI
         };
 
         return service;
@@ -103,6 +104,28 @@
                 data: '',
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
+        }
+
+        /**
+         * Search APIs
+         * @param query: String with query param
+         * @param offset: Int page to start search
+         * @param limit: Int number of results per page
+         * @return object: Contains pagination info and list of API objects
+         */
+        function searchAPI(query, offset, limit) {
+          offset = !_.isUndefined(offset) ? offset : 0;
+          limit = !_.isUndefined(limit) ? limit : 10;
+          var urlData = encodeURIComponent('search?name=' + query
+            + '&limit=' + limit
+            + '&offset=' + offset);
+          return $http({
+            url: APISERVICE.apiUrl + '/' + urlData,
+            method: 'GET',
+            dataType: 'json',
+            data: '',
+            headers: APISERVICE.headers
+          }).then(handleSuccess, handleError);
         }
 
         // private functions

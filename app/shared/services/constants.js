@@ -13,7 +13,8 @@
             READER: 'reader'
         })
         .constant('APISERVICE', (function() {
-            var baseUrl = 'http://jsonstub.com';
+            // var baseUrl = 'http://jsonstub.com';
+            var baseUrl = 'https://apioverload.herokuapp.com/api/v0';
             return {
                 url: baseUrl,
                 apiUrl: baseUrl + '/apis',
