@@ -116,11 +116,12 @@
         function searchAPI(query, offset, limit) {
           offset = !_.isUndefined(offset) ? offset : 0;
           limit = !_.isUndefined(limit) ? limit : 10;
-          var urlData = encodeURIComponent('search?name=' + query
+          var urlData = encodeURIComponent('/search?name=' + query
             + '&limit=' + limit
             + '&offset=' + offset);
           return $http({
-            url: APISERVICE.apiUrl + '/' + urlData,
+            // url: APISERVICE.apiUrl + urlData,
+            url: 'http://localhost:3000/api?q=' + encodeURIComponent(query),
             method: 'GET',
             dataType: 'json',
             data: '',

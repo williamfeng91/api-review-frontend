@@ -11,16 +11,25 @@
                 controller: function($state, apiservice) {
                   var vm = this;
                   vm.searchSubmit = searchSubmit;
-                  console.log('API SERVICE', apiservice);
                   function searchSubmit() {
+                    vm.dataLoading = true;
                     apiservice.search(vm.query)
                     .then(success, fail);
 
                     function success(data) {
-                      console.log('Great success', data);
+                      var result = {
+                        results: data,
+                        count: data.length,
+                        next: null,
+                        previous: null
+                      };
+                      vm.dataLoading = false;
+                      console.log('Great success', result);
+                      $state.go('api-list', {initData: result});
                     }
 
                     function fail(err) {
+                      vm.dataLoading = false;
                       console.log('Error', err);
                     }
                   }
