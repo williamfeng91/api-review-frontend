@@ -27,12 +27,12 @@
     <section ng-repeat="user in userListCtrl.users" class="col-xs-12 col-sm-6 col-md-12">
         <div class="search-result row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-left">
-                <h3><a ui-sref="user-item-view({id:user.id})" title="">{{user.given_name}} {{user.surname}}</a></h3>
+                <h3><a ui-sref="user-profile-view({id:user.id})" title="">{{user.given_name}} {{user.surname}}</a></h3>
                 <p><a ng-href="mailto:{{user.email}}">{{user.email}}</a></p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-right">
                 <ul class="meta-search">
-                    <li><i class="fa fa-group"></i> <span>User group: {{user.user_role}}</span></li>
+                    <li><i class="fa fa-group"></i> <span>User group: {{user.role}}</span></li>
                 </ul>
             </div>
             <span class="clearfix borda"></span>

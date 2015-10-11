@@ -15,8 +15,7 @@
             getAll: getAll,
             update: updateUser,
             delete: deleteUser,
-            resetPassword: resetPassword,
-            activate: activate
+            resetPassword: resetPassword
         };
 
         return service;
@@ -41,8 +40,9 @@
          * @param user a user object that captures all details the API needs
          */
         function register(user) {
+            user.role = "reader";
             return $http({
-                url: APISERVICE.userUrl + '/register',
+                url: APISERVICE.userUrl,
                 method: 'POST',
                 dataType: 'json',
                 data: user,
@@ -56,7 +56,7 @@
          */
         function getById(id) {
             return $http({
-                url: APISERVICE.userUrl + '/' + id,
+                url: APISERVICE.userUrl + id + '/',
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -72,7 +72,7 @@
          */
         function getPage(offset, limit, userType) {
             offset = typeof offset !== 'undefined' ? offset : 0;
-            limit = typeof limit !== 'undefined' ? limit : 20;
+            limit = typeof limit !== 'undefined' ? limit : session.getPageSize();
             var url = APISERVICE.userUrl + '?offset=' + offset + '&limit=' + limit;
             if (typeof userType !== 'undefined') {
                 url += '&userType=' + encodeURIComponent(userType);
@@ -110,7 +110,7 @@
          */
         function updateUser(user) {
             return $http({
-                url: APISERVICE.userUrl + '/' + user.id,
+                url: APISERVICE.userUrl + user.id + '/',
                 method: 'PUT',
                 dataType: 'json',
                 data: user,
@@ -124,7 +124,7 @@
          */
         function deleteUser(id) {
             return $http({
-                url: APISERVICE.userUrl + '/' + id,
+                url: APISERVICE.userUrl + id + '/',
                 method: 'DELETE',
                 dataType: 'json',
                 data: '',
@@ -141,24 +141,10 @@
                 'email': email
             };
             return $http({
-                url: APISERVICE.userUrl + '/reset-password',
+                url: APISERVICE.userUrl + 'reset-password/',
                 method: 'POST',
                 dataType: 'json',
                 data: request,
-                headers: APISERVICE.headers
-            }).then(handleSuccess, handleError);
-        }
-
-        /**
-         * Activates a user
-         * @param token the activation token
-         */
-        function activate(token) {
-            return $http({
-                url: APISERVICE.userUrl + '/activate',
-                method: 'POST',
-                dataType: 'json',
-                data: token,
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
         }

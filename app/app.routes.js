@@ -174,12 +174,30 @@
                 }),
             })
             .state('review-list', {
-                url: '/reviews',
+                url: '/reviews?page',
                 data: {
                     requireLogin: true,
                     authorisedRoles: [USER_ROLES.ALL]
                 },
-                views: getUICompObj('review-list'),
+                views: getUICompObj('review-list', undefined, undefined, {
+                    initData: function ($q, $stateParams, reviewservice, session) {
+                        var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
+                        var pageSize = session.getPageSize();
+                        return reviewservice.getPage((page - 1) * pageSize, pageSize)
+                            .then(getReviewListSuccessful, getReviewListFailed);
+
+                        function getReviewListSuccessful(result) {
+                            return $q.resolve(result);
+                        }
+
+                        function getReviewListFailed(error){
+                            return $q.reject({
+                                code: error.status,
+                                message: error.data.message
+                            });
+                        }
+                    }
+                }),
             })
             .state('api-item-new', {
                 url: '/apis/new',
@@ -217,7 +235,7 @@
                 url: '/apis/:id/edit',
                 data: {
                     requireLogin: true,
-                    authorisedRoles: [USER_ROLES.ADMIN, USER_ROLES.EDITOR, USER_ROLES.REVIEWER]
+                    authorisedRoles: [USER_ROLES.ADMIN, USER_ROLES.EDITOR]
                 },
                 views: getUICompObj('api-editor'),
             })

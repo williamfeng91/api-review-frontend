@@ -39,7 +39,7 @@
          */
         function getById(id) {
             return $http({
-                url: APISERVICE.apiUrl + '/' + id,
+                url: APISERVICE.apiUrl + id + '/',
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -83,7 +83,7 @@
          */
         function updateAPI(api) {
             return $http({
-                url: APISERVICE.apiUrl + '/' + api.id,
+                url: APISERVICE.apiUrl + api.id + '/',
                 method: 'PUT',
                 dataType: 'json',
                 data: api,
@@ -97,7 +97,7 @@
          */
         function deleteAPI(id) {
             return $http({
-                url: APISERVICE.apiUrl + '/' + id,
+                url: APISERVICE.apiUrl + id + '/',
                 method: 'DELETE',
                 dataType: 'json',
                 data: '',

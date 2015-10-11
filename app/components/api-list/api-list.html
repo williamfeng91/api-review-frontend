@@ -28,13 +28,13 @@
         <div class="search-result row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-left">
                 <h3><a ui-sref="api-item-view({id:api.id})" title="">{{api.name}}</a></h3>
-                <p><a ng-href="{{api.link}}">{{api.link}}</a></p>
+                <p><a ng-href="{{api.link}}" target="_blank">{{api.link}}</a></p>
                 <p>{{api.description}}</p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-right">
                 <ul class="meta-search">
-                    <li><i class="fa fa-calendar-plus-o"></i> <span>Date created: {{api.date_created}}</span></li>
-                    <li><i class="fa fa-calendar"></i> <span>Last updated: {{api.last_modified}}</span></li>
+                    <li><i class="fa fa-calendar-plus-o"></i> <span>Date created: {{api.created_at}}</span></li>
+                    <li><i class="fa fa-calendar"></i> <span>Last updated: {{api.updated_at}}</span></li>
                 </ul>
             </div>
             <span class="clearfix borda"></span>

@@ -22,7 +22,7 @@
             var comment = {
                 'content': vm.newComment
             };
-            commentservice.create(comment)
+            commentservice.create(vm.review.id, comment)
                 .then(submitCommentSuccessful, submitCommentFailed);
 
             function submitCommentSuccessful(result) {
