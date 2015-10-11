@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-group required" ng-class="{ 'has-error': form.link.$touched && form.link.$invalid }">
                     <label for="link">Home Page</label>
-                    <input type="url" name="link" id="link" class="form-control" ng-model="apiEditorCtrl.api.content" required />
+                    <input type="url" name="link" id="link" class="form-control" ng-model="apiEditorCtrl.api.link" required />
                     <span ng-show="form.link.$touched && form.link.$error.required" class="help-block">Link is required</span>
                     <span ng-show="form.link.$touched && form.link.$error.url" class="help-block">Invalid url</span>
                 </div>
