@@ -16,7 +16,7 @@
                 <div access="{{reviewCtrl.USER_ROLES.ADMIN}}, {{reviewCtrl.USER_ROLES.EDITOR}}, {{reviewCtrl.USER_ROLES.REVIEWER}}" class="col-lg-6">
                     <div class="btn-group action-btns">
                         <a title="Write a review" class="btn btn-default" ui-sref="review-item-new">
-                            <i class="fa fa-plus"></i> Create
+                            <i class="fa fa-plus"></i> Add
                         </a>
                         <a access="{{reviewCtrl.USER_ROLES.ADMIN}}, {{reviewCtrl.USER_ROLES.EDITOR}}, {{reviewCtrl.review.author.id}}" title="Edit this review" class="btn btn-default" ui-sref="review-item-edit({id:reviewCtrl.review.id})">
                             <i class="fa fa-pencil"></i> Edit
