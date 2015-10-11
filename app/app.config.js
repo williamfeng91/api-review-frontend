@@ -16,7 +16,7 @@
             return {
                 // request interceptor
                 request: function(request) {
-                    request.headers.authorization = session.getBasicAuth();
+                    request.headers.Authorization = session.getBasicAuth();
                     return request;
                 },
                 // responseError interceptor
