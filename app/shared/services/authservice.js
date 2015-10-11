@@ -24,14 +24,14 @@
          */
         function login(credentials) {
             return $http({
-                // url: APISERVICE.userUrl + 'login/',
-                url: 'https://jsonstub.com/users/login/',
+                url: APISERVICE.userUrl + 'authenticate/',
+                // url: 'https://jsonstub.com/users/login/',
                 method: 'POST',
                 data: credentials,
                 headers: {
                     'Content-Type': 'application/json',
-                    'JsonStub-User-Key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
-                    'JsonStub-Project-Key': 'deeec676-1dad-4086-a1f0-ead970151994'
+                    // 'JsonStub-User-Key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
+                    // 'JsonStub-Project-Key': 'deeec676-1dad-4086-a1f0-ead970151994'
                 }
             }).then(loginComplete, loginFailed);
 
