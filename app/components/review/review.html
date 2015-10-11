@@ -87,8 +87,8 @@
 
             <!-- the comments -->
             <div ng-repeat="comment in reviewCtrl.review.comments">
-                <h4><i class="fa fa-comment"></i> {{comment.commenter.given_name}} {{comment.commenter.surname}} says:
-                    <small> {{comment.last_updated}}</small>
+                <h4><i class="fa fa-comment"></i> {{comment.user.given_name}} {{comment.user.surname}} says:
+                    <small> {{comment.updated_at}}</small>
                 </h4>
                 <p>{{comment.content}}</p>
             </div>
