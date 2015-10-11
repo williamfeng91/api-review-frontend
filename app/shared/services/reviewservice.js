@@ -42,7 +42,7 @@
          */
         function getById(id) {
             return $http({
-                url: APISERVICE.reviewUrl + '/' + id,
+                url: APISERVICE.reviewUrl + id + '/',
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -58,7 +58,7 @@
             offset = typeof offset !== 'undefined' ? offset : 0;
             limit = typeof limit !== 'undefined' ? limit : session.getPageSize();
             return $http({
-                url: APISERVICE.apiUrl + '/' + apiId + '/reviews?offset=' + offset + '&limit=' + limit,
+                url: APISERVICE.apiUrl + apiId + '/reviews/?offset=' + offset + '&limit=' + limit,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -74,7 +74,7 @@
             offset = typeof offset !== 'undefined' ? offset : 0;
             limit = typeof limit !== 'undefined' ? limit : session.getPageSize();
             return $http({
-                url: APISERVICE.userUrl + '/' + reviewerId + '/reviews?offset=' + offset + '&limit=' + limit,
+                url: APISERVICE.userUrl + reviewerId + '/reviews/?offset=' + offset + '&limit=' + limit,
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -118,7 +118,7 @@
          */
         function updateReview(review) {
             return $http({
-                url: APISERVICE.reviewUrl + '/' + review.id,
+                url: APISERVICE.reviewUrl + review.id + '/',
                 method: 'PUT',
                 dataType: 'json',
                 data: review,
@@ -132,7 +132,7 @@
          */
         function deleteReview(id) {
             return $http({
-                url: APISERVICE.reviewUrl + '/' + id,
+                url: APISERVICE.reviewUrl + id + '/',
                 method: 'DELETE',
                 dataType: 'json',
                 data: '',

@@ -39,7 +39,7 @@
         // }
 
         this.getUserRole = function () {
-            return this.currentUser ? this.currentUser.user_role : '';
+            return this.currentUser ? this.currentUser.role : '';
         }
 
         // Basic Auth

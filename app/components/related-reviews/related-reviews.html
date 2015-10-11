@@ -1,5 +1,5 @@
 <div class="related-reviews well">
-    <h4><i class="fa fa-files-o"></i> Related Reviews</h4>
+    <h4><i class="fa fa-files-o"></i> Reviews</h4>
     <ul ng-if="relatedReviews && relatedReviews.length > 0">
         <li ng-repeat="article in relatedReviews">
             <a href ui-sref="review-item-view({id:article.id})">{{article.title}}</a>
