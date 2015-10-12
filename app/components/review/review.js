@@ -17,6 +17,8 @@
         vm.showDialog = showDialog;
         vm.reload = reload;
 
+        vm.searchSubmit = searchSubmit;
+
         function submitComment() {
             vm.dataloading = true;
             var comment = {
@@ -62,6 +64,10 @@
 
         function reload() {
             $state.reload();
+        }
+
+        function searchSubmit() {
+          $state.go('review-list', {'search': vm.searchQuery, page:1});
         }
     }
 })();
