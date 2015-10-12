@@ -11,7 +11,12 @@
 
         vm.user = initData;
         vm.reload = function () {
-        $state.reload();
+          $state.reload();
+        }
+
+        vm.searchSubmit = function () {
+          console.log('Search submited');
+          $state.go('user-list', {'search': vm.searchQuery, page:1});
         }
     }
 })();
