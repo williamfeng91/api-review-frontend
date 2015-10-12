@@ -15,7 +15,12 @@
             getAll: getAll,
             update: updateUser,
             delete: deleteUser,
-            resetPassword: resetPassword
+            resetPassword: resetPassword,
+            searchByGivenName: searchByGivenName,
+            searchBySurname: searchBySurname,
+            searchByUsername: searchByUsername,
+            searchByEmail: searchByEmail,
+            searchByStatus: searchByStatus
         };
 
         return service;
@@ -147,6 +152,50 @@
                 data: request,
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
+        }
+
+        /**
+         * Search Users
+         * @param query: String with query param
+         * @param attr: Attribute to search [given_name, surname,
+         *                        username, email, status]
+         * @param offset: Int page to start search
+         * @param limit: Int number of results per page
+         * @return object: Contains pagination info and list of User objects
+         */
+        function search(query, attr, offset, limit) {
+          offset = !_.isUndefined(offset) ? offset : 0;
+          limit = !_.isUndefined(limit) ? limit : 10;
+          var urlData = 'search?attr=' + attr + '&val=' + encodeURIComponent(query)
+            + '&limit=' + limit
+            + '&offset=' + offset;
+          return $http({
+            url: APISERVICE.userUrl + urlData,
+            method: 'GET',
+            dataType: 'json',
+            data: '',
+            headers: APISERVICE.headers
+          }).then(handleSuccess, handleError);
+        }
+
+        function searchByGivenName(query, offset, limit) {
+          return search(query, 'given_name', offset, limit);
+        }
+
+        function searchBySurname(query, offset, limit) {
+          return search(query, 'surname', offset, limit);
+        }
+
+        function searchByUsername(query, offset, limit) {
+          return search(query, 'username', offset, limit);
+        }
+
+        function searchByEmail(query, offset, limit) {
+          return search(query, 'email', offset, limit);
+        }
+
+        function searchByStatus(query, offset, limit) {
+          return search(query, 'status', offset, limit);
         }
 
         // private functions

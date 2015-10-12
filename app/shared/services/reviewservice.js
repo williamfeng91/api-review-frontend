@@ -156,11 +156,11 @@
         }
 
         /**
-         * Search APIs
+         * Search Reviews
          * @param query: String with query param
          * @param offset: Int page to start search
          * @param limit: Int number of results per page
-         * @return object: Contains pagination info and list of API objects
+         * @return object: Contains pagination info and list of Review objects
          */
         function searchByTitle(query, offset, limit) {
           offset = !_.isUndefined(offset) ? offset : 0;

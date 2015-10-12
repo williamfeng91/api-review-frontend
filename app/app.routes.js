@@ -188,9 +188,10 @@
                           return reviewservice.searchByTitle($stateParams.search,
                             (page - 1) * pageSize, pageSize)
                             .then(getReviewListSuccessful, getReviewListFailed);
-                        }
-                        return reviewservice.getPage((page - 1) * pageSize, pageSize)
+                        } else {
+                          return reviewservice.getPage((page - 1) * pageSize, pageSize)
                             .then(getReviewListSuccessful, getReviewListFailed);
+                        }
 
                         function getReviewListSuccessful(result) {
                             return $q.resolve(result);
@@ -257,10 +258,13 @@
                         var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
                         var pageSize = session.getPageSize();
                         if($stateParams.search) {
-                          return getApiListSuccessful($stateParams.search);
-                        }
-                        return apiservice.getPage((page - 1) * pageSize, pageSize)
+                          return apiservice.search($stateParams.search,
+                            (page - 1) * pageSize, pageSize)
                             .then(getApiListSuccessful, getApiListFailed);
+                        } else {
+                          return apiservice.getPage((page - 1) * pageSize, pageSize)
+                            .then(getApiListSuccessful, getApiListFailed);
+                        }
 
                         function getApiListSuccessful(result) {
                             return $q.resolve(result);
@@ -313,12 +317,19 @@
                     requireLogin: true,
                     authorisedRoles: [USER_ROLES.ALL]
                 },
+                params: {search: null},
                 views: getUICompObj('user-list', undefined, undefined, {
                     initData: function ($stateParams, $q, userservice, session) {
                         var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
                         var pageSize = session.getPageSize();
-                        return userservice.getPage((page - 1) * pageSize, pageSize)
+                        if($stateParams.search) {
+                          return userservice.searchByGivenName($stateParams.search,
+                            (page - 1) * pageSize, pageSize)
                             .then(getUserListSuccessful, getUserListFailed);
+                        } else {
+                          return userservice.getPage((page - 1) * pageSize, pageSize)
+                            .then(getUserListSuccessful, getUserListFailed);
+                        }
 
                         function getUserListSuccessful(result) {
                             return $q.resolve(result);

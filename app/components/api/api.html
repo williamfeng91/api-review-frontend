@@ -44,14 +44,16 @@
         <div id="api-sidebar" class="col-lg-4">
             <div class="well">
                 <h4><i class="fa fa-search"></i> API Search</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
+                <form ng-submit="apiCtrl.searchSubmit()" role="search">
+                  <div class="input-group">
+                      <input type="text" class="form-control" ng-model="apiCtrl.searchQuery">
+                      <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">
+                              <i class="fa fa-search"></i>
+                          </button>
+                      </span>
+                  </div>
+                </form>
                 <!-- /input-group -->
             </div>
             <ar-related-reviews api="{{apiCtrl.api.id}}"></ar-related-reviews>
