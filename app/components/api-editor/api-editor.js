@@ -67,8 +67,11 @@
         }
 
         function cancelEdit() {
-            $state.go('api-item-view', {id: vm.api.id});
-            logger.info('Editing cancelled');
+            if (isEditMode) {
+                $state.go('api-item-view', {id: vm.api.id});
+            } else {
+                $state.go('home');
+            }
         }
     }
 })();
