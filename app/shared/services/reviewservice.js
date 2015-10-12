@@ -16,7 +16,8 @@
             getAll: getAll,
             update: updateReview,
             delete: deleteReview,
-            searchByKeyword: searchByKeyword
+            searchByKeyword: searchByKeyword,
+            searchByTitle: searchByTitle
         };
 
         return service;
@@ -152,6 +153,28 @@
                 data: '',
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
+        }
+
+        /**
+         * Search APIs
+         * @param query: String with query param
+         * @param offset: Int page to start search
+         * @param limit: Int number of results per page
+         * @return object: Contains pagination info and list of API objects
+         */
+        function searchByTitle(query, offset, limit) {
+          offset = !_.isUndefined(offset) ? offset : 0;
+          limit = !_.isUndefined(limit) ? limit : 10;
+          var urlData = 'search_title?query=' + encodeURIComponent(query)
+            + '&limit=' + limit
+            + '&offset=' + offset;
+          return $http({
+            url: APISERVICE.reviewUrl + urlData,
+            method: 'GET',
+            dataType: 'json',
+            data: '',
+            headers: APISERVICE.headers
+          }).then(handleSuccess, handleError);
         }
 
         // private functions

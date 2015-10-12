@@ -179,10 +179,16 @@
                     requireLogin: true,
                     authorisedRoles: [USER_ROLES.ALL]
                 },
+                params: {search: null},
                 views: getUICompObj('review-list', undefined, undefined, {
                     initData: function ($q, $stateParams, reviewservice, session) {
                         var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
                         var pageSize = session.getPageSize();
+                        if($stateParams.search) {
+                          return reviewservice.searchByTitle($stateParams.search,
+                            (page - 1) * pageSize, pageSize)
+                            .then(getReviewListSuccessful, getReviewListFailed);
+                        }
                         return reviewservice.getPage((page - 1) * pageSize, pageSize)
                             .then(getReviewListSuccessful, getReviewListFailed);
 
@@ -245,10 +251,14 @@
                     requireLogin: true,
                     authorisedRoles: [USER_ROLES.ALL]
                 },
+                params: {search: null},
                 views: getUICompObj('api-list', undefined, undefined, {
                     initData: function ($q, $stateParams, apiservice, session) {
                         var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
                         var pageSize = session.getPageSize();
+                        if($stateParams.search) {
+                          return getApiListSuccessful($stateParams.search);
+                        }
                         return apiservice.getPage((page - 1) * pageSize, pageSize)
                             .then(getApiListSuccessful, getApiListFailed);
 
