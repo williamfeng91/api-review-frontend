@@ -30,6 +30,7 @@
 
             function loginFailed(error) {
                 vm.dataLoading = false;
+                toastr.error('Failed to login. Please try again.');
             }
         };
     }

@@ -5,7 +5,9 @@
         .module('app.home')
         .controller('HomeController', HomeController);
 
-    function HomeController() {
+    function HomeController(USER_ROLES) {
+        var vm = this;
+        vm.USER_ROLES = USER_ROLES;
     }
 
 })();

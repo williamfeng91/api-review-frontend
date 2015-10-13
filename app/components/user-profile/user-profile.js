@@ -5,18 +5,18 @@
         .module('app.userProfile')
         .controller('UserProfileController', UserProfileController);
 
-    function UserProfileController($state,initData,dialogs, userservice, reviewservice,
+    function UserProfileController($state, initData, dialogs, userservice, reviewservice,
         toastr, logger) {
         var vm = this;
 
         vm.user = initData;
         vm.reload = function () {
-          $state.reload();
+            $state.reload();
         }
 
         vm.searchSubmit = function () {
-          console.log('Search submited');
-          $state.go('user-list', {'search': vm.searchQuery, page:1});
+            logger.log('Search submited');
+            $state.go('user-list', {given_name: vm.searchQuery, page: 1});
         }
     }
 })();
