@@ -126,8 +126,11 @@
         }
 
         function cancelEdit() {
-            $state.go('review-item-view', {id: vm.review.id});
-            logger.info('Editing cancelled');
+            if (vm.isEditMode) {
+                $state.go('review-item-view', {id: vm.review.id});
+            } else {
+                $state.go('home');
+            }
         }
     }
 })();

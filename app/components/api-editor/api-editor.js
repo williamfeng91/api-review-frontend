@@ -67,7 +67,7 @@
         }
 
         function cancelEdit() {
-            if (isEditMode) {
+            if (vm.isEditMode) {
                 $state.go('api-item-view', {id: vm.api.id});
             } else {
                 $state.go('home');
