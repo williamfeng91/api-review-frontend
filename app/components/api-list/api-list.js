@@ -19,14 +19,14 @@
         vm.apis = initData.results;
 
         function doPaging(text, page) {
-            $state.go('api-list', {page: page});
+            $state.go('api-list', {search: $stateParams.search, page: page});
         }
 
         function onPageSizeChange() {
             session.setPageSize(vm.pageSize);
             // go to first page
             if (vm.currentPage != 1) {
-                $state.go('api-list', {page: 1});
+                $state.go('api-list', {search: $stateParams.search, page: 1});
             } else {
                 $state.reload();
             }
