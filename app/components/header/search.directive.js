@@ -8,8 +8,12 @@
                 restrict: 'E',
                 templateUrl: 'app/components/header/search.html',
                 controllerAs: 'searchCtrl',
-                controller: function() {
-
+                controller: function($state, reviewservice) {
+                  var vm = this;
+                  vm.searchSubmit = searchSubmit;
+                  function searchSubmit() {
+                    $state.go('review-list', {'search': vm.query, page:1});
+                  }
                 }
             };
         });

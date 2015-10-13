@@ -45,14 +45,16 @@
         <div id="user-sidebar" class="col-lg-4">
             <div class="well">
                 <h4><i class="fa fa-search"></i> User Search</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
+                <form ng-submit="userProfileCtrl.searchSubmit()" role="search">
+                  <div class="input-group">
+                      <input type="text" class="form-control" ng-model="userProfileCtrl.searchQuery">
+                      <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">
+                              <i class="fa fa-search"></i>
+                          </button>
+                      </span>
+                  </div>
+                </form>
                 <!-- /input-group -->
             </div>
             <ar-related-reviews reviewer="{{userProfileCtrl.user.id}}"></ar-related-reviews>
