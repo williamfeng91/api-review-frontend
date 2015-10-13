@@ -5,7 +5,9 @@
         .module('app.footer')
         .controller('FooterController', FooterController);
 
-    function FooterController() {
+    function FooterController(USER_ROLES) {
+        var vm = this;
+        vm.USER_ROLES = USER_ROLES;
     }
 
 })();

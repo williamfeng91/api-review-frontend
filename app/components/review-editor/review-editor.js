@@ -91,7 +91,7 @@
             var reviewObj = {
                 'title': vm.review.title,
                 'content': vm.review.content,
-                'description': vm.review.description,
+                // 'description': vm.review.description,
                 'api': vm.review.api.id,
                 'tags': []
             };

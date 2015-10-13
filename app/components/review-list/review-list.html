@@ -29,7 +29,7 @@
             <div class="col-xs-12 col-sm-12 col-md-8 col-left">
                 <h3><a ui-sref="review-item-view({id:review.id})" title="">{{review.title}}</a></h3>
                 <p>By {{review.author.given_name}} {{review.author.surname}}</p>
-                <p>{{review.content | limitTo:500}}</p>
+                <p>{{review.content | htmlToPlaintext | limitTo:500}}</p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-right">
                 <ul class="meta-search">

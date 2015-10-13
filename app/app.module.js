@@ -13,6 +13,7 @@
             'angucomplete-alt',
             'ngTagsInput',
             'app.services',
+            'app.filters',
             'app.error',
             'app.header',
             'app.footer',
