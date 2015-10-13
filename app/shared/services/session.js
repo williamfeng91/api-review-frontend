@@ -8,7 +8,6 @@
     /** @ngInject */
     function session($cookieStore, logger) {
         this.currentUser = null;
-        this.basicAuth = '';
         this.currentAPI = null;
         this.currentReview = null;
         this.pageSize = 10;
@@ -21,7 +20,6 @@
 
         this.destroy = function () {
             this.currentUser = null;
-            this.basicAuth = '';
             this.currentAPI = null;
             this.currentReview = null;
             $cookieStore.remove('currentUser');
@@ -44,11 +42,15 @@
 
         // Basic Auth
         this.getBasicAuth = function () {
-            return this.basicAuth;
+            if (this.currentUser) {
+                return this.currentUser.basicAuth;
+            } else {
+                return null;
+            }
         }
 
         this.setBasicAuth = function(authData) {
-            this.basicAuth = authData;
+            this.currentUser.basicAuth = authData;
         }
 
         // Current api

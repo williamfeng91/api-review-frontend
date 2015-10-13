@@ -28,18 +28,14 @@
                 // url: 'https://jsonstub.com/users/login/',
                 method: 'POST',
                 data: credentials,
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'JsonStub-User-Key': '51ec5e27-c872-4a8e-8070-dec92f5fca8f',
-                    // 'JsonStub-Project-Key': 'deeec676-1dad-4086-a1f0-ead970151994'
-                }
+                headers: APISERVICE.headers
             }).then(loginComplete, loginFailed);
 
             function loginComplete(response) {
                 var user = response.data;
-                session.create(user);
                 var authdata = Base64.encode(credentials.email + ':' + credentials.password);
-                session.setBasicAuth('Basic ' + authdata);
+                user.basicAuth = 'Basic ' + authdata;
+                session.create(user);
                 logger.success(
                     'User ' + user.email + ' successfully logged in',
                     response,
