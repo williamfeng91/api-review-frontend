@@ -352,10 +352,11 @@
                 }),
             })
             .state('error', {
-                url: '/error?type',
+                url: '/error',
                 data: {
                     requireLogin: false
                 },
+                params: { type: null },
                 views: getUICompObj('error'),
             })
             .state('test', {
