@@ -45,13 +45,13 @@
                 <div class="col-lg-2">
                     <div class="row">
                         <div class="col-lg-6">
-                            <a title="Upvote" class="" href>
+                            <a ng-click="reviewCtrl.upvote()" title="Upvote" class="" href>
                                 <i class="fa fa-thumbs-o-up"></i>
                             </a>
                             <span>{{reviewCtrl.review.upvotes}}</span>
                         </div>
                         <div class="col-lg-6">
-                            <a title="Downvote" class="" href>
+                            <a ng-click="reviewCtrl.downvote()" title="Downvote" class="" href>
                                 <i class="fa fa-thumbs-o-down"></i>
                             </a>
                             <span>{{reviewCtrl.review.downvotes}}</span>
