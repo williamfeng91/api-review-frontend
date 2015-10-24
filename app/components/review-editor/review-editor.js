@@ -92,7 +92,7 @@
                 'title': vm.review.title,
                 'content': vm.review.content,
                 // 'description': vm.review.description,
-                'api': vm.review.api.id,
+                'api_id': vm.review.api.id,
                 'tags': []
             };
             angular.forEach(vm.review.tags, function(tag) {
@@ -103,7 +103,7 @@
                 reviewservice.update(reviewObj)
                     .then(updateReviewSuccessful, submitReviewFailed);
             } else {
-                reviewObj.api = vm.selectedApi.originalObject.id;
+                reviewObj.api_id = vm.selectedApi.originalObject.id;
                 reviewservice.create(reviewObj)
                     .then(createReviewSuccessful, submitReviewFailed);
             }
