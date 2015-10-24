@@ -115,13 +115,17 @@
                             .then(function (result) {
                                 review.comments = result.results;
                                 return review;
-                            }, getReviewFailed);
+                            }, getCommentsFailed);
 
                         function getReviewFailed(error) {
                             return $q.reject({
                                 code: error.status,
-                                message: error.data.message
+                                message: error.data.detail
                             });
+                        }
+
+                        function getCommentsFailed(error) {
+                            return $q.reject(error);
                         }
                     }
                 }),
@@ -167,7 +171,7 @@
                         function getReviewFailed(error) {
                             return $q.reject({
                                 code: error.status,
-                                message: error.data.message
+                                message: error.data.detail
                             });
                         }
                     }
@@ -200,7 +204,7 @@
                         function getReviewListFailed(error){
                             return $q.reject({
                                 code: error.status,
-                                message: error.data.message
+                                message: error.data.detail
                             });
                         }
                     }
@@ -232,7 +236,7 @@
                         function getApiFailed(error){
                             return $q.reject({
                                 code: error.status,
-                                message: error.data.message
+                                message: error.data.detail
                             });
                         }
                     }
@@ -273,7 +277,7 @@
                         function getApiListFailed(error){
                             return $q.reject({
                                 code: error.status,
-                                message: error.data.message
+                                message: error.data.detail
                             });
                         }
                     }
@@ -305,7 +309,7 @@
                         function getUserFailed(error){
                             return $q.reject({
                                 code: error.status,
-                                message: error.data.message
+                                message: error.data.detail
                             });
                         }
                     }
@@ -345,7 +349,7 @@
                         function getUserListFailed(error){
                             return $q.reject({
                                 code: error.status,
-                                message: error.data.message
+                                message: error.data.detail
                             });
                         }
                     }
