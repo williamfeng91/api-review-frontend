@@ -29,7 +29,8 @@
             'app.reviewList',
             'app.userProfile',
             'app.userProfileEditor',
-            'app.userList'
+            'app.userList',
+            'app.search'
         ])
         .run(run);
 

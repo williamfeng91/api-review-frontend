@@ -1,0 +1,21 @@
+<!-- Page Content -->
+<div class="container">
+  <hgroup class="mb20">
+      <h1>Advance Search</h1>
+  </hgroup>
+
+  <form class="form-inline">
+    <div class="form-group search-line">
+      <input type="text" class="span6 form-control search-box" placeholder="Search" ng-model="searchCtrl.query" required>
+      <select class="span4 form-control search-options" ng-model="searchCtrl.objectType">
+        <option value="api">API</option>
+        <option value="review">Review</option>
+        <option value="user">User</option>
+      </select>
+      <select class="form-control search-options" ng-model="searchCtrl.objectAttr">
+        <option value="name">Name</option>
+      </select>
+    </div>
+  </form>
+</div>
+<!-- /.container -->

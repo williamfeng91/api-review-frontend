@@ -373,6 +373,13 @@
                     }
                 }),
             })
+            .state('search', {
+              url: '/search',
+              data: {
+                requireLogin: false
+              },
+              views: getUICompObj('search')
+            })
             .state('error', {
                 url: '/error',
                 data: {
