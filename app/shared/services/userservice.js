@@ -18,7 +18,7 @@
             resetPassword: resetPassword,
             searchByGivenName: searchByGivenName,
             searchBySurname: searchBySurname,
-            searchByUsername: searchByUsername,
+            searchByName: searchByName,
             searchByEmail: searchByEmail,
             searchByStatus: searchByStatus,
             searchByRole: searchByRole
@@ -167,7 +167,7 @@
         function search(query, attr, offset, limit) {
             offset = !_.isUndefined(offset) ? offset : 0;
             limit = !_.isUndefined(limit) ? limit : 10;
-            var urlData = 'search?attr=' + attr + '&val=' + encodeURIComponent(query)
+            var urlData = '?attr=' + attr + '&val=' + encodeURIComponent(query)
                 + '&limit=' + limit
                 + '&offset=' + offset;
             return $http({
@@ -187,8 +187,8 @@
             return search(query, 'surname', offset, limit);
         }
 
-        function searchByUsername(query, offset, limit) {
-            return search(query, 'username', offset, limit);
+        function searchByName(query, offset, limit) {
+            return search(query, 'name', offset, limit);
         }
 
         function searchByEmail(query, offset, limit) {

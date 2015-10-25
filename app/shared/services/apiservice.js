@@ -116,7 +116,7 @@
         function searchAPI(query, offset, limit) {
           offset = !_.isUndefined(offset) ? offset : 0;
           limit = !_.isUndefined(limit) ? limit : 10;
-          var urlData = 'search?name=' + encodeURIComponent(query)
+          var urlData = '?attr=name&val=' + encodeURIComponent(query)
             + '&limit=' + limit
             + '&offset=' + offset;
           return $http({

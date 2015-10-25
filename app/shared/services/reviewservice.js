@@ -147,7 +147,7 @@
          */
         function searchByKeyword(keyword) {
             return $http({
-                url: APISERVICE.reviewUrl + '/search?q=' + encodeURIComponent(keyword),
+                url: APISERVICE.reviewUrl + '?attr=keyword&val=' + encodeURIComponent(keyword),
                 method: 'GET',
                 dataType: 'json',
                 data: '',
@@ -165,7 +165,7 @@
         function searchByTitle(query, offset, limit) {
           offset = !_.isUndefined(offset) ? offset : 0;
           limit = !_.isUndefined(limit) ? limit : 10;
-          var urlData = 'search_title?query=' + encodeURIComponent(query)
+          var urlData = '?attr=title&val=' + encodeURIComponent(query)
             + '&limit=' + limit
             + '&offset=' + offset;
           return $http({
