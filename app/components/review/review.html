@@ -37,7 +37,7 @@
                     <p><i class="fa fa-calendar"></i> Updated on {{reviewCtrl.review.updated_at | date:'dd/MM/yyyy HH:mm:ss'}}</p>
                     <p>
                         <i class="fa fa-tags"></i> Tags:
-                        <a title="{{tag.name}}" href="" ng-repeat="tag in reviewCtrl.review.tags">
+                        <a title="{{tag.name}}" href="" ng-repeat="tag in reviewCtrl.review.tags" ng-click="reviewCtrl.clickTag(tag.name)">
                             <span class="badge badge-info">{{tag.name}}</span>
                         </a>
                     </p>

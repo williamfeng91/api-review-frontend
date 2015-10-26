@@ -17,7 +17,8 @@
             update: updateReview,
             delete: deleteReview,
             searchByKeyword: searchByKeyword,
-            searchByTitle: searchByTitle
+            searchByTitle: searchByTitle,
+            searchByTag: searchByTag
         };
 
         return service;
@@ -175,6 +176,20 @@
             data: '',
             headers: APISERVICE.headers
           }).then(handleSuccess, handleError);
+        }
+
+        /**
+         * Searches a review by tag
+         * @param tag the tag used to search
+         */
+        function searchByTag(tag) {
+            return $http({
+                url: APISERVICE.reviewUrl + '?attr=tag&val=' + encodeURIComponent(tag),
+                method: 'GET',
+                dataType: 'json',
+                data: '',
+                headers: APISERVICE.headers
+            }).then(handleSuccess, handleError);
         }
 
         // private functions

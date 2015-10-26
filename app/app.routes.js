@@ -185,7 +185,7 @@
                 },
                 params: {search: null, type: null},
                 views: getUICompObj('review-list', undefined, undefined, {
-                    initData: function ($q, $stateParams, reviewservice, session) {
+                    initData: function ($q, $stateParams, reviewservice, tagservice, session) {
                         var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
                         var pageSize = session.getPageSize();
                         if($stateParams.search) {
@@ -195,6 +195,10 @@
                                 .then(getReviewListSuccessful, getReviewListFailed);
                           } else if ($stateParams.type == 'keyword') {
                             return reviewservice.searchByKeyword($stateParams.search,
+                                (page - 1) * pageSize, pageSize)
+                                .then(getReviewListSuccessful, getReviewListFailed);
+                          } else if ($stateParams.type == 'tag') {
+                            return reviewservice.searchByTag($stateParams.search,
                                 (page - 1) * pageSize, pageSize)
                                 .then(getReviewListSuccessful, getReviewListFailed);
                           }

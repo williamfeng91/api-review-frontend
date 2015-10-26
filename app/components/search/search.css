@@ -9,3 +9,7 @@
 .search-options {
   width:15% !important;
 }
+
+.search-btn {
+  display: inline-block;
+}
