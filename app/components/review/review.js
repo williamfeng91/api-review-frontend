@@ -20,7 +20,6 @@
         vm.reload = reload;
 
         vm.searchSubmit = searchSubmit;
-
         vm.clickTag = clickTag;
 
         function submitComment() {
@@ -105,11 +104,11 @@
         }
 
         function searchSubmit() {
-          $state.go('review-list', {'search': vm.searchQuery, page:1});
+          $state.go('review-list', {'search': vm.searchQuery, page: 1});
         }
 
         function clickTag(tagName) {
-          $state.go('review-list', {'search': tagName, type: 'tag', page:1});
+          $state.go('review-list', {'search': tagName, type: 'tag', page: 1});
         }
     }
 })();

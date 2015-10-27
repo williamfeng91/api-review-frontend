@@ -1,4 +1,4 @@
-<div class="col-sm-5 col-md-5">
+<div class="col-sm-3 col-md-3">
     <form class="navbar-form navbar-left" ng-submit="searchCtrl.searchSubmit()" role="search">
       <div class="input-group">
         <input type="text" class="span6 form-control" placeholder="Search" ng-model="searchCtrl.query" required>
@@ -6,6 +6,8 @@
             <button type="submit" ng-disabled="search.$invalid || searchCtrl.dataLoading" class="btn btn-default"><i class="fa fa-search fa-lg"></i></button>
         </div>
       </div>
-      <a ui-sref="search" class="helper"><span>Advance search</span></a>
     </form>
+</div>
+<div class="nav navbar-nav adv-search">
+    <li><a ui-sref="search">Advance search</a></li>
 </div>

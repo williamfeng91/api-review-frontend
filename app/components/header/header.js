@@ -20,7 +20,7 @@
             {title: 'New Review', link: 'review-item-new'}];
         vm.userMenu = [
             {title: 'My profile', link: 'user-profile-edit'},
-            {title: 'My reviews', link: 'user-review-list'}];
+            {title: 'My reviews', link: 'my-review-list'}];
         vm.logout = logout;
 
         function logout() {

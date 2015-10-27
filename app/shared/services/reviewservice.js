@@ -6,7 +6,7 @@
         .factory('reviewservice', reviewservice);
 
     /** @ngInject */
-    function reviewservice($http, $q, APISERVICE, logger) {
+    function reviewservice($http, $q, APISERVICE, session, logger) {
         var service = {
             create: createReview,
             getById: getById,
