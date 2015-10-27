@@ -27,6 +27,7 @@
             'app.review',
             'app.reviewEditor',
             'app.reviewList',
+            'app.myReviewList',
             'app.userProfile',
             'app.userProfileEditor',
             'app.userList',

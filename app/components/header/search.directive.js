@@ -9,13 +9,15 @@
                 templateUrl: 'app/components/header/search.html',
                 controllerAs: 'searchCtrl',
                 controller: function($state, reviewservice) {
-                  var vm = this;
-                  vm.searchSubmit = searchSubmit;
-                  function searchSubmit() {
-                    $state.go('review-list', {'search': vm.query,
-                      'type': 'title',
-                      page:1});
-                  }
+                    var vm = this;
+                    vm.searchSubmit = searchSubmit;
+                    function searchSubmit() {
+                        $state.go('review-list', {
+                            'search': vm.query,
+                            'type': 'title',
+                            page: 1
+                        });
+                    }
                 }
             };
         });

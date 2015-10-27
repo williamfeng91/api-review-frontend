@@ -2,13 +2,7 @@
   .navbar-form, .navbar-form .input-group {
       width: 100%;
   }
-  .helper {
-    font-size: 12px;
-    display: inline-block;
-    color: white;
-  }
-
-  .helper:hover {
-    color: white;
+  .adv-search {
+    margin-left: -30px;
   }
 }

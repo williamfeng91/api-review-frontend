@@ -220,6 +220,33 @@
                     }
                 }),
             })
+            .state('my-review-list', {
+                url: '/my-reviews?page',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ADMIN, USER_ROLES.EDITOR, USER_ROLES.REVIEWER]
+                },
+                params: {search: null, type: null},
+                views: getUICompObj('my-review-list', undefined, undefined, {
+                    initData: function ($q, $stateParams, reviewservice, session) {
+                        var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
+                        var pageSize = session.getPageSize();
+                        return reviewservice.getByReviewer(session.getCurrentUser().id)
+                                .then(getReviewListSuccessful, getReviewListFailed);
+
+                        function getReviewListSuccessful(result) {
+                            return $q.resolve(result);
+                        }
+
+                        function getReviewListFailed(error){
+                            return $q.reject({
+                                code: error.status,
+                                message: error.data.detail
+                            });
+                        }
+                    }
+                }),
+            })
             .state('api-item-new', {
                 url: '/apis/new',
                 data: {
