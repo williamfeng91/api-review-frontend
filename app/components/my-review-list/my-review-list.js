@@ -6,7 +6,8 @@
         .controller('MyReviewListController', MyReviewListController);
 
     /** @ngInject */
-    function MyReviewListController($state, $stateParams, initData, reviewservice, session, CONSTANTS, logger) {
+    function MyReviewListController($state, $stateParams, initData, reviewservice, session,
+        CONSTANTS) {
         var vm = this;
 
         vm.currentPage = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;

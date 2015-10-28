@@ -5,6 +5,7 @@
         .module('app.header')
         .controller('HeaderController', HeaderController);
 
+    /** @ngInject */
     function HeaderController($state, authservice, session, USER_ROLES) {
         var vm = this;
         vm.USER_ROLES = USER_ROLES;

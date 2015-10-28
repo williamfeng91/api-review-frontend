@@ -6,7 +6,8 @@
         .controller('ReviewController', ReviewController);
 
     /** @ngInject */
-    function ReviewController($state, initData, dialogs, reviewservice, commentservice, ratingservice, session, USER_ROLES, toastr) {
+    function ReviewController($state, initData, dialogs, reviewservice, commentservice,
+        ratingservice, session, USER_ROLES, toastr) {
         var vm = this;
         vm.USER_ROLES = USER_ROLES;
 
@@ -18,8 +19,6 @@
         vm.downvote = downvote;
         vm.showDialog = showDialog;
         vm.reload = reload;
-
-        vm.searchSubmit = searchSubmit;
         vm.clickTag = clickTag;
 
         function submitComment() {
@@ -101,10 +100,6 @@
 
         function reload() {
             $state.reload();
-        }
-
-        function searchSubmit() {
-          $state.go('review-list', {'search': vm.searchQuery, page: 1});
         }
 
         function clickTag(tagName) {

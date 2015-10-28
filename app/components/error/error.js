@@ -6,7 +6,7 @@
         .controller('ErrorController', ErrorController);
 
     /** @ngInject */
-    function ErrorController($state, $stateParams, logger) {
+    function ErrorController($state, $stateParams) {
         var vm = this;
 
         switch ($stateParams.type) {

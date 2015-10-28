@@ -6,7 +6,7 @@
         .controller('UserListController', UserListController);
 
     /** @ngInject */
-    function UserListController($state, $stateParams, initData, userservice, session, CONSTANTS, logger) {
+    function UserListController($state, $stateParams, initData, userservice, session, CONSTANTS) {
         var vm = this;
 
         vm.currentPage = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
