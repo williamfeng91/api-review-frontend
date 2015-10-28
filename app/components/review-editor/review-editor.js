@@ -93,10 +93,10 @@
                 'content': vm.review.content,
                 // 'description': vm.review.description,
                 'api_id': vm.review.api.id,
-                'tags': []
+                'tag_ids': []
             };
             angular.forEach(vm.review.tags, function(tag) {
-                reviewObj.tags.push(tag.id);
+                reviewObj.tag_ids.push(tag.id);
             });
             if (vm.isEditMode) {
                 reviewObj.id = vm.review.id;
