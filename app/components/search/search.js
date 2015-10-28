@@ -5,6 +5,7 @@
         .module('app.search')
         .controller('SearchController', SearchController);
 
+    /** @ngInject */
     function SearchController($state, apiservice, reviewservice, userservice, tagservice) {
         var vm = this;
         var reviewOptions = [

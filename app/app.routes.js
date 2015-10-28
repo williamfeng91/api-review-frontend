@@ -431,5 +431,6 @@
             .otherwise('/error');
     }
 
+    /** @ngInject */
     function AppController () {}
 })();

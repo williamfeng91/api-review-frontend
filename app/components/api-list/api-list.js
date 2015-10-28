@@ -6,7 +6,7 @@
         .controller('ApiListController', ApiListController);
 
     /** @ngInject */
-    function ApiListController($state, $stateParams, initData, apiservice, session, CONSTANTS, logger) {
+    function ApiListController($state, $stateParams, initData, apiservice, session, CONSTANTS) {
         var vm = this;
 
         vm.currentPage = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;

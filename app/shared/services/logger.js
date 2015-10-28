@@ -5,6 +5,7 @@
         .module('app.services')
         .factory('logger', logger);
 
+    /** @ngInject */
     function logger($log, toastr) {
         var service = {
             error   : error,

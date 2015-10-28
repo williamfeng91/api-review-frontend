@@ -3,7 +3,7 @@
 
     angular
         .module('app')
-        .directive('access', function(authservice) {
+        .directive('access', ['authservice', function(authservice) {
             return {
                 restrict: 'A',
                 link: function(scope, element, attrs) {
@@ -21,5 +21,5 @@
                     }
                 }
             };
-        });
+        }]);
 })();

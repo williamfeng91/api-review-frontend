@@ -3,7 +3,7 @@
 
     angular
         .module('app')
-        .directive('arRelatedReviews', function(reviewservice) {
+        .directive('arRelatedReviews', ['reviewservice', function(reviewservice) {
             return {
                 restrict: 'E',
                 scope: {
@@ -31,5 +31,5 @@
                     }
                 }
             };
-        });
+        }]);
 })();

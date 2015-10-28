@@ -5,6 +5,7 @@
         .module('app.userProfileEditor')
         .controller('ChangePasswordDialogController', ChangePasswordDialogController);
 
+    /** @ngInject */
     function ChangePasswordDialogController($scope, $modalInstance) {
         //-- Variables --//
         $scope.passwords = {

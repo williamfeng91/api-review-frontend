@@ -7,7 +7,7 @@
 
     /** @ngInject */
     function ReviewEditorController($state, $stateParams, initData, dialogs, reviewservice,
-        apiservice, userservice, tagservice, ratingservice, session, toastr, logger) {
+        apiservice, userservice, tagservice, ratingservice, session, toastr) {
         var vm = this;
 
         vm.review = initData;
@@ -26,7 +26,6 @@
 
         function getAllAPIsSuccess(result) {
             vm.allApis = result.results;
-            logger.log(vm.allApis);
         }
 
         function getAllAPIsFailed(result) {
@@ -87,7 +86,6 @@
 
         function submitReview() {
             vm.dataLoading = true;
-            logger.log(vm.review);
             var reviewObj = {
                 'title': vm.review.title,
                 'content': vm.review.content,
@@ -107,7 +105,6 @@
                 reviewservice.create(reviewObj)
                     .then(createReviewSuccessful, submitReviewFailed);
             }
-            logger.log(reviewObj);
 
             function createReviewSuccessful(result) {
                 $state.go('review-item-view', {id: result.id});

@@ -11,9 +11,7 @@
         vm.USER_ROLES = USER_ROLES;
 
         vm.api = initData;
-		    session.setCurrentAPI(vm.api);
-
-        vm.searchSubmit = searchSubmit;
+		session.setCurrentAPI(vm.api);
 
         vm.showDialog = function () {
             var dlg = dialogs.confirm(
@@ -41,10 +39,6 @@
 
 		    vm.reload = function () {
             $state.reload();
-        }
-
-        function searchSubmit() {
-          $state.go('api-list', {'search': vm.searchQuery, page:1});
         }
     }
 })();

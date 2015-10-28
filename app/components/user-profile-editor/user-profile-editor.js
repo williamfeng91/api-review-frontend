@@ -6,7 +6,7 @@
         .controller('UserProfileEditorController', UserProfileEditorController);
 
     /** @ngInject */
-    function UserProfileEditorController($state, dialogs, userservice, session, toastr, logger) {
+    function UserProfileEditorController($state, dialogs, userservice, session, toastr) {
         var vm = this;
 
         vm.showChangePasswordDialog = showChangePasswordDialog;
@@ -44,7 +44,6 @@
 
         function submitUserProfile() {
             vm.dataLoading = true;
-            logger.log(vm.currentUser);
             userservice.update(vm.currentUser)
                     .then(updateUserProfileSuccessful, updateUserProfileFailed);
 
