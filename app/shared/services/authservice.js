@@ -25,7 +25,6 @@
         function login(credentials) {
             return $http({
                 url: APISERVICE.userUrl + 'authenticate/',
-                // url: 'https://jsonstub.com/users/login/',
                 method: 'POST',
                 data: credentials,
                 headers: APISERVICE.headers

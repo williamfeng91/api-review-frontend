@@ -36,3 +36,9 @@ Everything is configured. Just start the application and enjoy using API Review!
 ```
 npm start
 ```
+
+## Usage
+
+Here is an admin account:
+username: comp9323gdacct@gmail.com
+password: Comp9323Admin

@@ -2,6 +2,7 @@
 
     <hgroup class="mb20">
         <h1>My Reviews</h1>
+        <h2 class="lead" ng-if="myReviewListCtrl.reviews.length <= 0"><strong class="text-danger">You haven't created any reviews</strong></span></h2>
     </hgroup>
 
     <div class="row" ng-if="myReviewListCtrl.reviews.length > 0">
