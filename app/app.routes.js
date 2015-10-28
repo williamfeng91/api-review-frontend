@@ -358,32 +358,29 @@
                     requireLogin: true,
                     authorisedRoles: [USER_ROLES.ALL]
                 },
-                params: {
-                    given_name: null,
-                    role: null
-                },
+                params: {search: null, type: null},
                 views: getUICompObj('user-list', undefined, undefined, {
                     initData: function ($stateParams, $q, userservice, session) {
                         var page = typeof $stateParams.page !== 'undefined' ? $stateParams.page : 1;
                         var pageSize = session.getPageSize();
-                        if ($stateParams.given_name) {
-                            return userservice.searchByGivenName($stateParams.given_name,
+                        if ($stateParams.type == 'given_name') {
+                            return userservice.searchByGivenName($stateParams.search,
                                 (page - 1) * pageSize, pageSize)
                                 .then(getUserListSuccessful, getUserListFailed);
-                        } else if ($stateParams.surname) {
-                            return userservice.searchBySurname($stateParams.surname,
+                        } else if ($stateParams.type == 'surname') {
+                            return userservice.searchBySurname($stateParams.search,
                               (page - 1) * pageSize, pageSize)
                               .then(getUserListSuccessful, getUserListFailed);
-                        } else if ($stateParams.name) {
-                            return userservice.searchByName($stateParams.name,
+                        } else if ($stateParams.type == 'name') {
+                            return userservice.searchByName($stateParams.search,
                               (page - 1) * pageSize, pageSize)
                               .then(getUserListSuccessful, getUserListFailed);
-                        } else if ($stateParams.email) {
-                            return userservice.searchByEmail($stateParams.email,
+                        } else if ($stateParams.type == 'email') {
+                            return userservice.searchByEmail($stateParams.search,
                               (page - 1) * pageSize, pageSize)
                               .then(getUserListSuccessful, getUserListFailed);
-                        } else if ($stateParams.role) {
-                            return userservice.searchByRole($stateParams.role,
+                        } else if ($stateParams.type == 'role') {
+                            return userservice.searchByRole($stateParams.search,
                                 (page - 1) * pageSize, pageSize)
                                 .then(getUserListSuccessful, getUserListFailed);
                         } else {
