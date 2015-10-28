@@ -6,7 +6,7 @@
         .controller('HeaderController', HeaderController);
 
     /** @ngInject */
-    function HeaderController($state, authservice, session, USER_ROLES) {
+    function HeaderController($state, authservice, userservice, session, USER_ROLES, toastr) {
         var vm = this;
         vm.USER_ROLES = USER_ROLES;
         vm.authservice = authservice;
@@ -20,7 +20,7 @@
             {title: 'New API', link: 'api-item-new'},
             {title: 'New Review', link: 'review-item-new'}];
         vm.userMenu = [
-            {title: 'My profile', link: 'user-profile-edit'},
+            // {title: 'My profile', link: 'user-profile-edit'},
             {title: 'My reviews', link: 'my-review-list'}];
         vm.logout = logout;
 
@@ -33,6 +33,23 @@
             }
 
             function logoutFailed() {
+            }
+        }
+
+        function becomeReviewer() {
+            var patch = {
+                role: USER_ROLES.REVIEWER
+            };
+            userservice.update(session.getCurrentUser().id, patch)
+                .then(updateUserSuccessful, updateUserFailed);
+
+            function updateUserSuccessful(result) {
+                $state.go('login');
+                toastr.info('You are a reviewer now. Please login again.');
+            }
+
+            function updateUserFailed(error) {
+                toastr.error('Request failed. Please try again.');
             }
         }
     }

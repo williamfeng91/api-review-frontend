@@ -320,14 +320,14 @@
                     }
                 }),
             })
-            .state('user-profile-edit', {
-                url: '/users/my-profile',
-                data: {
-                    requireLogin: true,
-                    authorisedRoles: [USER_ROLES.ALL]
-                },
-                views: getUICompObj('user-profile-editor'),
-            })
+            // .state('user-profile-edit', {
+            //     url: '/users/my-profile',
+            //     data: {
+            //         requireLogin: true,
+            //         authorisedRoles: [USER_ROLES.ALL]
+            //     },
+            //     views: getUICompObj('user-profile-editor'),
+            // })
             .state('user-profile-view', {
                 url: '/users/:id',
                 data: {
@@ -407,6 +407,14 @@
                 requireLogin: false
               },
               views: getUICompObj('search')
+            })
+            .state('admin-console', {
+                url: '/admin-console',
+                data: {
+                    requireLogin: true,
+                    authorisedRoles: [USER_ROLES.ADMIN]
+                },
+                views: getUICompObj('admin-console'),
             })
             .state('error', {
                 url: '/error',

@@ -114,12 +114,12 @@
          * Updates a user's profile
          * @param user the user object with updated information
          */
-        function updateUser(user) {
+        function updateUser(id, patch) {
             return $http({
-                url: APISERVICE.userUrl + user.id + '/',
-                method: 'PUT',
+                url: APISERVICE.userUrl + id + '/',
+                method: 'PATCH',
                 dataType: 'json',
-                data: user,
+                data: patch,
                 headers: APISERVICE.headers
             }).then(handleSuccess, handleError);
         }
@@ -147,7 +147,7 @@
                 'email': email
             };
             return $http({
-                url: APISERVICE.userUrl + 'reset-password/',
+                url: APISERVICE.userUrl + 'reset_password/',
                 method: 'POST',
                 dataType: 'json',
                 data: request,

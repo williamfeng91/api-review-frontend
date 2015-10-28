@@ -31,7 +31,8 @@
             'app.userProfile',
             'app.userProfileEditor',
             'app.userList',
-            'app.search'
+            'app.search',
+            'app.adminConsole'
         ])
         .run(run);
 

@@ -20,7 +20,7 @@
         };
 
         $scope.save = function() {
-            $modalInstance.close($scope.passwords.newPassword);
+            $modalInstance.close($scope.passwords);
         };
 
         $scope.hitEnter = function(evt) {
