@@ -51,7 +51,7 @@
             if (toState.data.requireLogin && !authservice.isAuthenticated()) {
                 evt.preventDefault();
                 $state.go('login');
-                toastr.info('Please sign in first.');
+                toastr.info('Please log in first.');
             } else if (toState.data.authorisedRoles && !authservice.isAuthorised(toState.data.authorisedRoles)) {
                 evt.preventDefault();
                 $state.go('error', {type: 'forbidden'});
