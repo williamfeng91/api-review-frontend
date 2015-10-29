@@ -2,7 +2,7 @@
 
     <hgroup class="mb20">
         <h1>User List</h1>
-        <h2 ng-if="userListCtrl.users.length <= 0" class="lead"><strong class="text-danger">0</strong> results were found</h2>
+        <h2 class="lead"><strong class="text-danger">{{userListCtrl.totalNum}}</strong> user<span ng-if="userListCtrl.totalNum > 1">s</span> found<span ng-if="userListCtrl.searchType"> for {{userListCtrl.searchType}} <string class="text-danger">{{userListCtrl.searchStr}}</strong></span></h2>
     </hgroup>
 
     <div class="row" ng-if="userListCtrl.users.length > 0">

@@ -2,7 +2,7 @@
 
     <hgroup class="mb20">
         <h1>API List</h1>
-        <h2 ng-if="apiListCtrl.apis.length <= 0" class="lead"><strong class="text-danger">0</strong> results were found</h2>
+        <h2 class="lead"><strong class="text-danger">{{apiListCtrl.totalNum}}</strong> API<span ng-if="apiListCtrl.totalNum > 1">s</span> found<span ng-if="apiListCtrl.searchType"> for {{apiListCtrl.searchType}} <string class="text-danger">{{apiListCtrl.searchStr}}</strong></span></h2>
     </hgroup>
 
     <div class="row" ng-if="apiListCtrl.apis.length > 0">
