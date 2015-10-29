@@ -15,7 +15,7 @@
         vm.contentMenu = [
             {title: 'APIs', link: 'api-list'},
             {title: 'Reviews', link: 'review-list'},
-            {title: 'Reviewers', link: 'user-list'}];
+            {title: 'Reviewers', link: 'user-list({type:\'role\',search:headerCtrl.USER_ROLES.REVIEWER})'}];
         vm.createMenu = [
             {title: 'New API', link: 'api-item-new'},
             {title: 'New Review', link: 'review-item-new'}];
