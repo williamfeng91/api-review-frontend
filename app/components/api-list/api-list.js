@@ -18,6 +18,11 @@
         vm.totalNum = initData.count;
         vm.apis = initData.results;
 
+        if ($stateParams.search) {
+            vm.searchType = $stateParams.type;
+            vm.searchStr = $stateParams.search;
+        }
+
         function doPaging(text, page) {
             $state.go('api-list', {search: $stateParams.search, page: page});
         }
