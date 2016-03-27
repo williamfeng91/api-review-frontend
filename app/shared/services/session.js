@@ -7,7 +7,17 @@
 
     /** @ngInject */
     function session($cookieStore, logger) {
-        this.currentUser = null;
+        // this.currentUser = null;
+        this.currentUser = {
+            basicAuth: "Basic ZnlocmVuYXRlQGhvdG1haWwuY29tOkNvbXA5MzIz",
+            created_at: "2015-10-28T11:08:09.718000Z",
+            email: "fyhrenate@hotmail.com",
+            given_name: "William",
+            id: 148,
+            role: "admin",
+            surname: "Feng",
+            updated_at: "2016-03-27T04:33:38.086230Z"
+        }
         this.currentAPI = null;
         this.currentReview = null;
         this.pageSize = 10;
